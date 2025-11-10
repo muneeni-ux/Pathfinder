@@ -1,25 +1,70 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Footer from "./components/Footer";
+import { Toaster } from "react-hot-toast";
+import ScrollToTop from "./components/scrollTop";
+import VisitorTracker from "./components/VisitorTracker";
+import Tracker from "./pages/Tracker";
+import Media from "./pages/Media";
+import Donate from "./pages/Donate";
+import Registration from "./pages/Registration";
+import NotFound from "./pages/NotFound";
+import NewUpdates from "./pages/New-Updates";
+import Policies from "./pages/Policies";
+import Docs from "./pages/Docs";
+// import AdminDashboard etc later
 
-function App() {
+function AppLayout() {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith("/admin");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code className='text-red-500'>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ScrollToTop />
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          success: { style: { background: "#D1FAE5", color: "#065F46" } },
+          error: { style: { background: "#FEE2E2", color: "#991B1B" } },
+        }}
+      />
+      <VisitorTracker />
+
+      {!isAdminRoute && <Navbar />}
+      <main className="min-h-screen bg-cream pt-20">
+        <AppRoutes />
+      </main>
+      {!isAdminRoute && <Footer />}
+    </>
   );
 }
 
-export default App;
+function AppRoutes() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/tracker" element={<Tracker />} />
+      <Route path="/media" element={<Media />} />
+      <Route path="/donate" element={<Donate />} />
+      <Route path="/get-involved" element={<Registration />} />
+      <Route path="/news-updates" element={<NewUpdates />} />
+      <Route path="/policies"element={<Policies />} />
+      <Route path="/document-center" element={<Docs />} />
+      {/* Admin Routes can be added here later */}
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  );
+}
+
+export default function App() {
+  return (
+    <Router>
+      <AppLayout />
+    </Router>
+  );
+}

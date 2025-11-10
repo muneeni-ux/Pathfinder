@@ -1,15 +1,3 @@
-Why We Need a Website
-1.	 Central Information Hub
-o	To share the mission, timeline (2025–2030), goals, and progress of the Pathfinder 75 Tree Planting Evangelism initiative.
-2.	 Mobilizing Clubs and Volunteers
-o	Makes it easy for Pathfinder clubs, churches, and individuals to register, participate, and access guidelines.
-3.	 Transparency & Reporting
-o	Showcase trees planted, locations, partners, photos, testimonies, and impact updates.
-4.	 Fundraising & Partnerships
-o	Attract sponsors, donors, NGOs, churches, and government agencies willing to support the initiative.
-5.	 Evangelism & Awareness
-o	Use the platform to spread spiritual messages, environmental stewardship, and inspire more people to join the mission.
-
  What the Website Should Contain (Key Sections)
 1.	 Home Page
 o	Vision, mission, and Pathfinder @75 overview.
