@@ -37,7 +37,7 @@ const Tracker = () => {
   }, [data.totalTrees]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-green-50 via-green-100 to-amber-50 mt-[-2rem] px-6 md:px-12 lg:px-20 py-12">
+    <div className="min-h-screen bg-gradient-to-b from-green-50 via-green-100 to-amber-50 mt-[-2rem] mb-[-4rem] px-6 md:px-12 lg:px-20 py-12">
       {/* Header */}
       <section className="text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-extrabold text-green-900 mb-4">

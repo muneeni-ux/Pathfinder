@@ -72,7 +72,7 @@ const Registration = () => {
   };
 
   return (
-    <div className="bg-gradient-to-b from-green-50 via-green-100 to-amber-50 min-h-screen mt-[-2rem] px-6 md:px-12 lg:px-20 py-12">
+    <div className="bg-gradient-to-b from-green-50 via-green-100 to-amber-50 min-h-screen mt-[-2rem] px-6 md:px-12 lg:px-20 py-12 mb-[-4rem]">
       {/* Page Header */}
       <section className="text-center py-12">
         <h1 className="text-4xl md:text-5xl font-extrabold text-green-900 mb-4">

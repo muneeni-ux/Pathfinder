@@ -12,7 +12,7 @@ const About = () => {
   }, []);
 
   return (
-    <div className="bg-gradient-to-b from-green-50 via-green-100 to-amber-50 text-green-900 overflow-x-hidden mt-[-2rem]">
+    <div className="bg-gradient-to-b from-green-50 via-green-100 to-amber-50 text-green-900 overflow-x-hidden mt-[-2rem] mb-[-4rem]">
       {/* 🌿 Hero Section with Parallax */}
       <section className="relative h-[60vh] flex items-center justify-center text-center px-6 overflow-hidden">
         <img

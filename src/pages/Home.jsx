@@ -4,7 +4,7 @@ import { Sprout, TreePine, HeartHandshake, Leaf } from "lucide-react";
 
 const Home = () => {
   return (
-    <div className="bg-white text-green-900 overflow-x-hidden mt-[-2rem]">
+    <div className="bg-white text-green-900 overflow-x-hidden mt-[-2rem] mb-[-4rem]">
       {/* 🌿 Hero Section */}
       <section className="relative h-[90vh] flex items-center justify-center text-center bg-green-100">
         <img
