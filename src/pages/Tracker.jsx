@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { TreePine, Users, MapPin } from "lucide-react";
+import { TreePine, Users } from "lucide-react";
 
 const Tracker = () => {
   // Mock data for demo
-  const [data, setData] = useState({
+  const [data] = useState({
     totalTrees: 120000,
     regions: [
       { name: "North Region", trees: 35000 },
@@ -44,7 +44,8 @@ const Tracker = () => {
           Tree Planting Tracker 🌳
         </h1>
         <p className="text-green-800 max-w-2xl mx-auto">
-          Track our collective impact across regions, conferences, and clubs. Every tree counts!
+          Track our collective impact across regions, conferences, and clubs.
+          Every tree counts!
         </p>
       </section>
 
@@ -53,7 +54,9 @@ const Tracker = () => {
         <div className="inline-flex items-center gap-3 bg-amber-200/50 px-8 py-6 rounded-3xl shadow-lg border border-green-200">
           <TreePine size={36} className="text-green-900" />
           <div>
-            <p className="text-3xl font-bold text-green-950">{animatedCount.toLocaleString()}</p>
+            <p className="text-3xl font-bold text-green-950">
+              {animatedCount.toLocaleString()}
+            </p>
             <p className="text-green-800 font-medium">Trees Planted</p>
           </div>
         </div>
@@ -66,7 +69,10 @@ const Tracker = () => {
         </h2>
         <div className="space-y-4">
           {data.regions.map((region, idx) => {
-            const percentage = Math.min((region.trees / data.totalTrees) * 100, 100);
+            const percentage = Math.min(
+              (region.trees / data.totalTrees) * 100,
+              100
+            );
             return (
               <div key={idx}>
                 <div className="flex justify-between mb-1 font-semibold text-green-800">
@@ -100,7 +106,9 @@ const Tracker = () => {
                 <Users className="text-amber-400 w-6 h-6" />
                 <h3 className="font-semibold text-green-900">{club.name}</h3>
               </div>
-              <p className="text-green-800 font-bold text-xl">{club.trees.toLocaleString()} Trees</p>
+              <p className="text-green-800 font-bold text-xl">
+                {club.trees.toLocaleString()} Trees
+              </p>
             </div>
           ))}
         </div>

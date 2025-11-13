@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Phone, Mail, MapPin, MessageCircle, TreePine } from "lucide-react";
+import { Phone, Mail, MapPin, TreePine } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 
 const Contact = () => {
