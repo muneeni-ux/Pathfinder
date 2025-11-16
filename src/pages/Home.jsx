@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div className="bg-white text-green-900 overflow-x-hidden mt-[-2rem] mb-[-4rem]">
       {/* 🌿 Hero Section */}
-      <section className="relative h-[90vh] flex items-center justify-center text-center bg-green-100">
+      <section className="relative h-[75vh] flex items-center justify-center text-center bg-green-100 rounded-b-3xl">
         <img
           src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1500&q=80"
           alt="Forest"
