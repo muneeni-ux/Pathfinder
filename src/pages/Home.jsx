@@ -18,7 +18,8 @@ const Home = () => {
           </h1>
           <p className="text-lg md:text-xl text-green-800 mb-8">
             Celebrating 75 years of service, faith, and stewardship by growing
-            a greener future for generations to come.
+            a greener future for generations to come. Planting trees, planting
+            hope (2025-2030).
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link

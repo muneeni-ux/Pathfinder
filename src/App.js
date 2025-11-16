@@ -15,6 +15,7 @@ import NotFound from "./pages/NotFound";
 import NewUpdates from "./pages/New-Updates";
 import Policies from "./pages/Policies";
 import Docs from "./pages/Docs";
+import Profiles from "./pages/Profiles";
 // import AdminDashboard etc later
 
 function AppLayout() {
@@ -55,6 +56,7 @@ function AppRoutes() {
       <Route path="/news-updates" element={<NewUpdates />} />
       <Route path="/policies"element={<Policies />} />
       <Route path="/document-center" element={<Docs />} />
+      <Route path="/profiles" element={<Profiles />} />
       {/* Admin Routes can be added here later */}
       <Route path="*" element={<NotFound />} />
     </Routes>

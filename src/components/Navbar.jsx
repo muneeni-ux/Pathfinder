@@ -31,9 +31,9 @@ const Navbar = () => {
         {/* 🌿 Logo + Title */}
         <Link to="/" className="flex items-center gap-2 group">
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbGRSzm-q0usCpOR9Zag0vmrdC1oqq51Z65g&s"
+            src="/path-logo.jpg"
             alt="Green World"
-            className="w-8 h-8 group-hover:rotate-12 transition-transform"
+            className="w-8 h-8 group-hover:rotate-12 transition-transform rounded-full"
           />
           <span className="text-2xl font-extrabold text-green-900 tracking-wide">
             Pathfinders <span className="text-amber-500">@75</span>

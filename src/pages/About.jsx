@@ -61,6 +61,7 @@ const About = () => {
             <Sprout className="text-amber-400" /> Objectives
           </h2>
           <p className="text-green-800 leading-relaxed relative z-10">
+            By 2030, every Pathfinder will have their own garden of trees through this initiative. Our key objectives include: <br />
             - Plant millions of trees across all conferences, clubs, and communities. <br />
             - Train youth in environmental stewardship and sustainable practices. <br />
             - Encourage community engagement, faith in action, and social responsibility.

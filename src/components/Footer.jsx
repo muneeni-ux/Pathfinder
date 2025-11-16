@@ -1,5 +1,5 @@
 import React from "react";
-import { Facebook, Instagram, Youtube, MessageCircle, FileText, Image, Newspaper } from "lucide-react";
+import { Facebook, Instagram, Youtube, MessageCircle, FileText, Image, Newspaper, UserPen } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -7,9 +7,10 @@ const Footer = () => {
 
   const quickLinks = [
     { to: "/news-updates", label: "News & Updates", icon: <Newspaper size={18} /> },
-    { to: "/media", label: "Gallery", icon: <Image size={18} /> },
+    { to: "/media", label: "Media & Gallery", icon: <Image size={18} /> },
     { to: "/document-center", label: "Document Center", icon: <FileText size={18} /> },
     { to: "/policies", label: "Policies", icon: <FileText size={18} /> },
+    { to: "/profiles", label: "Team Profiles", icon: <UserPen size={18} /> },
   ];
 
   const socialLinks = [
