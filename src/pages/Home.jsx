@@ -5,37 +5,51 @@ import { Sprout, TreePine, HeartHandshake, Leaf } from "lucide-react";
 const Home = () => {
   return (
     <div className="bg-white text-green-900 overflow-x-hidden mt-[-2rem] mb-[-4rem]">
-      {/* 🌿 Hero Section */}
-      <section className="relative h-[75vh] flex items-center justify-center text-center bg-green-100 rounded-b-3xl">
-        <img
-          src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1500&q=80"
-          alt="Forest"
-          className="absolute inset-0 w-full h-full object-cover opacity-25"
-        />
-        <div className="relative z-10 max-w-3xl px-4">
-          <h1 className="text-5xl md:text-6xl font-extrabold mb-4 text-green-900 drop-shadow-md">
+
+      {/* 🌿 Animated Hero Section */}
+      <section className="relative h-[80vh] flex items-center justify-center text-center overflow-hidden rounded-b-3xl">
+
+        {/* Parallax Background */}
+        <div
+          className="absolute inset-0 bg-cover bg-center animate-zoomSlow"
+          style={{
+            backgroundImage:
+              "url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1500&q=80')",
+            opacity: 0.28,
+          }}
+        ></div>
+
+        {/* Floating Leaves */}
+        <Leaf className="absolute top-10 left-10 text-green-600 opacity-50 animate-leafFloat1" size={50} />
+        <Leaf className="absolute bottom-16 right-20 text-green-700 opacity-40 animate-leafFloat2" size={60} />
+        <Leaf className="absolute top-1/2 left-1/4 text-amber-500 opacity-40 animate-leafFloat3" size={45} />
+
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-3xl px-6 animate-fadeSlideUp">
+          <h1 className="text-5xl md:text-6xl font-extrabold mb-4 text-green-900 drop-shadow-xl">
             Pathfinders @75 Tree Planting Initiative 🌳
           </h1>
-          <p className="text-lg md:text-xl text-green-800 mb-8">
-            Celebrating 75 years of service, faith, and stewardship by growing
-            a greener future for generations to come. Planting trees, planting
-            hope (2025-2030).
+          <p className="text-lg md:text-xl text-green-800 mb-10">
+            Celebrating 75 years of service, faith & stewardship — inspiring kids,
+            families and communities to grow a greener future together.
           </p>
+
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               to="/get-involved"
-              className="bg-amber-400 hover:bg-amber-500 text-green-950 font-semibold px-6 py-3 rounded-full transition-all"
+              className="bg-amber-400 hover:bg-amber-500 text-green-950 font-semibold px-8 py-3 rounded-full transition-all shadow-lg hover:scale-105"
             >
               Get Involved
             </Link>
             <Link
               to="/tracker"
-              className="border-2 border-amber-400 text-amber-600 hover:bg-amber-400 hover:text-green-950 font-semibold px-6 py-3 rounded-full transition-all"
+              className="border-2 border-amber-400 text-amber-600 hover:bg-amber-400 hover:text-green-950 font-semibold px-8 py-3 rounded-full transition-all shadow-lg hover:scale-105"
             >
               Track Progress
             </Link>
           </div>
         </div>
+
       </section>
 
       {/* 🌍 Vision & Mission */}
@@ -43,6 +57,7 @@ const Home = () => {
         <h2 className="text-3xl md:text-4xl font-bold text-green-900 mb-8">
           Our Vision & Mission
         </h2>
+
         <div className="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto">
           <div className="bg-green-50 p-8 rounded-2xl shadow-md border border-green-200">
             <h3 className="text-2xl font-semibold mb-4 flex items-center justify-center gap-2 text-green-900">
@@ -54,6 +69,7 @@ const Home = () => {
               with God’s world.
             </p>
           </div>
+
           <div className="bg-green-50 p-8 rounded-2xl shadow-md border border-green-200">
             <h3 className="text-2xl font-semibold mb-4 flex items-center justify-center gap-2 text-green-900">
               <Sprout className="text-amber-400" /> Mission
@@ -72,12 +88,14 @@ const Home = () => {
         <h2 className="text-3xl md:text-4xl font-bold text-green-900 mb-6">
           Pathfinder @75 Overview
         </h2>
+
         <p className="max-w-4xl mx-auto text-green-800 mb-10 leading-relaxed">
           As the Pathfinder movement celebrates 75 years of empowering young
           leaders, this environmental initiative marks a historic milestone.
           Each planted tree represents service, growth, and hope—echoing our
           heritage of faith in action.
         </p>
+
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {[
             {
@@ -115,6 +133,7 @@ const Home = () => {
       {/* 🌳 Get Involved CTA */}
       <section className="relative py-24 text-center bg-green-100">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1500&q=80')] bg-cover bg-center opacity-10"></div>
+
         <div className="relative z-10 max-w-3xl mx-auto px-6">
           <h2 className="text-4xl font-bold text-green-900 mb-4">
             Join the Movement 🌱
@@ -125,7 +144,7 @@ const Home = () => {
           </p>
           <Link
             to="/get-involved"
-            className="bg-amber-400 hover:bg-amber-500 text-green-950 font-semibold px-8 py-4 rounded-full transition-all text-lg"
+            className="bg-amber-400 hover:bg-amber-500 text-green-950 font-semibold px-8 py-4 rounded-full transition-all text-lg shadow-lg hover:scale-105"
           >
             Register Now
           </Link>

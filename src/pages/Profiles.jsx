@@ -54,7 +54,7 @@ const team = [
 
 function Profiles() {
   return (
-    <div className="min-h-screen bg-green-50 pt-20 pb-16 mt-[-2rem] mb-[-4rem]">
+    <div className="min-h-screen bg-green-50 pt-12 pb-16 mt-[-2rem] mb-[-4rem]">
       {/* Header */}
       <div className="text-center mb-12">
         <h2 className="text-4xl font-bold text-green-800">

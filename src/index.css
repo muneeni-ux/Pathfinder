@@ -4,14 +4,157 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+@keyframes leafFloat1 {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(15deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+@keyframes leafFloat2 {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(-10deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+.animate-leafFloat1 {
+  animation: leafFloat1 6s ease-in-out infinite;
+}
+.animate-leafFloat2 {
+  animation: leafFloat2 5s ease-in-out infinite;
+}
+
+/* Sidebar links slide-in */
+@keyframes slideIn {
+  0% {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.animate-slideIn {
+  animation: slideIn 0.5s ease forwards;
+}
+/* Hero text fade + slide */
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fadeSlideUp {
+  animation: fadeSlideUp 1.2s ease-out forwards;
+}
+
+/* Parallax zoom */
+@keyframes zoomSlow {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.06);
+  }
+}
+.animate-zoomSlow {
+  animation: zoomSlow 18s ease-in-out infinite alternate;
+}
+
+/* Floating Leaf Animations */
+@keyframes leafFloat1 {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-25px) rotate(15deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+.animate-leafFloat1 {
+  animation: leafFloat1 6s ease-in-out infinite;
+}
+
+@keyframes leafFloat2 {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-35px) rotate(-10deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+.animate-leafFloat2 {
+  animation: leafFloat2 8s ease-in-out infinite;
+}
+
+@keyframes leafFloat3 {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(20deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+.animate-leafFloat3 {
+  animation: leafFloat3 7s ease-in-out infinite;
+}
+/* Global scrollbar styling */
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 12px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #f0fdf4; /* Light green background behind the thumb */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #34d399, #10b981); /* Gradient green thumb */
+  border-radius: 10px;
+  border: 3px solid #f0fdf4; /* Creates padding around the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #059669, #047857); /* Darker green on hover */
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #10b981 #f0fdf4; /* thumb color, track color */
 }

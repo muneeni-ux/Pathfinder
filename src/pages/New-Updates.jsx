@@ -19,14 +19,6 @@ const posts = [
     category: "Reports",
   },
   {
-    title: "Fundraising Event Success",
-    date: "Sep 15, 2025",
-    snippet: "Our annual fundraising event brought together community members and sponsors, helping us raise funds for conservation projects...",
-    link: "#",
-    img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
-    category: "Testimonials",
-  },
-  {
     title: "Local Park Cleanup",
     date: "Aug 10, 2025",
     snippet: "Community members joined hands to clean up local parks and promote environmental responsibility...",
@@ -36,7 +28,7 @@ const posts = [
   },
 ];
 
-const categories = ["All", "Events", "Reports", "Testimonials"];
+const categories = ["All", "Events", "Reports"];
 
 const NewUpdates = () => {
   const [activeCategory, setActiveCategory] = useState("All");
