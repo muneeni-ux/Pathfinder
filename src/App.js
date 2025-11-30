@@ -16,7 +16,9 @@ import NewUpdates from "./pages/New-Updates";
 import Policies from "./pages/Policies";
 import Docs from "./pages/Docs";
 import Profiles from "./pages/Profiles";
+import Club from "./pages/Club";
 import Testimonials from "./pages/Testimonials";
+import ViewMore from "./pages/ViewMore";
 // import AdminDashboard etc later
 
 function AppLayout() {
@@ -55,10 +57,12 @@ function AppRoutes() {
       <Route path="/donate" element={<Donate />} />
       <Route path="/get-involved" element={<Registration />} />
       <Route path="/news-updates" element={<NewUpdates />} />
+      <Route path="/view-more/:id" element={<ViewMore />} />
       <Route path="/testimonials" element={<Testimonials />} />
       <Route path="/policies"element={<Policies />} />
       <Route path="/document-center" element={<Docs />} />
       <Route path="/profiles" element={<Profiles />} />
+      <Route path="/clubs" element={<Club />} />
       {/* Admin Routes can be added here later */}
       <Route path="*" element={<NotFound />} />
     </Routes>

@@ -54,9 +54,8 @@ const About = () => {
           <p className="text-green-800 leading-relaxed relative z-10">
             The Pathfinder @75 Tree Planting Initiative builds on decades of
             youth empowerment and environmental awareness within the church
-            community. Our aim is to engage young leaders and clubs across the
-            region in planting trees that symbolize growth, faith, and
-            stewardship.
+            community. It engages young leaders and clubs across the region in
+            planting trees that symbolize growth, faith, and stewardship.
           </p>
         </div>
 
@@ -77,8 +76,8 @@ const About = () => {
             <br />
             Our key objectives include: <br />
             - Plant millions of trees across all regions and clubs. <br />
-            - Train youth in sustainable environmental practices. <br />
-            - Encourage community engagement and faith-based service. <br />
+            - Train youth in sustainable environmental practices. <br />-
+            Encourage community engagement and faith-based service.
           </p>
         </div>
       </section>
@@ -102,59 +101,113 @@ const About = () => {
         </p>
       </section>
 
-      {/* 📅 NEW — Honor Themes Section */}
-      <section className="py-20 px-6 md:px-12 lg:px-20 max-w-5xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-green-900 mb-6 text-center flex justify-center items-center gap-2">
-          <CalendarDays className="text-amber-500" />
+      {/* 📅 Honor Themes */}
+      <section className="py-16 px-6 md:px-12 lg:px-20 max-w-6xl mx-auto">
+        {" "}
+        {/* Adjusted max-width for more columns */}
+        <h2 className="text-3xl md:text-4xl font-bold text-green-900 mb-4 text-center flex justify-center items-center gap-3">
+          <CalendarDays className="text-amber-500 w-8 h-8" />
           Weekly Pathfinder Honor Themes
         </h2>
-        <p className="text-center text-green-800 max-w-3xl mx-auto mb-12">
+        <p className="text-center text-green-800 max-w-4xl mx-auto mb-10 text-lg">
+          {" "}
+          {/* Increased text size slightly */}
           With over <strong>600 Pathfinder honors</strong>, we focus on one
           theme per day. Each day highlights achievements, activities, and
           stories in that category.
         </p>
-
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+        {/* 🌟 Beautiful & Compact Grid Implementation */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-3 md:gap-4">
           {[
-            { day: "Monday", theme: "Arts / Crafts / Money", icon: "🎨" },
-            { day: "Tuesday", theme: "Hobbies", icon: "⚽" },
-            { day: "Wednesday", theme: "Health", icon: "💚" },
-            { day: "Thursday", theme: "Science", icon: "🔬" },
-            { day: "Friday", theme: "Nature", icon: "🌿" },
-            {
-              day: "Saturday",
-              theme: "Outdoor Industries / Vocational",
-              icon: "🛠️",
-            },
-            { day: "Sunday", theme: "Recreation", icon: "🎾" },
+            { day: "MON", theme: "Arts / Crafts / Money", icon: "🎨" },
+            { day: "TUE", theme: "Hobbies", icon: "⚽" },
+            { day: "WED", theme: "Health", icon: "💚" },
+            { day: "THU", theme: "Science", icon: "🔬" },
+            { day: "FRI", theme: "Nature", icon: "🌿" },
+            { day: "SAT", theme: "Outdoor / Vocational", icon: "🛠️" },
+            { day: "SUN", theme: "Recreation", icon: "🎾" },
           ].map((item, i) => (
             <div
               key={i}
-              className="relative bg-white p-6 rounded-3xl shadow-md border border-green-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group overflow-hidden"
+              // Reduced padding and used a brighter background
+              className="relative bg-white p-4 rounded-xl shadow-md border border-green-100 hover:shadow-lg transition-all duration-300 group overflow-hidden cursor-pointer h-full"
             >
-              {/* Background gradient effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-green-100 via-amber-50 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              {/* Subtle border accent on hover */}
+              <div className="absolute top-0 left-0 w-full h-1 bg-amber-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
 
-              <div className="relative z-10 flex flex-col items-center text-center">
-                <div className="text-4xl mb-3 group-hover:scale-125 transition-transform duration-300">
+              <div className="relative z-10 flex flex-col items-center justify-between h-full">
+                {/* Compact Icon Placement */}
+                <div className="text-3xl mb-2 p-1 rounded-full bg-green-50 group-hover:bg-amber-100 transition-colors duration-300">
                   {item.icon}
                 </div>
-                <h3 className="text-xl font-extrabold text-green-900">
-                  {item.day}
-                </h3>
-                <p className="text-green-700 mt-2 text-sm">{item.theme}</p>
+
+                <div className="text-center mt-2 flex-grow">
+                  {/* Highlighted Day, using shorter abbreviations */}
+                  <h3 className="text-base font-extrabold text-amber-600 uppercase tracking-widest">
+                    {item.day}
+                  </h3>
+
+                  {/* Compact Theme Description */}
+                  <p className="text-green-800 mt-1 text-xs font-medium leading-tight">
+                    {item.theme}
+                  </p>
+                </div>
               </div>
+            </div>
+          ))}
+        </div>
+      </section>
+      {/* 🌟 Projects & Initiatives */}
+      <section className="pb-20 px-6 md:px-12 lg:px-20 max-w-6xl mx-auto">
+        <h2 className="text-3xl md:text-4xl font-bold text-green-900 mb-12 text-center">
+          Projects & Initiatives
+        </h2>
+        <p className="text-green-800 mb-8 text-center max-w-3xl mx-auto">
+          Pathfinders actively participate in environmental, community, and
+          youth empowerment projects. These initiatives provide hands-on
+          experience, leadership development, and opportunities to make a real
+          impact.
+        </p>
+
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+          {[
+            {
+              icon: <TreePine size={36} className="text-amber-400" />,
+              title: "Environmental Projects",
+              desc: "Tree planting campaigns, clean-up drives, and sustainability programs to protect our environment.",
+            },
+            {
+              icon: <HeartHandshake size={36} className="text-amber-400" />,
+              title: "Community Service",
+              desc: "Supporting local communities through outreach programs, charity work, and social initiatives.",
+            },
+            {
+              icon: <Sprout size={36} className="text-amber-400" />,
+              title: "Youth Empowerment",
+              desc: "Programs and workshops designed to enhance skills, leadership, and personal growth for young Pathfinders.",
+            },
+          ].map((item, i) => (
+            <div
+              key={i}
+              className="bg-white p-6 rounded-2xl shadow-md border border-green-200 hover:shadow-lg transition-all"
+            >
+              <div className="flex justify-center text-amber-400 mb-4">
+                {item.icon}
+              </div>
+              <h4 className="text-xl font-semibold mb-2 text-green-900">
+                {item.title}
+              </h4>
+              <p className="text-green-800 text-sm">{item.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* 🌱 Expected Outcomes */}
-      <section className="py-20 px-6 md:px-12 lg:px-20 max-w-6xl mx-auto">
+      <section className="pb-20 px-6 md:px-12 lg:px-20 max-w-6xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-green-900 mb-12 text-center">
           Expected Outcomes
         </h2>
-
         <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
           {[
             {
@@ -191,6 +244,59 @@ const About = () => {
               <p className="text-green-800 text-sm">{item.desc}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* 🌟 Lifestyle & Jobs / Opportunities & Pathfinder History */}
+      <section className="pb-20 px-6 md:px-12 lg:px-20 max-w-6xl mx-auto space-y-12">
+        {/* Lifestyle */}
+        <div className="bg-white p-8 rounded-2xl shadow-lg border border-green-200">
+          <h3 className="text-2xl font-bold text-green-900 mb-4">Lifestyle</h3>
+          <p className="text-green-800 mb-4">
+            Pathfinders are encouraged to maintain holistic wellness. This
+            includes physical health, mental well-being, and spiritual growth.
+            Our lifestyle section provides practical tips:
+          </p>
+          <ul className="text-green-800 list-disc list-inside space-y-2">
+            <li>
+              <strong>Health & wellness:</strong> Nutrition guidance, regular
+              exercise, mindfulness, and healthy routines.
+            </li>
+            <li>
+              <strong>Travel & outdoor activities:</strong> Camping, hiking,
+              nature exploration, and team-building adventures.
+            </li>
+            <li>
+              <strong>Camping Guides:</strong> How to set up tents, plan meals,
+              and safely enjoy outdoor expeditions.
+            </li>
+          </ul>
+        </div>
+
+        {/* Jobs / Opportunities */}
+        <div className="bg-white p-8 rounded-2xl shadow-lg border border-green-200">
+          <h3 className="text-2xl font-bold text-green-900 mb-4">
+            Jobs & Opportunities
+          </h3>
+          <p className="text-green-800 mb-4">
+            Pathfinders can grow personally and professionally. We provide
+            guidance and access to opportunities that strengthen youth
+            development:
+          </p>
+          <ul className="text-green-800 list-disc list-inside space-y-2">
+            <li>
+              <strong>Volunteering:</strong> Local and regional projects,
+              community service, and leadership roles.
+            </li>
+            <li>
+              <strong>Scholarships & Internships:</strong> Educational grants
+              and placements supporting career growth.
+            </li>
+            <li>
+              <strong>Career Guidance:</strong> Workshops and mentorships to
+              explore STEM, arts, and vocational pathways.
+            </li>
+          </ul>
         </div>
       </section>
     </div>

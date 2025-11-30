@@ -1,5 +1,5 @@
 import React from "react";
-import { Facebook, Instagram, Youtube, MessageCircle, FileText, Image, Newspaper, UserPen, FileHeart } from "lucide-react";
+import { Facebook, Instagram, Youtube, MessageCircle, FileText, Image, Newspaper, UserPen, FileHeart, Club } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -10,6 +10,7 @@ const Footer = () => {
     {to: "/testimonials", label: "Testimonials", icon: <FileHeart size={18} />},
     { to: "/media", label: "Media & Gallery", icon: <Image size={18} /> },
     { to: "/document-center", label: "Document Center", icon: <FileText size={18} /> },
+    { to: "/clubs", label: "Regional Clubs", icon: <Club size={18} /> },
     { to: "/policies", label: "Policies", icon: <FileText size={18} /> },
     { to: "/profiles", label: "Team Profiles", icon: <UserPen size={18} /> },
   ];

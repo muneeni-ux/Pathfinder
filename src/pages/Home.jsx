@@ -1,15 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Sprout, TreePine, HeartHandshake, Leaf } from "lucide-react";
+import {
+  Sprout,
+  TreePine,
+  HeartHandshake,
+  Leaf,
+  Calendar,
+  Megaphone,
+  ArrowRight,
+  Sparkles,
+} from "lucide-react";
 
 const Home = () => {
   return (
     <div className="bg-white text-green-900 overflow-x-hidden mt-[-2rem] mb-[-4rem]">
 
-      {/* 🌿 Animated Hero Section */}
+      {/* 🌿 HERO SECTION */}
       <section className="relative h-[80vh] flex items-center justify-center text-center overflow-hidden rounded-b-3xl">
-
-        {/* Parallax Background */}
+        
+        {/* Background */}
         <div
           className="absolute inset-0 bg-cover bg-center animate-zoomSlow"
           style={{
@@ -24,14 +33,14 @@ const Home = () => {
         <Leaf className="absolute bottom-16 right-20 text-green-700 opacity-40 animate-leafFloat2" size={60} />
         <Leaf className="absolute top-1/2 left-1/4 text-amber-500 opacity-40 animate-leafFloat3" size={45} />
 
-        {/* Hero Content */}
+        {/* Main Content */}
         <div className="relative z-10 max-w-3xl px-6 animate-fadeSlideUp">
           <h1 className="text-5xl md:text-6xl font-extrabold mb-4 text-green-900 drop-shadow-xl">
             Pathfinders @75 Tree Planting Initiative 🌳
           </h1>
           <p className="text-lg md:text-xl text-green-800 mb-10">
-            Celebrating 75 years of service, faith & stewardship — inspiring kids,
-            families and communities to grow a greener future together.
+            Celebrating 75 years of leadership, service, and stewardship — raising
+            a generation committed to caring for God’s creation.
           </p>
 
           <div className="flex flex-wrap justify-center gap-4">
@@ -52,85 +61,125 @@ const Home = () => {
 
       </section>
 
-      {/* 🌍 Vision & Mission */}
-      <section className="py-16 px-6 md:px-12 lg:px-20 text-center bg-white">
-        <h2 className="text-3xl md:text-4xl font-bold text-green-900 mb-8">
-          Our Vision & Mission
+      {/* 🌟 WELCOME MESSAGE FROM LEADERSHIP */}
+      <section className="py-16 px-6 md:px-12 lg:px-20 bg-green-50 text-center">
+        <h2 className="text-3xl md:text-4xl font-extrabold text-green-900 mb-6 flex justify-center gap-2">
+          <Sparkles className="text-amber-500" /> Welcome From Leadership
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto">
-          <div className="bg-green-50 p-8 rounded-2xl shadow-md border border-green-200">
-            <h3 className="text-2xl font-semibold mb-4 flex items-center justify-center gap-2 text-green-900">
-              <Leaf className="text-amber-400" /> Vision
-            </h3>
-            <p className="text-green-800 leading-relaxed">
-              To inspire a generation of young people committed to caring for
-              creation, preserving nature, and living sustainably in harmony
-              with God’s world.
-            </p>
-          </div>
+        <p className="max-w-4xl mx-auto text-green-800 text-lg leading-relaxed">
+          “As we celebrate 75 years of Pathfinder ministry, we rededicate
+          ourselves to service, community, and environmental stewardship.  
+          Every tree planted represents growth, hope, and our commitment to the future.”
+        </p>
 
-          <div className="bg-green-50 p-8 rounded-2xl shadow-md border border-green-200">
-            <h3 className="text-2xl font-semibold mb-4 flex items-center justify-center gap-2 text-green-900">
-              <Sprout className="text-amber-400" /> Mission
-            </h3>
-            <p className="text-green-800 leading-relaxed">
-              To plant millions of trees across conferences, clubs, and
-              communities—symbolizing faith, unity, and our commitment to a
-              sustainable planet.
-            </p>
-          </div>
-        </div>
+        <p className="mt-4 font-semibold text-green-900">
+          — Pathfinder Leadership Council, 2025
+        </p>
       </section>
 
-      {/* 🌱 Pathfinder @75 Overview */}
-      <section className="py-20 px-6 md:px-12 lg:px-20 text-center bg-green-50">
-        <h2 className="text-3xl md:text-4xl font-bold text-green-900 mb-6">
-          Pathfinder @75 Overview
+      {/* 🧭 FEATURED PROJECTS */}
+      <section className="py-20 px-6 md:px-12 lg:px-20 text-center bg-white">
+        <h2 className="text-3xl md:text-4xl font-bold text-green-900 mb-10">
+          Featured Pathfinder Projects
         </h2>
-
-        <p className="max-w-4xl mx-auto text-green-800 mb-10 leading-relaxed">
-          As the Pathfinder movement celebrates 75 years of empowering young
-          leaders, this environmental initiative marks a historic milestone.
-          Each planted tree represents service, growth, and hope—echoing our
-          heritage of faith in action.
-        </p>
 
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {[
             {
-              icon: <TreePine size={36} />,
-              title: "Planting Goals",
-              desc: "Millions of trees planted across all regions by 2025.",
+              title: "Green Club Challenge",
+              desc: "Compete globally by planting and nurturing trees.",
+              icon: <Sprout size={38} />,
             },
             {
-              icon: <HeartHandshake size={36} />,
-              title: "Community Involvement",
-              desc: "Engaging clubs, churches, and volunteers in joint efforts.",
+              title: "Eco-Education Campaign",
+              desc: "Teaching kids about sustainability and conservation.",
+              icon: <TreePine size={38} />,
             },
             {
-              icon: <Sprout size={36} />,
-              title: "Sustainable Future",
-              desc: "Training young people in stewardship and eco-leadership.",
+              title: "Community Clean-Up",
+              desc: "Local clubs unite to restore parks & riverbanks.",
+              icon: <HeartHandshake size={38} />,
             },
-          ].map((item, i) => (
+          ].map((item, index) => (
             <div
-              key={i}
-              className="bg-white p-8 rounded-2xl border border-amber-200 shadow hover:shadow-lg transition-all"
+              key={index}
+              className="bg-green-50 p-8 rounded-2xl border border-green-200 shadow hover:shadow-xl transition-all"
             >
-              <div className="flex justify-center text-amber-400 mb-4">
+              <div className="flex justify-center text-amber-500 mb-4">
                 {item.icon}
               </div>
-              <h4 className="text-xl font-semibold mb-2 text-green-900">
-                {item.title}
-              </h4>
-              <p className="text-green-800">{item.desc}</p>
+              <h3 className="text-xl font-semibold text-green-900">{item.title}</h3>
+              <p className="text-green-700 mt-2">{item.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* 🌳 Get Involved CTA */}
+      {/* 📅 UPCOMING EVENTS */}
+      <section className="py-20 px-6 md:px-12 lg:px-20 bg-green-50 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold text-green-900 mb-10">
+          Upcoming Events & Announcements
+        </h2>
+
+        <div className="space-y-6 max-w-3xl mx-auto">
+          {[
+            {
+              date: "25 Feb 2025",
+              title: "National Pathfinder Sabbath",
+            },
+            {
+              date: "10 March 2025",
+              title: "Global Pathfinder Tree Planting Day",
+            },
+            {
+              date: "May 2025",
+              title: "Conference-Level Eco Workshops",
+            },
+          ].map((event, index) => (
+            <div
+              key={index}
+              className="flex justify-between items-center bg-white shadow rounded-xl p-6 border border-green-200 hover:shadow-lg transition"
+            >
+              <div className="flex items-center gap-3">
+                <Calendar className="text-amber-500" />
+                <div>
+                  <h4 className="text-green-900 font-semibold">{event.title}</h4>
+                  <p className="text-green-700 text-sm">{event.date}</p>
+                </div>
+              </div>
+              <Megaphone className="text-green-700" />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ⚡ QUICK LINKS SECTION */}
+      <section className="py-16 px-6 md:px-12 lg:px-20 bg-white text-center">
+        <h2 className="text-3xl md:text-4xl font-bold text-green-900 mb-10">
+          Quick Links
+        </h2>
+
+        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          {[
+            { label: "Latest Reports", to: "/news-updates" },
+            { label: "Photo Gallery", to: "/gallery" },
+            { label: "Volunteer Programs", to: "/get-involved" },
+            { label: "Regional Clubs", to: "/clubs" },
+          ].map((link, i) => (
+            <Link
+              key={i}
+              to={link.to}
+              className="bg-green-50 border border-green-200 p-6 rounded-2xl shadow hover:shadow-lg hover:scale-105 transition-all flex items-center justify-between text-green-900 font-semibold"
+            >
+              {link.label}
+              <ArrowRight />
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* 🌳 CTA */}
       <section className="relative py-24 text-center bg-green-100">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1500&q=80')] bg-cover bg-center opacity-10"></div>
 
@@ -139,8 +188,7 @@ const Home = () => {
             Join the Movement 🌱
           </h2>
           <p className="text-green-800 mb-8">
-            Be part of the green legacy — register your club, volunteer, or
-            become a partner today.
+            Register your club, start planting, and help us reach our global goal!
           </p>
           <Link
             to="/get-involved"
