@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Phone, Mail, MapPin, TreePine } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
+import toast, { Toaster } from "react-hot-toast";
+
+const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -8,20 +11,50 @@ const Contact = () => {
     email: "",
     message: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(`Thank you ${formData.name}! Your message has been sent.`);
-    setFormData({ name: "", email: "", message: "" });
+
+    const { name, email, message } = formData;
+
+    if (!name || !email || !message) {
+      toast.error("Please fill in all required fields.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const res = await fetch(`${SERVER_URL}/api/contact/send-mail`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.error || "Failed to send message.");
+
+      toast.success(
+        `Thank you ${name}! Your message has been sent successfully.`
+      );
+      setFormData({ name: "", email: "", message: "" });
+    } catch (err) {
+      toast.error(err.message || "Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-green-50 via-green-100 to-amber-50 mt-[-2rem] px-6 md:px-12 lg:px-20 py-12 relative mb-[-4rem]">
-      
+      <Toaster position="top-right" reverseOrder={false} />
+
       {/* Page Header */}
       <section className="text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-extrabold text-green-900 mb-4">
@@ -33,20 +66,42 @@ const Contact = () => {
       </section>
 
       {/* Contact Info */}
+      {/* Contact Info */}
       <section className="max-w-6xl mx-auto mb-12 grid md:grid-cols-3 gap-8 text-center">
+        {/* Phone Section */}
         <div className="bg-white rounded-2xl shadow-lg p-6 border border-green-200 hover:shadow-2xl transition">
           <Phone className="w-8 h-8 text-amber-400 mx-auto mb-4" />
           <h3 className="text-xl font-semibold text-green-900 mb-2">Call Us</h3>
-          <p className="text-green-800 font-medium">+254 700 000 000</p>
+          <p className="text-green-800 font-medium">
+            <a
+              href="tel:+254700000000"
+              className="hover:text-amber-500 transition-colors"
+            >
+              +254 700 000 000
+            </a>
+          </p>
         </div>
+
+        {/* Email Section */}
         <div className="bg-white rounded-2xl shadow-lg p-6 border border-green-200 hover:shadow-2xl transition">
           <Mail className="w-8 h-8 text-amber-400 mx-auto mb-4" />
           <h3 className="text-xl font-semibold text-green-900 mb-2">Email</h3>
-          <p className="text-green-800 font-medium">info@pathfinders75.org</p>
+          <p className="text-green-800 font-medium">
+            <a
+              href="mailto:info@pathfinders75.org"
+              className="hover:text-amber-500 transition-colors"
+            >
+              info@pathfinders75.org
+            </a>
+          </p>
         </div>
+
+        {/* Location Section */}
         <div className="bg-white rounded-2xl shadow-lg p-6 border border-green-200 hover:shadow-2xl transition">
           <MapPin className="w-8 h-8 text-amber-400 mx-auto mb-4" />
-          <h3 className="text-xl font-semibold text-green-900 mb-2">Location</h3>
+          <h3 className="text-xl font-semibold text-green-900 mb-2">
+            Location
+          </h3>
           <p className="text-green-800 font-medium">Nairobi, Kenya</p>
         </div>
       </section>
@@ -59,11 +114,10 @@ const Contact = () => {
           width="100%"
           height="400"
           className="border-0"
-          allowFullScreen=""
+          allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
-        {/* Decorative Leaf/Tree overlay */}
         <div className="absolute top-4 left-4 flex gap-2">
           <TreePine className="w-6 h-6 text-amber-400 animate-pulse" />
           <TreePine className="w-6 h-6 text-green-600 animate-bounce" />
@@ -106,9 +160,12 @@ const Contact = () => {
           ></textarea>
           <button
             type="submit"
-            className="bg-amber-400 hover:bg-amber-500 text-green-950 font-bold py-3 rounded-full transition-all text-lg"
+            disabled={loading}
+            className={`bg-amber-400 hover:bg-amber-500 text-green-950 font-bold py-3 rounded-full transition-all text-lg ${
+              loading ? "opacity-70 cursor-not-allowed" : ""
+            }`}
           >
-            Send Message
+            {loading ? "Sending..." : "Send Message"}
           </button>
         </form>
       </section>

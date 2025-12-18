@@ -5,15 +5,43 @@ import {
   TreePine,
   HeartHandshake,
   CalendarDays,
+  Loader2,
+  AlertTriangle,
 } from "lucide-react";
+import axios from "axios";
+
+const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 const About = () => {
   const [offsetY, setOffsetY] = useState(0);
+  const [honorThemes, setHonorThemes] = useState([]);
+  const [loadingThemes, setLoadingThemes] = useState(true);
+  const [themeError, setThemeError] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => setOffsetY(window.pageYOffset);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+  useEffect(() => {
+    const fetchHonorThemes = async () => {
+      try {
+        setLoadingThemes(true);
+        setThemeError(null);
+
+        const res = await axios.get(`${SERVER_URL}/api/honor-themes`);
+
+        setHonorThemes(res.data);
+      } catch (error) {
+        setThemeError(
+          "We couldn’t load the weekly honor themes at the moment. Please try again shortly."
+        );
+      } finally {
+        setLoadingThemes(false);
+      }
+    };
+
+    fetchHonorThemes();
   }, []);
 
   return (
@@ -117,44 +145,57 @@ const About = () => {
           stories in that category.
         </p>
         {/* 🌟 Beautiful & Compact Grid Implementation */}
+        {/* 🌟 Beautiful & Compact Grid Implementation */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-3 md:gap-4">
-          {[
-            { day: "MON", theme: "Arts / Crafts / Money", icon: "🎨" },
-            { day: "TUE", theme: "Hobbies", icon: "⚽" },
-            { day: "WED", theme: "Health", icon: "💚" },
-            { day: "THU", theme: "Science", icon: "🔬" },
-            { day: "FRI", theme: "Nature", icon: "🌿" },
-            { day: "SAT", theme: "Outdoor / Vocational", icon: "🛠️" },
-            { day: "SUN", theme: "Recreation", icon: "🎾" },
-          ].map((item, i) => (
-            <div
-              key={i}
-              // Reduced padding and used a brighter background
-              className="relative bg-white p-4 rounded-xl shadow-md border border-green-100 hover:shadow-lg transition-all duration-300 group overflow-hidden cursor-pointer h-full"
-            >
-              {/* Subtle border accent on hover */}
-              <div className="absolute top-0 left-0 w-full h-1 bg-amber-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
+          {/* Loader */}
+          {loadingThemes && (
+            <div className="col-span-full flex flex-col items-center justify-center py-12">
+              <Loader2 className="w-10 h-10 text-amber-500 animate-spin mb-3" />
+              <p className="text-green-800 font-medium">
+                Loading weekly honor themes…
+              </p>
+            </div>
+          )}
 
-              <div className="relative z-10 flex flex-col items-center justify-between h-full">
-                {/* Compact Icon Placement */}
-                <div className="text-3xl mb-2 p-1 rounded-full bg-green-50 group-hover:bg-amber-100 transition-colors duration-300">
-                  {item.icon}
-                </div>
+          {/* Error */}
+          {!loadingThemes && themeError && (
+            <div className="col-span-full flex flex-col items-center justify-center py-12 bg-white rounded-xl border border-red-200 shadow-md">
+              <AlertTriangle className="w-10 h-10 text-red-500 mb-3" />
+              <p className="text-red-600 font-semibold text-center max-w-md">
+                {themeError}
+              </p>
+            </div>
+          )}
 
-                <div className="text-center mt-2 flex-grow">
-                  {/* Highlighted Day, using shorter abbreviations */}
-                  <h3 className="text-base font-extrabold text-amber-600 uppercase tracking-widest">
-                    {item.day}
-                  </h3>
+          {/* Data */}
+          {!loadingThemes &&
+            !themeError &&
+            honorThemes.map((item, i) => (
+              <div
+                key={item._id || i}
+                className="relative bg-white p-4 rounded-xl shadow-md border border-green-100 hover:shadow-lg transition-all duration-300 group overflow-hidden cursor-pointer h-full"
+              >
+                {/* Hover Accent */}
+                <div className="absolute top-0 left-0 w-full h-1 bg-amber-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
 
-                  {/* Compact Theme Description */}
-                  <p className="text-green-800 mt-1 text-xs font-medium leading-tight">
-                    {item.theme}
-                  </p>
+                <div className="relative z-10 flex flex-col items-center justify-between h-full">
+                  {/* Icon */}
+                  <div className="text-3xl mb-2 p-1 rounded-full bg-green-50 group-hover:bg-amber-100 transition-colors duration-300">
+                    {item.icon}
+                  </div>
+
+                  <div className="text-center mt-2 flex-grow">
+                    <h3 className="text-base font-extrabold text-amber-600 uppercase tracking-widest">
+                      {item.day}
+                    </h3>
+
+                    <p className="text-green-800 mt-1 text-xs font-medium leading-tight">
+                      {item.theme}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </section>
       {/* 🌟 Projects & Initiatives */}
