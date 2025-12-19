@@ -19,12 +19,12 @@ const connectdb = async () => {
     // Check if a default admin already exists
     const existingAdmin = await Admin.findOne({ username });
     if (existingAdmin) {
-      console.log('Default EUSDA admin already exists');
+      console.log('Default PathFinder@75 admin already exists');
     } else {
       // Create the default admin user
       const admin = new Admin({ username, password });
       await admin.save();
-      console.log('Default EUSDA admin user created:', admin);
+      console.log('Default PathFinder@75 admin user created:', admin);
     }
   } catch (err) {
     console.log('MongoDB connection error:', err);
