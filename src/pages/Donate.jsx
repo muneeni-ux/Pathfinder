@@ -109,11 +109,9 @@
 // };
 
 // export default Donate;
-
 import React, { useState } from "react";
 import { CreditCard, Phone, HeartHandshake, Users } from "lucide-react";
-import toast, { Toaster } from "react-hot-toast";
-
+import toast from "react-hot-toast";
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
@@ -121,8 +119,28 @@ const Donate = () => {
   const [amount, setAmount] = useState("");
   const [donorName, setDonorName] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("mpesa");
-  const [phone, setPhone] = useState(""); // For MPesa donations
+  const [phone, setPhone] = useState(""); 
   const [loading, setLoading] = useState(false);
+
+  // --- HELPER: Format Phone Number ---
+  const formatPhoneNumber = (number) => {
+    // 1. Remove all non-numeric characters (spaces, dashes, +, etc.)
+    let cleanNumber = number.replace(/\D/g, "");
+
+    // 2. Check if it starts with '0' (standard local format e.g., 07xx or 01xx)
+    if (cleanNumber.startsWith("0")) {
+      cleanNumber = "254" + cleanNumber.substring(1);
+    } 
+    // 3. Check if it starts with '7' or '1' directly (missing prefix)
+    else if (cleanNumber.startsWith("7") || cleanNumber.startsWith("1")) {
+       if(cleanNumber.length === 9) {
+          cleanNumber = "254" + cleanNumber;
+       }
+    }
+
+    // 4. Ensure it's the correct length for M-Pesa (12 digits: 254XXXXXXXXX)
+    return cleanNumber;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -137,6 +155,15 @@ const Donate = () => {
       return;
     }
 
+    // --- APPLY FORMATTING HERE ---
+    const formattedPhone = formatPhoneNumber(phone);
+
+    // Basic validation: M-Pesa numbers in 254 format are typically 12 digits
+    if (formattedPhone.length !== 12) {
+      toast.error("Invalid phone number format. Please use 07... or 01...");
+      return;
+    }
+
     setLoading(true);
 
     let toastId;
@@ -144,7 +171,8 @@ const Donate = () => {
       const res = await fetch(`${SERVER_URL}/api/donate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ donorName, amount, paymentMethod, phone }),
+        // Send the formatted phone number
+        body: JSON.stringify({ donorName, amount, paymentMethod, phone: formattedPhone }),
       });
 
       const data = await res.json();
@@ -158,10 +186,11 @@ const Donate = () => {
       // Poll for transaction status every 3 seconds, max 30 seconds
       const startTime = Date.now();
       const pollInterval = 3000;
+      
       const poll = async () => {
         if (Date.now() - startTime > 30000) {
           toast.dismiss(toastId);
-          toast.error("Transaction timed out. Please try again.");
+          toast.error("Transaction timed out. Please check your phone.");
           setLoading(false);
           return;
         }
@@ -185,15 +214,14 @@ const Donate = () => {
             setTimeout(poll, pollInterval); // Continue polling if still pending
           }
         } catch (err) {
-          toast.dismiss(toastId);
-          toast.error("Failed to check donation status. Try again.");
-          setLoading(false);
+          // If polling fails (network blip), just keep trying until timeout
+          setTimeout(poll, pollInterval);
         }
       };
 
       poll(); // Start polling
     } catch (err) {
-      toast.dismiss(toastId);
+      if (toastId) toast.dismiss(toastId);
       toast.error(err.message || "Something went wrong. Please try again.");
       setLoading(false);
     }
@@ -201,7 +229,6 @@ const Donate = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-green-50 via-green-100 to-amber-50 mt-[-2rem] px-6 md:px-12 lg:px-20 py-12 mb-[-4rem]">
-      <Toaster position="top-right" reverseOrder={false} />
 
       {/* Header */}
       <section className="text-center mb-12">
@@ -268,8 +295,11 @@ const Donate = () => {
                 onChange={(e) => setPhone(e.target.value)}
                 required
                 className="w-full px-4 py-3 rounded-lg border border-green-300 focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
-                placeholder="e.g., 254712345678"
+                placeholder="e.g., 0712 345 678 or 0110..."
               />
+              <p className="text-xs text-green-600 mt-1 ml-1">
+                Accepted formats: 07xx, 01xx, or 2547xx
+              </p>
             </div>
           )}
 

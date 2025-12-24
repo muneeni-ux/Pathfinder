@@ -422,7 +422,7 @@
 // export default Tracker;
 
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { TreePine, ChevronDown, ChevronRight, Crown } from "lucide-react";
 
   const SERVER_URL = process.env.REACT_APP_SERVER_URL;
@@ -526,7 +526,7 @@ const Tracker = () => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-green-50 via-green-100 to-amber-50 px-6">
         <div className="bg-white border border-green-200 rounded-2xl shadow-xl p-8 max-w-md text-center">
-          <TreePine className="mx-auto mb-4 text-amber-500" size={48} />
+          <TreePine className="mx-auto mb-4 text-amber-500 animate-bounce" size={48} />
           <h2 className="text-xl font-bold text-green-900 mb-2">
             Data Temporarily Unavailable
           </h2>
@@ -557,7 +557,7 @@ const Tracker = () => {
           Tree Planting Tracker 🌳
         </h1>
         <p className="text-green-800 max-w-2xl mx-auto">
-          Tracking tree planting progress across Kenya — station by station.
+          Tracking tree planting progress across Kenya station by station.
         </p>
       </section>
 

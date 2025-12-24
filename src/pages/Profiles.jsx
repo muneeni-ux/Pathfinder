@@ -149,7 +149,7 @@ function Profiles() {
   useEffect(() => {
     const fetchLeaders = async () => {
       try {
-        const res = await axios.get(`${SERVER_URL}/leadership`);
+        const res = await axios.get(`${SERVER_URL}/api/leadership`);
         setTeam(res.data.data || []);
       } catch (err) {
         console.error("Leadership fetch error:", err);

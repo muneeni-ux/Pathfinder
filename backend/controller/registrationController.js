@@ -56,9 +56,11 @@ const createEntity = async (req, res) => {
 };
 /**
  * READ all entities
+ * UPDATED: Handles Admin vs Public view for Clubs
  */
 const getEntities = async (req, res) => {
   const { type } = req.params;
+  const { admin } = req.query; // Check for admin query param
   const Model = getModelByType(type);
   
   if (!Model) {
@@ -66,11 +68,22 @@ const getEntities = async (req, res) => {
   }
 
   try {
-    // Only return APPROVED clubs. For other types, return all.
-    const query = type === "clubs" ? { approved: true } : {};
+    let query = {};
+
+    // Logic: If it's 'clubs' and NOT an admin request, only show approved
+    if (type === "clubs" && admin !== 'true') {
+      query = { approved: true };
+    }
+
+    // If admin=true, query remains {} (fetches all)
+
     const entities = await Model.find(query).sort({ createdAt: -1 });
     
-    res.status(200).json(entities);
+    // Optional: Return a count for frontend convenience
+    res.status(200).json(entities); // User's frontend expects array or { data: [] } logic
+    // Based on frontend code: setRegistrations(data.data || []);
+    // I will stick to returning the array directly or object based on your existing middleware structure.
+    // Assuming your original code returned: res.status(200).json(entities);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Failed to fetch data." });

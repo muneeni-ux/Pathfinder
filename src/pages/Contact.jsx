@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Phone, Mail, MapPin, TreePine } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
@@ -53,7 +53,6 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-green-50 via-green-100 to-amber-50 mt-[-2rem] px-6 md:px-12 lg:px-20 py-12 relative mb-[-4rem]">
-      <Toaster position="top-right" reverseOrder={false} />
 
       {/* Page Header */}
       <section className="text-center mb-12">
@@ -65,7 +64,6 @@ const Contact = () => {
         </p>
       </section>
 
-      {/* Contact Info */}
       {/* Contact Info */}
       <section className="max-w-6xl mx-auto mb-12 grid md:grid-cols-3 gap-8 text-center">
         {/* Phone Section */}

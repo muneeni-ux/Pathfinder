@@ -44,12 +44,61 @@ function AppLayout() {
     <>
       <ScrollToTop />
       <Toaster
-        position="top-right"
-        toastOptions={{
-          success: { style: { background: "#D1FAE5", color: "#065F46" } },
-          error: { style: { background: "#FEE2E2", color: "#991B1B" } },
-        }}
-      />
+              position="top-center"
+              reverseOrder={false}
+              gutter={8}
+              toastOptions={{
+                // Default styles for all toasts
+                className: "",
+                duration: 5000,
+                style: {
+                  background: "#fff",
+                  color: "#065F46",
+                  fontSize: "16px",
+                  fontWeight: "600",
+                  padding: "16px 24px",
+                  borderRadius: "50px", // Pill shape matches your buttons
+                  boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.15)",
+                },
+      
+                // Custom Success State (Deep Green & Gold)
+                success: {
+                  duration: 4000,
+                  iconTheme: {
+                    primary: "#FBBF24", // Amber/Gold checkmark
+                    secondary: "#064E3B", // Deep green background for check
+                  },
+                  style: {
+                    background: "#064E3B", // Dark Green background
+                    color: "#FFFFFF", // White text
+                    border: "2px solid #FBBF24", // Gold border to match your buttons
+                  },
+                },
+      
+                // Custom Error State (Soft Red & Earthy)
+                error: {
+                  duration: 6000,
+                  iconTheme: {
+                    primary: "#EF4444",
+                    secondary: "#FEF2F2",
+                  },
+                  style: {
+                    background: "#FEF2F2", // Very light red/white
+                    color: "#991B1B", // Deep red text
+                    border: "2px solid #FECACA", // Soft red border
+                  },
+                },
+      
+                // Custom Loading State (Matches your form loader)
+                loading: {
+                  style: {
+                    background: "#FFFBEB", // Light Amber background
+                    color: "#B45309", // Dark Amber text
+                    border: "2px solid #FDE68A",
+                  },
+                },
+              }}
+            />
       <VisitorTracker />
 
       {!isAdminRoute && <Navbar />}

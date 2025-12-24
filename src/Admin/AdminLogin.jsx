@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import AdminLoader from "./components/AdminLoader";
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
@@ -55,7 +55,6 @@ const AdminLogin = () => {
         backgroundSize: "cover",
       }}
     >
-      <Toaster position="top-right" />
       <div className="absolute inset-0 bg-black bg-opacity-40 z-0" />
       <div className="relative z-10 bg-white/95 backdrop-blur-sm p-8 rounded-2xl shadow-2xl w-full max-w-md border border-green-200">
         <h2 className="text-3xl font-bold text-center text-green-700 mb-4">

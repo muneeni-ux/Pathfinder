@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { NavLink, Outlet, Navigate } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
 import {
   Users,
   MailCheck,
@@ -16,7 +15,7 @@ import {
   Menu,
   X,
 } from "lucide-react";
-// update component accordingly.. Make the UI consistent with the rest of the admin dashboard, beautiful and proffessional using theme colours amber,brownish yellow, black and white. A good dasboard display since its supposed to handle the admin routes navigation.Update to display the navigations properly to the relevant current admin Routes. And use the lucide icons properly.
+
 const AdminDashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
@@ -146,9 +145,6 @@ const AdminDashboard = () => {
       <main
         className={`flex-1 bg-gray-100 text-gray-900 p-6 pt-20 md:pt-6 transition-all duration-300 overflow-y-auto`}
       >
-        {/* Toaster for inline notifications */}
-        <Toaster position="top-right" />
-        {/* Mobile top bar */}
         <div className="flex items-center justify-between mb-6 md:hidden mt-[-2rem]">
           <h1 className="text-xl font-bold">Admin Dashboard</h1>
           <button

@@ -259,7 +259,7 @@
 
 import React, { useState, useEffect } from "react";
 import { MessageCircle, PlusCircle, X, Heart } from "lucide-react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 const categories = ["All", "Pathfinder", "Parent", "Leader"];
@@ -281,7 +281,7 @@ const Testimonials = () => {
   const fetchTestimonials = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`${SERVER_URL}/testimonials`);
+      const res = await fetch(`${SERVER_URL}/api/testimonials`);
       const data = await res.json();
       if (data.success) {
         setTestimonials(data.data);
@@ -308,7 +308,7 @@ const Testimonials = () => {
   // HANDLE LIKE
   const handleLike = async (testimonialId, idx) => {
     try {
-      const res = await fetch(`${SERVER_URL}/testimonials/like/${testimonialId}`, {
+      const res = await fetch(`${SERVER_URL}/api/testimonials/like/${testimonialId}`, {
         method: "PUT",
       });
       const data = await res.json();
@@ -336,7 +336,7 @@ const Testimonials = () => {
     }
 
     try {
-      const res = await fetch(`${SERVER_URL}/testimonials`, {
+      const res = await fetch(`${SERVER_URL}/api/testimonials`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -358,7 +358,6 @@ const Testimonials = () => {
 
   return (
     <div className="bg-green-50 min-h-screen py-16 px-6 mt-[-2rem] mb-[-4rem] relative">
-      <Toaster position="top-right" reverseOrder={false} />
 
       {/* HEADER */}
       <div className="text-center mb-12 animate-fadeIn">

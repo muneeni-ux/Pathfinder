@@ -69,7 +69,7 @@ app.use("/api/admin", require('./routes/AdminAuth'));
 app.use("/api/visitors", require('./routes/VisitorRoutes'));
 app.use("/api/subscribe", require('./routes/SubscriptionRoutes')); 
 
-app.use("/api/honour-themes", require('./routes/honourThemeRoutes')); 
+app.use("/api/honor-themes", require('./routes/honourThemeRoutes')); 
 app.use("/api/tracker", require('./routes/trackerRoutes'));
 app.use("/api/registrations", require('./routes/RegistrationRoutes'));
 app.use("/api/donate", require('./routes/donationRoutes'));
