@@ -1,431 +1,19 @@
-// import React, { useState, useEffect } from "react";
-// import { TreePine, ChevronDown, ChevronRight, Crown } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { 
+  TreePine, 
+  ChevronDown, 
+  ChevronRight, 
+  Crown, 
+  MessageCircle, 
+  X, 
+  Send, 
+  Copy, 
+  Camera 
+} from "lucide-react";
+import { toast, Toaster } from "react-hot-toast";
 
-// const SERVER_URL = process.env.REACT_APP_SERVER_URL;
-
-// const Tracker = () => {
-//   // ---------------------------------------------------------------------
-//   // 1. STATIC DATA — ALL CONFERENCES & STATIONS (WITH STATION TREE COUNTS)
-//   // ---------------------------------------------------------------------
-//   const conferences = [
-//     {
-//       name: "Central Nyanza Conference",
-//       stations: [
-//         { name: "Kisumu", trees: 1800 },
-//         { name: "Ahero", trees: 1500 },
-//         { name: "Thurgam", trees: 1200 },
-//         { name: "Olembo", trees: 900 },
-//         { name: "Siaya", trees: 1600 },
-//         { name: "Bondo", trees: 1700 },
-//         { name: "Maliara", trees: 1300 },
-//         { name: "Kagwa", trees: 1500 }
-//       ]
-//     },
-
-//     {
-//       name: "Greater Rift Valley",
-//       stations: [
-//         { name: "Moiben North", trees: 2100 },
-//         { name: "Moiben South", trees: 2000 },
-//         { name: "Moiben East", trees: 1900 },
-//         { name: "Moiben West", trees: 2200 }
-//       ]
-//     },
-
-//     {
-//       name: "Kenya Lake Conference",
-//       stations: [
-//         { name: "Gendia Central", trees: 2600 },
-//         { name: "Gendia East", trees: 2400 },
-//         { name: "Gendia West", trees: 2500 },
-//         { name: "Olare South", trees: 2600 },
-//         { name: "Olare West", trees: 2500 },
-//         { name: "Olare East", trees: 2700 }
-//       ]
-//     },
-
-//     {
-//       name: "Ranen Conference",
-//       stations: [
-//         { name: "Uriri", trees: 1400 },
-//         { name: "Awendo", trees: 1600 },
-//         { name: "Ranen", trees: 1500 },
-//         { name: "Rongo", trees: 1300 },
-//         { name: "Ngere", trees: 1100 },
-//         { name: "Sare", trees: 1200 },
-//         { name: "Kanyimach", trees: 1600 }
-//       ]
-//     },
-
-//     {
-//       name: "Western Kenya Conference",
-//       stations: [
-//         { name: "Chebwai", trees: 1900 },
-//         { name: "Webuye", trees: 1800 },
-//         { name: "Busia", trees: 2100 },
-//         { name: "Kakamega", trees: 2300 },
-//         { name: "Vihiga", trees: 2000 },
-//         { name: "Bungoma", trees: 2100 },
-//         { name: "Iwandet", trees: 1500 },
-//         { name: "Malaba", trees: 1200 }
-//       ]
-//     },
-
-//     {
-//       name: "Lake Victoria Field",
-//       stations: [
-//         { name: "Homabay", trees: 1500 },
-//         { name: "Sori", trees: 1300 },
-//         { name: "Obera", trees: 1100 },
-//         { name: "Rusinga", trees: 1400 },
-//         { name: "Rapedhi", trees: 1200 },
-//         { name: "Gwassi", trees: 1500 },
-//         { name: "Mfangano", trees: 1300 },
-//         { name: "Ruri", trees: 1200 },
-//         { name: "Got Kojowi", trees: 1400 }
-//       ]
-//     },
-
-//     {
-//       name: "North Rift Valley Field",
-//       stations: [
-//         { name: "Turkana", trees: 1200 },
-//         { name: "Kapenguria", trees: 1500 },
-//         { name: "Kitale", trees: 1600 },
-//         { name: "Mt. Elgon", trees: 1400 }
-//       ]
-//     },
-
-//     {
-//       name: "South East Nyanza Field",
-//       stations: [{ name: "Stations TBD", trees: 1000 }]
-//     },
-
-//     {
-//       name: "South West Nyanza Field",
-//       stations: [
-//         { name: "Migori", trees: 1600 },
-//         { name: "Nyamome", trees: 1300 },
-//         { name: "Kadika", trees: 1400 },
-//         { name: "Nyaduong", trees: 1200 },
-//         { name: "Magina", trees: 1300 },
-//         { name: "Sota", trees: 1100 },
-//         { name: "Nyandago", trees: 1400 }
-//       ]
-//     },
-
-//     {
-//       name: "Southern Kenya Lake Field",
-//       stations: [
-//         { name: "Wang’a Pala", trees: 1400 },
-//         { name: "Dudi", trees: 1200 },
-//         { name: "Wire", trees: 1300 },
-//         { name: "Oyugis", trees: 1500 },
-//         { name: "Kwoyo", trees: 1400 }
-//       ]
-//     },
-
-//     {
-//       name: "West Rift Valley Field",
-//       stations: [
-//         { name: "Kapsabet", trees: 1500 },
-//         { name: "Chepterit", trees: 1300 },
-//         { name: "Kaigat", trees: 1200 },
-//         { name: "Tinderet", trees: 1400 }
-//       ]
-//     },
-
-//     {
-//       name: "Central Kenya Conference",
-//       stations: [
-//         { name: "Central Nairobi", trees: 2000 },
-//         { name: "Mt. Kenya Central", trees: 1800 },
-//         { name: "Mt. Kenya South", trees: 1700 },
-//         { name: "North Nairobi", trees: 1600 },
-//         { name: "Thika", trees: 1500 },
-//         { name: "West Nairobi", trees: 1900 }
-//       ]
-//     },
-
-//     {
-//       name: "Central Rift Valley Conference",
-//       stations: [
-//         { name: "Baringo South", trees: 1500 },
-//         { name: "Laikipia", trees: 1300 },
-//         { name: "Molo", trees: 1400 },
-//         { name: "Naivasha", trees: 1500 },
-//         { name: "Nakuru East", trees: 1600 },
-//         { name: "Nakuru West", trees: 1500 },
-//         { name: "Narok", trees: 1300 },
-//         { name: "Njoro", trees: 1400 },
-//         { name: "Nyahururu", trees: 1500 },
-//         { name: "Nyandarua", trees: 1300 },
-//         { name: "Olenguruone", trees: 1200 },
-//         { name: "Rongai", trees: 1300 }
-//       ]
-//     },
-
-//     {
-//       name: "East Nairobi Field",
-//       stations: [
-//         { name: "Kitui", trees: 1400 },
-//         { name: "Lower Nairobi", trees: 1300 },
-//         { name: "Machakos", trees: 1500 },
-//         { name: "Mbooni", trees: 1200 },
-//         { name: "Upper Nairobi", trees: 1400 },
-//         { name: "Wote", trees: 1300 }
-//       ]
-//     },
-
-//     {
-//       name: "Kenya Coast Field",
-//       stations: [
-//         { name: "Galana", trees: 1200 },
-//         { name: "Kilifi", trees: 1400 },
-//         { name: "Lamu", trees: 1300 },
-//         { name: "Malindi", trees: 1500 },
-//         { name: "Mombasa", trees: 1600 },
-//         { name: "Mombasa West", trees: 1500 },
-//         { name: "Mtito Andei", trees: 1400 },
-//         { name: "North Eastern", trees: 1300 },
-//         { name: "South Coast", trees: 1400 },
-//         { name: "Taita Taveta", trees: 1500 }
-//       ]
-//     },
-
-//     {
-//       name: "North East Kenya Field",
-//       stations: [
-//         { name: "Meru", trees: 1500 },
-//         { name: "Mt. Kenya Central", trees: 1400 },
-//         { name: "Mt. Kenya East", trees: 1300 },
-//         { name: "North West", trees: 1200 },
-//         { name: "Nyambene", trees: 1400 },
-//         { name: "Tharaka", trees: 1300 }
-//       ]
-//     },
-
-//     {
-//       name: "Nyamira Conference",
-//       stations: [
-//         { name: "Gesura", trees: 1500 },
-//         { name: "Kebirigo", trees: 1300 },
-//         { name: "Manga", trees: 1400 },
-//         { name: "Matutu", trees: 1300 },
-//         { name: "Nyaigwa", trees: 1200 },
-//         { name: "Sironga", trees: 1500 },
-//         { name: "Tonga", trees: 1400 },
-//         { name: "Township", trees: 1500 }
-//       ]
-//     },
-
-//     {
-//       name: "Nyamira West Field",
-//       stations: [
-//         { name: "Kemera", trees: 1200 },
-//         { name: "Keroka", trees: 1400 },
-//         { name: "Nyagesenda", trees: 1300 },
-//         { name: "Rigoma", trees: 1200 },
-//         { name: "Riotero", trees: 1300 }
-//       ]
-//     },
-
-//     {
-//       name: "South East Kenya Field",
-//       stations: [
-//         { name: "Etago", trees: 1300 },
-//         { name: "Gotichaki", trees: 1200 },
-//         { name: "Kenyenya", trees: 1300 },
-//         { name: "Kilgoris", trees: 1500 },
-//         { name: "Lolgorian", trees: 1400 },
-//         { name: "Magenche", trees: 1300 },
-//         { name: "Mogenda", trees: 1200 },
-//         { name: "Nyacheki", trees: 1300 },
-//         { name: "Nyamache", trees: 1400 },
-//         { name: "Nyamonyo", trees: 1200 },
-//         { name: "Ogembo", trees: 1400 },
-//         { name: "Omosaria", trees: 1100 },
-//         { name: "Shartuka", trees: 1300 }
-//       ]
-//     },
-
-//     {
-//       name: "South Kenya Conference",
-//       stations: [
-//         { name: "Gesabakwa", trees: 1400 },
-//         { name: "Itumbe", trees: 1300 },
-//         { name: "Masimba", trees: 1400 },
-//         { name: "Nyanchwa", trees: 1500 },
-//         { name: "Riana", trees: 1300 },
-//         { name: "Riondong’a", trees: 1200 },
-//         { name: "Suneka", trees: 1300 }
-//       ]
-//     },
-
-//     {
-//       name: "South Nairobi Kajiado Field",
-//       stations: [
-//         { name: "Kajiado East", trees: 1300 },
-//         { name: "Kajiado North", trees: 1500 },
-//         { name: "Southern Nairobi", trees: 1600 }
-//       ]
-//     },
-
-//     {
-//       name: "South Rift Valley Field",
-//       stations: [
-//         { name: "Bomet", trees: 1500 },
-//         { name: "Bureti", trees: 1400 },
-//         { name: "Kericho Central", trees: 1300 },
-//         { name: "Kericho East", trees: 1300 },
-//         { name: "Kericho West", trees: 1400 }
-//       ]
-//     }
-//   ];
-
-//   // -------------------------------------------------
-//   // 2. COMPUTED TOTALS
-//   // -------------------------------------------------
-//   const conferencesWithTotals = conferences.map(conf => ({
-//     ...conf,
-//     trees: conf.stations.reduce((sum, s) => sum + s.trees, 0)
-//   }));
-
-//   const totalTrees = conferencesWithTotals.reduce((sum, c) => sum + c.trees, 0);
-
-//   const topRegion = [...conferencesWithTotals].sort((a, b) => b.trees - a.trees)[0];
-
-//   // Global animated counter
-//   const [animatedCount, setAnimatedCount] = useState(0);
-
-//   useEffect(() => {
-//     let start = 0;
-//     const end = totalTrees;
-//     const duration = 2000;
-//     const step = Math.ceil(end / (duration / 40));
-
-//     const counter = setInterval(() => {
-//       start += step;
-//       if (start >= end) {
-//         clearInterval(counter);
-//         start = end;
-//       }
-//       setAnimatedCount(start);
-//     }, 40);
-//   }, [totalTrees]);
-
-//   const [open, setOpen] = useState(null);
-
-//   // -------------------------------------------------
-//   // 3. RENDER UI
-//   // -------------------------------------------------
-//   return (
-//     <div className="min-h-screen bg-gradient-to-b from-green-50 via-green-100 to-amber-50 px-6 md:px-14 lg:px-20 py-12 mt-[-2rem] mb-[-4rem]">
-
-//       {/* HEADER */}
-//       <section className="text-center mb-14">
-//         <h1 className="text-4xl md:text-5xl font-extrabold text-green-900 mb-4">
-//           Tree Planting Tracker 🌳
-//         </h1>
-//         <p className="text-green-800 max-w-2xl mx-auto">
-//           Tracking tree planting progress across Kenya — station by station.
-//         </p>
-//       </section>
-
-//       {/* GLOBAL TREES COUNTER */}
-//       <section className="text-center mb-16">
-//         <div className="inline-flex items-center gap-3 bg-amber-200/50 px-10 py-7 rounded-3xl shadow-lg border border-green-200">
-//           <TreePine size={38} className="text-green-900" />
-//           <div>
-//             <p className="text-4xl font-extrabold text-green-950 tracking-wide">
-//               {animatedCount.toLocaleString()}
-//             </p>
-//             <p className="text-green-800 font-medium">Total Trees Planted</p>
-//           </div>
-//         </div>
-//       </section>
-
-//       {/* TOP REGION */}
-//       <section className="max-w-3xl mx-auto mb-16">
-//         <h2 className="text-2xl font-bold text-green-900 mb-4 text-center">Top Performing Region</h2>
-
-//         <div className="bg-white rounded-3xl shadow-xl p-6 border border-green-200 flex sm:flex-row flex-col items-center gap-6">
-//           <Crown size={50} className="text-amber-500" />
-//           <div className="flex-1">
-//             <h3 className="text-2xl font-bold text-green-900">{topRegion.name}</h3>
-//             <p className="text-green-700 text-lg font-semibold mt-1">
-//               {topRegion.trees.toLocaleString()} Trees Planted
-//             </p>
-//           </div>
-//         </div>
-//       </section>
-
-//       {/* CONFERENCES LIST */}
-//       <section className="max-w-5xl mx-auto mb-20">
-//         <h2 className="text-2xl md:text-3xl font-bold text-green-900 mb-8 text-center">
-//           Trees Planted by Conference
-//         </h2>
-
-//         <div className="space-y-6">
-//           {conferencesWithTotals.map((conf, idx) => (
-//             <div key={idx} className="bg-white rounded-2xl shadow-lg border border-green-200 p-6">
-
-//               {/* HEADER ROW */}
-//               <div
-//                 className="flex justify-between items-center cursor-pointer"
-//                 onClick={() => setOpen(open === idx ? null : idx)}
-//               >
-//                 <div>
-//                   <h3 className="text-xl font-bold text-green-900">{conf.name}</h3>
-//                   <p className="text-green-700 font-semibold">
-//                     {conf.trees.toLocaleString()} Trees Planted
-//                   </p>
-//                 </div>
-
-//                 {open === idx ? (
-//                   <ChevronDown className="text-green-800" />
-//                 ) : (
-//                   <ChevronRight className="text-green-800" />
-//                 )}
-//               </div>
-
-//               {/* STATIONS */}
-//               {open === idx && (
-//                 <ul className="mt-4 grid md:grid-cols-2 lg:grid-cols-3 gap-2">
-//                   {conf.stations.map((station, sIdx) => (
-//                     <li
-//                       key={sIdx}
-//                       className="bg-green-50 border border-green-200 rounded-lg px-4 py-2 text-green-900 flex justify-between"
-//                     >
-//                       🌱 {station.name}
-//                       <span className="font-semibold">{station.trees.toLocaleString()}</span>
-//                     </li>
-//                   ))}
-//                 </ul>
-//               )}
-//             </div>
-//           ))}
-//         </div>
-//       </section>
-
-//       {/* MAP PLACEHOLDER */}
-//       <section className="text-center mb-10">
-//         <h2 className="text-2xl font-bold text-green-900 mb-6">Interactive Map (Coming Soon)</h2>
-//         <div className="w-full h-80 bg-green-200 rounded-2xl shadow-lg flex items-center justify-center text-green-900 font-semibold">
-//           Kenya Tree Planting Map 🌍
-//         </div>
-//       </section>
-//     </div>
-//   );
-// };
-
-// export default Tracker;
-
-
-import { useState, useEffect } from "react";
-import { TreePine, ChevronDown, ChevronRight, Crown } from "lucide-react";
-
-  const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+const WHATSAPP_NUMBER = "254738380692"; // REPLACE THIS WITH YOUR ACTUAL ADMIN NUMBER
 
 const Tracker = () => {
   // -------------------------------------------------
@@ -438,6 +26,9 @@ const Tracker = () => {
   const [error, setError] = useState(false);
   const [open, setOpen] = useState(null);
   const [animatedCount, setAnimatedCount] = useState(0);
+  
+  // WhatsApp Modal State
+  const [showWhatsAppModal, setShowWhatsAppModal] = useState(false);
 
   // -------------------------------------------------
   // FETCH BACKEND DATA
@@ -504,7 +95,31 @@ const Tracker = () => {
   }, [totalTrees]);
 
   // -------------------------------------------------
-  // LOADING STATE (POLISHED)
+  // WHATSAPP HANDLERS
+  // -------------------------------------------------
+  const reportTemplate = `*TREE PLANTING REPORT 🌳*
+------------------
+*Club Name:* [Enter Name]
+*Region/Conference:* [Enter Region]
+*Station:* [Enter Station]
+*Trees Planted:* [Number]
+------------------
+*Evidence:* (Please attach photos/videos below)`;
+
+  const handleOpenWhatsApp = () => {
+    const encodedMessage = encodeURIComponent(reportTemplate);
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+    window.open(whatsappUrl, "_blank");
+    setShowWhatsAppModal(false);
+  };
+
+  const copyTemplate = () => {
+    navigator.clipboard.writeText(reportTemplate);
+    toast.success("Template copied to clipboard!");
+  };
+
+  // -------------------------------------------------
+  // LOADING STATE
   // -------------------------------------------------
   if (loading) {
     return (
@@ -520,13 +135,13 @@ const Tracker = () => {
   }
 
   // -------------------------------------------------
-  // ERROR STATE (USER-FRIENDLY)
+  // ERROR STATE
   // -------------------------------------------------
   if (error) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-green-50 via-green-100 to-amber-50 px-6">
         <div className="bg-white border border-green-200 rounded-2xl shadow-xl p-8 max-w-md text-center">
-          <TreePine className="mx-auto mb-4 text-amber-500 animate-bounce" size={48} />
+          <TreePine className="mx-auto mb-4 text-amber-500" size={48} />
           <h2 className="text-xl font-bold text-green-900 mb-2">
             Data Temporarily Unavailable
           </h2>
@@ -546,10 +161,11 @@ const Tracker = () => {
   }
 
   // -------------------------------------------------
-  // UI (UNCHANGED)
+  // MAIN UI
   // -------------------------------------------------
   return (
-    <div className="min-h-screen bg-gradient-to-b from-green-50 via-green-100 to-amber-50 px-6 md:px-14 lg:px-20 py-12 mt-[-2rem] mb-[-4rem]">
+    <div className="min-h-screen bg-gradient-to-b from-green-50 via-green-100 to-amber-50 px-6 md:px-14 lg:px-20 py-12 mt-[-2rem] mb-[-4rem] relative">
+      <Toaster position="top-center" />
 
       {/* HEADER */}
       <section className="text-center mb-14">
@@ -651,6 +267,91 @@ const Tracker = () => {
           Kenya Tree Planting Map 🌍
         </div>
       </section>
+
+      {/* ------------------------------------------------------- */}
+      {/* FLOATING WHATSAPP BUTTON */}
+      {/* ------------------------------------------------------- */}
+      <div className="fixed bottom-8 right-6 z-40">
+        <button
+          onClick={() => setShowWhatsAppModal(true)}
+          className="group flex items-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white px-4 py-3 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-105 border-4 border-white/30"
+        >
+          <span className="font-bold hidden md:block">Update Status</span>
+          <MessageCircle size={28} className="fill-white text-[#25D366]" />
+          
+          {/* Notification Dot */}
+          <span className="absolute -top-1 -right-1 flex h-4 w-4">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-4 w-4 bg-red-500"></span>
+          </span>
+        </button>
+      </div>
+
+      {/* ------------------------------------------------------- */}
+      {/* UPDATE INFO MODAL */}
+      {/* ------------------------------------------------------- */}
+      {showWhatsAppModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in zoom-in duration-200">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md relative overflow-hidden">
+            
+            {/* Header */}
+            <div className="bg-[#075E54] p-6 text-white">
+              <button 
+                onClick={() => setShowWhatsAppModal(false)}
+                className="absolute top-4 right-4 text-white/80 hover:text-white bg-white/10 rounded-full p-1"
+              >
+                <X size={20} />
+              </button>
+              <h3 className="text-xl font-bold flex items-center gap-2">
+                <MessageCircle className="fill-white" /> Report Progress
+              </h3>
+              <p className="text-green-100 text-sm mt-1">
+                Send your tree planting updates directly to our admin team via WhatsApp.
+              </p>
+            </div>
+
+            {/* Body */}
+            <div className="p-6">
+              <div className="bg-green-50 border border-green-100 rounded-lg p-4 mb-4">
+                <h4 className="text-green-800 font-bold mb-2 flex items-center gap-2 text-sm">
+                  <Camera size={16} /> Evidence Required
+                </h4>
+                <p className="text-green-700 text-sm mb-2">
+                  Please attach photos or videos of your planting activity along with the text details.
+                </p>
+              </div>
+
+              <div className="relative">
+                <label className="text-xs font-bold text-gray-500 uppercase mb-1 block">Message Preview</label>
+                <textarea 
+                  readOnly 
+                  value={reportTemplate} 
+                  className="w-full h-36 bg-gray-50 border border-gray-200 rounded-lg p-3 text-sm text-gray-700 font-mono resize-none focus:outline-none"
+                />
+                <button 
+                  onClick={copyTemplate}
+                  className="absolute top-8 right-2 p-1.5 bg-white border border-gray-200 rounded-md text-gray-500 hover:text-green-600 shadow-sm"
+                  title="Copy Text"
+                >
+                  <Copy size={14} />
+                </button>
+              </div>
+
+              <button 
+                onClick={handleOpenWhatsApp}
+                className="w-full mt-6 bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-3.5 rounded-xl shadow-lg flex items-center justify-center gap-2 transition-transform transform hover:-translate-y-1"
+              >
+                <Send size={18} /> Open WhatsApp
+              </button>
+              
+              <p className="text-center text-xs text-gray-400 mt-3">
+                This will open WhatsApp with the pre-filled message.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };
