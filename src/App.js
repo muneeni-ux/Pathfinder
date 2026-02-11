@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Footer from "./components/Footer";
-import { Toaster } from "react-hot-toast";
+import CustomToaster from "./components/CustomToaster";
 import ScrollToTop from "./components/scrollTop";
 import VisitorTracker from "./components/VisitorTracker";
 import Tracker from "./pages/Tracker";
@@ -18,6 +18,7 @@ import Policies from "./pages/Policies";
 import Docs from "./pages/Docs";
 import Profiles from "./pages/Profiles";
 import Club from "./pages/Club";
+import Programs from "./pages/Programs";
 import Testimonials from "./pages/Testimonials";
 import ViewMore from "./pages/ViewMore";
 // Admin Imports
@@ -43,62 +44,7 @@ function AppLayout() {
   return (
     <>
       <ScrollToTop />
-      <Toaster
-              position="top-center"
-              reverseOrder={false}
-              gutter={8}
-              toastOptions={{
-                // Default styles for all toasts
-                className: "",
-                duration: 5000,
-                style: {
-                  background: "#fff",
-                  color: "#065F46",
-                  fontSize: "16px",
-                  fontWeight: "600",
-                  padding: "16px 24px",
-                  borderRadius: "50px", // Pill shape matches your buttons
-                  boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.15)",
-                },
-      
-                // Custom Success State (Deep Green & Gold)
-                success: {
-                  duration: 4000,
-                  iconTheme: {
-                    primary: "#FBBF24", // Amber/Gold checkmark
-                    secondary: "#064E3B", // Deep green background for check
-                  },
-                  style: {
-                    background: "#064E3B", // Dark Green background
-                    color: "#FFFFFF", // White text
-                    border: "2px solid #FBBF24", // Gold border to match your buttons
-                  },
-                },
-      
-                // Custom Error State (Soft Red & Earthy)
-                error: {
-                  duration: 6000,
-                  iconTheme: {
-                    primary: "#EF4444",
-                    secondary: "#FEF2F2",
-                  },
-                  style: {
-                    background: "#FEF2F2", // Very light red/white
-                    color: "#991B1B", // Deep red text
-                    border: "2px solid #FECACA", // Soft red border
-                  },
-                },
-      
-                // Custom Loading State (Matches your form loader)
-                loading: {
-                  style: {
-                    background: "#FFFBEB", // Light Amber background
-                    color: "#B45309", // Dark Amber text
-                    border: "2px solid #FDE68A",
-                  },
-                },
-              }}
-            />
+      <CustomToaster />
       <VisitorTracker />
 
       {!isAdminRoute && <Navbar />}
@@ -115,6 +61,7 @@ function AppRoutes() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
+      <Route path="/programs" element={<Programs />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/tracker" element={<Tracker />} />
       <Route path="/media" element={<Media />} />
@@ -123,7 +70,7 @@ function AppRoutes() {
       <Route path="/news-updates" element={<NewUpdates />} />
       <Route path="/view-more/:id" element={<ViewMore />} />
       <Route path="/testimonials" element={<Testimonials />} />
-      <Route path="/policies"element={<Policies />} />
+      <Route path="/policies" element={<Policies />} />
       <Route path="/document-center" element={<Docs />} />
       <Route path="/profiles" element={<Profiles />} />
       <Route path="/clubs" element={<Club />} />

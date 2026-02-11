@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { 
-  ArrowLeft, 
-  Calendar, 
-  Clock, 
-  Share2, 
-  AlertCircle, 
+import {
+  ArrowLeft,
+  Calendar,
+  Clock,
+  Share2,
+  AlertCircle,
   Loader2,
-  Tag
+  Tag,
 } from "lucide-react";
 import { toast } from "react-hot-toast";
 
@@ -27,9 +27,10 @@ const ViewMore = () => {
         setLoading(true);
         const res = await fetch(`${SERVER_URL}/api/posts/${id}`);
         const data = await res.json();
-        
-        if (!res.ok) throw new Error(data.error || data.message || "Post not found");
-        
+
+        if (!res.ok)
+          throw new Error(data.error || data.message || "Post not found");
+
         setPost(data);
       } catch (err) {
         setError(err.message || "Failed to load post");
@@ -50,17 +51,60 @@ const ViewMore = () => {
     });
   };
 
-  const handleShare = () => {
-    navigator.clipboard.writeText(window.location.href);
-    toast.success("Link copied to clipboard!");
+  const handleShare = async () => {
+    const shareUrl = window.location.href;
+    const shareText = post?.title ? `${post.title} — ${shareUrl}` : shareUrl;
+
+    // Use Web Share API when available (mobile & supported browsers)
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: post?.title || "Pathfinder Update",
+          text: post?.excerpt || post?.title || "Check out this article",
+          url: shareUrl,
+        });
+        toast.success("Thanks for sharing!");
+        return;
+      } catch (err) {
+        // User probably cancelled; fallthrough to clipboard fallback
+      }
+    }
+
+    // Fallback: copy to clipboard and offer platform-specific share
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      toast.success("Link copied to clipboard!");
+    } catch (err) {
+      toast.error("Could not copy link to clipboard");
+    }
+
+    // If on mobile, open WhatsApp share; otherwise open Twitter intent in a new window
+    const isMobile = /Mobi|Android|iPhone|iPad/i.test(
+      navigator.userAgent || "",
+    );
+    const encoded = encodeURIComponent(shareText);
+
+    try {
+      if (isMobile) {
+        const wa = `https://api.whatsapp.com/send?text=${encoded}`;
+        window.open(wa, "_blank");
+      } else {
+        const tw = `https://twitter.com/intent/tweet?text=${encoded}`;
+        window.open(tw, "_blank", "noopener,noreferrer,width=600,height=400");
+      }
+    } catch (err) {
+      // ignore popup blocking; user already has link copied
+    }
   };
 
   // --- LOADING STATE ---
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col justify-center items-center bg-green-50">
-        <Loader2 className="w-12 h-12 text-amber-500 animate-spin mb-4" />
-        <p className="text-green-800 font-semibold animate-pulse">Loading article...</p>
+      <div className="min-h-screen flex flex-col justify-center items-center bg-pink-50">
+        <Loader2 className="w-12 h-12 text-blue-500 animate-spin mb-4" />
+        <p className="text-pink-800 font-semibold animate-pulse">
+          Loading article...
+        </p>
       </div>
     );
   }
@@ -74,7 +118,8 @@ const ViewMore = () => {
           {error || "Article not found"}
         </h2>
         <p className="text-gray-600 mb-8">
-          The article you are looking for might have been removed or is temporarily unavailable.
+          The article you are looking for might have been removed or is
+          temporarily unavailable.
         </p>
         <button
           onClick={() => navigate("/news-updates")}
@@ -88,31 +133,34 @@ const ViewMore = () => {
 
   return (
     <div className="min-h-screen bg-stone-50 mt-[-5px] mb-[-3rem]">
-      
       {/* HERO SECTION - IMAGE */}
       <div className="relative w-full h-[50vh] md:h-[60vh] bg-gray-900">
         <img
-          src={post.image || "https://via.placeholder.com/1200x600?text=Pathfinder+Update"}
+          src={
+            post.image ||
+            "https://via.placeholder.com/1200x600?text=Pathfinder+Update"
+          }
           alt={post.title}
           className="w-full h-full object-cover opacity-90"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-        
+
         {/* Navigation Button (Floating) */}
-        <button 
+        <button
           onClick={() => navigate("/news-updates")}
           className="absolute top-6 left-6 md:top-10 md:left-10 bg-white/20 backdrop-blur-md hover:bg-white/30 text-white p-3 rounded-full transition-all border border-white/30 group"
         >
-          <ArrowLeft size={24} className="group-hover:-translate-x-1 transition-transform" />
+          <ArrowLeft
+            size={24}
+            className="group-hover:-translate-x-1 transition-transform"
+          />
         </button>
       </div>
 
       {/* CONTENT CONTAINER - OVERLAPPING HERO */}
       <div className="max-w-4xl mx-auto px-6 relative -mt-32 md:-mt-40 z-10 pb-20">
-        
         {/* Title Card */}
         <div className="bg-white rounded-2xl shadow-xl p-6 md:p-10 border border-gray-100">
-          
           {/* Metadata Row */}
           <div className="flex flex-wrap items-center gap-4 mb-6 text-sm md:text-base">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 text-amber-800 font-semibold uppercase tracking-wide text-xs">
@@ -124,8 +172,7 @@ const ViewMore = () => {
               {formatDate(post.date)}
             </span>
             <span className="flex items-center gap-1.5 text-gray-500">
-              <Clock size={16} />
-              3 min read
+              <Clock size={16} />3 min read
             </span>
           </div>
 
@@ -140,12 +187,14 @@ const ViewMore = () => {
                 P
               </div>
               <div className="text-sm">
-                <p className="font-semibold text-gray-800">Pathfinder@75 Team</p>
+                <p className="font-semibold text-gray-800">
+                  Pathfinder@75 Team
+                </p>
                 <p className="text-gray-500">Author</p>
               </div>
             </div>
-            
-            <button 
+
+            <button
               onClick={handleShare}
               className="flex items-center gap-2 text-gray-500 hover:text-green-600 transition-colors"
               title="Share this article"
@@ -161,27 +210,29 @@ const ViewMore = () => {
                For a more advanced rich-text experience later, you might use 'dangerouslySetInnerHTML' 
                if your backend saves HTML, but this is safe and clean for plain text.
             */}
-            {(post.content || "").split("\n").map((paragraph, idx) => (
-              paragraph.trim() !== "" && (
-                <p key={idx} className="mb-6 first-letter:text-5xl first-letter:font-bold first-letter:text-green-700 first-letter:mr-3 first-letter:float-left">
-                  {paragraph}
-                </p>
-              )
-            ))}
+            {(post.content || "").split("\n").map(
+              (paragraph, idx) =>
+                paragraph.trim() !== "" && (
+                  <p
+                    key={idx}
+                    className="mb-6 first-letter:text-5xl first-letter:font-bold first-letter:text-green-700 first-letter:mr-3 first-letter:float-left"
+                  >
+                    {paragraph}
+                  </p>
+                ),
+            )}
           </article>
-
         </div>
 
         {/* Bottom Navigation */}
         <div className="mt-12 text-center">
           <button
             onClick={() => navigate("/news-updates")}
-            className="text-green-700 font-semibold hover:text-green-900 transition flex items-center justify-center gap-2 mx-auto"
+            className="text-pink-700 font-semibold hover:text-pink-900 transition flex items-center justify-center gap-2 mx-auto"
           >
             <ArrowLeft size={20} /> Return to News Feed
           </button>
         </div>
-
       </div>
     </div>
   );

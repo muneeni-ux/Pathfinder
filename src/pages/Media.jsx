@@ -1,331 +1,322 @@
-// import React, { useState } from "react";
-// import { X, PlayCircle } from "lucide-react";
-
-// const SERVER_URL = process.env.REACT_APP_SERVER_URL;
-
-// // Sample galleries
-// const galleryImages = [
-//   { src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80", alt: "Tree 1" },
-//   { src: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=400&q=80", alt: "Forest" },
-//   { src: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=400&q=80", alt: "Plant" },
-//   { src: "https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?auto=format&fit=crop&w=400&q=80", alt: "Environment" },
-// ];
-
-// const galleryVideos = [
-//   { src: "https://www.w3schools.com/html/mov_bbb.mp4", alt: "Sample Video 1" },
-//   { src: "https://www.w3schools.com/html/movie.mp4", alt: "Sample Video 2" },
-// ];
-
-// const entertainmentItems = [
-//   { title: "Pathfinder Music Showcase", type: "video", src: "https://www.w3schools.com/html/mov_bbb.mp4" },
-//   { title: "Drama Performance", type: "image", src: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=400&q=80" },
-// ];
-
-// const Media = () => {
-//   const [activeTab, setActiveTab] = useState("images");
-//   const [lightbox, setLightbox] = useState({ isOpen: false, src: "", type: "image" });
-
-//   const openLightbox = (src, type = "image") => setLightbox({ isOpen: true, src, type });
-//   const closeLightbox = () => setLightbox({ isOpen: false, src: "", type: "image" });
-
-//   return (
-//     <div className="bg-green-50 min-h-screen py-16 mt-[-2rem] mb-[-4rem]">
-//       {/* Page Header */}
-//       <div className="text-center mb-12">
-//         <h1 className="text-4xl md:text-5xl font-extrabold text-green-900 mb-2">
-//           Media & Gallery
-//         </h1>
-//         <p className="text-green-700 text-lg md:text-xl max-w-2xl mx-auto">
-//           Explore our events, talent showcases, and Pathfinder legacy 🌿
-//         </p>
-//       </div>
-
-//       {/* Tabs */}
-//       <div className="flex justify-center gap-6 mb-12 flex-wrap">
-//         {["Images", "Videos", "Entertainment" ].map((tab) => (
-//           <button
-//             key={tab}
-//             className={`px-6 py-2 font-semibold rounded-full transition ${
-//               activeTab.toLowerCase() === tab.toLowerCase()
-//                 ? "bg-green-900 text-amber-400"
-//                 : "bg-green-200 text-green-900 hover:bg-green-300"
-//             }`}
-//             onClick={() => setActiveTab(tab.toLowerCase())}
-//           >
-//             {tab}
-//           </button>
-//         ))}
-//       </div>
-
-//       {/* Gallery Grid */}
-//       <div className="max-w-7xl mx-auto px-6">
-//         {/* Images */}
-//         {activeTab === "images" && (
-//           <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4">
-//             {galleryImages.map((img, idx) => (
-//               <div
-//                 key={idx}
-//                 className="mb-4 break-inside-avoid relative group cursor-pointer rounded-xl overflow-hidden shadow-lg"
-//                 onClick={() => openLightbox(img.src, "image")}
-//               >
-//                 <img
-//                   src={img.src}
-//                   alt={img.alt}
-//                   className="w-full object-cover transition-transform duration-500 group-hover:scale-105 rounded-xl"
-//                 />
-//                 <div className="absolute bottom-0 left-0 w-full bg-black/30 text-white text-sm px-2 py-1">
-//                   {img.alt}
-//                 </div>
-//               </div>
-//             ))}
-//           </div>
-//         )}
-
-//         {/* Videos */}
-//         {activeTab === "videos" && (
-//           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-//             {galleryVideos.map((vid, idx) => (
-//               <div
-//                 key={idx}
-//                 className="relative group rounded-xl overflow-hidden shadow-lg cursor-pointer"
-//                 onClick={() => openLightbox(vid.src, "video")}
-//               >
-//                 <video
-//                   src={vid.src}
-//                   className="w-full h-64 object-cover rounded-xl"
-//                   muted
-//                   loop
-//                   autoPlay
-//                 />
-//                 <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-//                   <PlayCircle size={48} className="text-amber-400" />
-//                 </div>
-//               </div>
-//             ))}
-//           </div>
-//         )}
-
-//         {/* Entertainment */}
-//         {activeTab === "entertainment" && (
-//           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-//             {entertainmentItems.map((item, idx) => (
-//               <div
-//                 key={idx}
-//                 className="relative group rounded-xl overflow-hidden shadow-lg cursor-pointer"
-//                 onClick={() => openLightbox(item.src, item.type)}
-//               >
-//                 {item.type === "image" ? (
-//                   <img
-//                     src={item.src}
-//                     alt={item.title}
-//                     className="w-full h-64 object-cover rounded-xl"
-//                   />
-//                 ) : (
-//                   <video
-//                     src={item.src}
-//                     className="w-full h-64 object-cover rounded-xl"
-//                     muted
-//                     loop
-//                     autoPlay
-//                   />
-//                 )}
-//                 <div className="absolute bottom-0 left-0 w-full bg-black/40 text-white text-sm px-2 py-1">
-//                   {item.title}
-//                 </div>
-//               </div>
-//             ))}
-//           </div>
-//         )}
-
-//       </div>
-
-//       {/* Lightbox */}
-//       {lightbox.isOpen && (
-//         <div
-//           className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
-//           onClick={closeLightbox}
-//         >
-//           <button
-//             className="absolute top-4 right-4 text-amber-400 hover:text-white"
-//             onClick={closeLightbox}
-//           >
-//             <X size={28} />
-//           </button>
-//           {lightbox.type === "image" ? (
-//             <img
-//               src={lightbox.src}
-//               alt="Lightbox"
-//               className="max-h-full max-w-full rounded-lg shadow-2xl"
-//             />
-//           ) : (
-//             <video
-//               src={lightbox.src}
-//               controls
-//               autoPlay
-//               className="max-h-full max-w-full rounded-lg shadow-2xl"
-//             />
-//           )}
-//         </div>
-//       )}
-
-//       {/* CTA */}
-//       <div className="text-center mt-12">
-//         <p className="text-green-900 font-medium text-lg">
-//           Want to see more? Follow us on our social media platforms 🌱
-//         </p>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Media;
-
 import React, { useState, useEffect } from "react";
-import { X, PlayCircle } from "lucide-react";
+import {
+  X,
+  PlayCircle,
+  Image as ImageIcon,
+  Video,
+  Loader2,
+  Trees,
+  Tent,
+  CalendarDays,
+  Search,
+  Filter,
+  Layers,
+} from "lucide-react";
 import axios from "axios";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 const Media = () => {
-  const [activeTab, setActiveTab] = useState("images");
-  const [lightbox, setLightbox] = useState({ isOpen: false, src: "", type: "image" });
+  const [activeTab, setActiveTab] = useState("all");
+  const [lightbox, setLightbox] = useState({
+    isOpen: false,
+    src: "",
+    type: "image",
+    title: "",
+  });
   const [mediaItems, setMediaItems] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const openLightbox = (src, type = "image") => setLightbox({ isOpen: true, src, type });
-  const closeLightbox = () => setLightbox({ isOpen: false, src: "", type: "image" });
-
-  // Fetch media from backend
-  const fetchMedia = async (type) => {
-    setLoading(true);
-    try {
-      const res = await axios.get(`${SERVER_URL}/api/gallery`, {
-        params: { type }
-      });
-      setMediaItems(res.data.data);
-    } catch (err) {
-      console.error("Failed to fetch media:", err);
-      toast.error("Failed to load media. Please try again later.");
-    } finally {
-      setLoading(false);
-    }
+  // Lightbox handlers
+  const openLightbox = (src, type = "image", title = "") => {
+    setLightbox({ isOpen: true, src, type, title });
+    document.body.style.overflow = "hidden"; // Prevent background scrolling
   };
 
-  // Fetch media when tab changes
+  const closeLightbox = () => {
+    setLightbox({ isOpen: false, src: "", type: "image", title: "" });
+    document.body.style.overflow = "auto";
+  };
+
+  // 🔄 FETCH MEDIA FROM BACKEND
   useEffect(() => {
-    let type = activeTab === "images" ? "image" : activeTab === "videos" ? "video" : "entertainment";
-    fetchMedia(type);
+    const fetchMedia = async () => {
+      setLoading(true);
+      try {
+        // Construct query parameters based on activeTab
+        let params = {};
+
+        if (activeTab === "videos") {
+          params.type = "video";
+        } else if (activeTab !== "all") {
+          // For specific image categories (tree-planting, events, scouts)
+          params.type = "image";
+          params.category = activeTab;
+        }
+        // If 'all', we might fetch everything or just images depending on backend logic.
+        // Assuming backend returns all mixed media or latest items if no params.
+
+        const response = await axios.get(`${SERVER_URL}/api/gallery`, {
+          params,
+        });
+
+        // Ensure we handle the response structure correctly (adjust based on your actual API)
+        const data = response.data.data || response.data || [];
+        setMediaItems(data);
+      } catch (error) {
+        console.error("Error fetching media:", error);
+        toast.error("Could not load gallery items.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMedia();
   }, [activeTab]);
 
+  // Tab Definitions based on Documentation
+  const tabs = [
+    { id: "all", label: "All Gallery", icon: <Layers size={16} /> },
+    { id: "tree-planting", label: "Tree Planting", icon: <Trees size={16} /> },
+    { id: "events", label: "Events", icon: <CalendarDays size={16} /> },
+    { id: "scouts", label: "Scouts & Brigade", icon: <Tent size={16} /> },
+    { id: "videos", label: "Video Stories", icon: <Video size={16} /> },
+  ];
+
+  // Client-side search filtering
+  const filteredItems = mediaItems.filter((item) =>
+    item.title?.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
+
   return (
-    <div className="bg-green-50 min-h-screen py-16 mt-[-2rem] mb-[-4rem]">
-      <Toaster position="top-right" reverseOrder={false} />
+    <div className="bg-slate-50 overflow-x-hidden min-h-screen font-sans selection:bg-pink-200">
+      {/* 🌟 HERO SECTION */}
+      <section className="relative h-[45vh] min-h-[350px] flex items-center justify-center overflow-hidden bg-slate-900">
+        {/* Dynamic Background Image */}
+        <div className="absolute inset-0 opacity-40">
+          <img
+            src="https://images.unsplash.com/photo-1518398046578-8cca57782e17?auto=format&fit=crop&q=80"
+            alt="TVA Events"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-slate-900/30"></div>
 
-      {/* Page Header */}
-      <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-green-900 mb-2">
-          Media & Gallery
-        </h1>
-        <p className="text-green-700 text-lg md:text-xl max-w-2xl mx-auto">
-          Explore our events, talent showcases, and Pathfinder legacy 🌿
-        </p>
-      </div>
-
-      {/* Tabs */}
-      <div className="flex justify-center gap-6 mb-12 flex-wrap">
-        {["Images", "Videos", "Entertainment"].map((tab) => (
-          <button
-            key={tab}
-            className={`px-6 py-2 font-semibold rounded-full transition ${
-              activeTab.toLowerCase() === tab.toLowerCase()
-                ? "bg-green-900 text-amber-400"
-                : "bg-green-200 text-green-900 hover:bg-green-300"
-            }`}
-            onClick={() => setActiveTab(tab.toLowerCase())}
-          >
-            {tab}
-          </button>
-        ))}
-      </div>
-
-      {/* Gallery Grid */}
-      <div className="max-w-7xl mx-auto px-6">
-        {loading ? (
-          <p className="text-center text-green-900 text-lg font-medium">Loading media...</p>
-        ) : mediaItems.length === 0 ? (
-          <p className="text-center text-green-900 text-lg font-medium">No media available.</p>
-        ) : (
-          <div
-            className={`${
-              activeTab === "images" ? "columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4" : "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
-            }`}
-          >
-            {mediaItems.map((item) => (
-              <div
-                key={item._id}
-                className="mb-4 break-inside-avoid relative group cursor-pointer rounded-xl overflow-hidden shadow-lg"
-                onClick={() => openLightbox(item.url, item.type)}
-              >
-                {item.type === "image" ? (
-                  <img
-                    src={item.url}
-                    alt={item.title || "Media item"}
-                    className="w-full object-cover transition-transform duration-500 group-hover:scale-105 rounded-xl"
-                  />
-                ) : (
-                  <video
-                    src={item.url}
-                    className="w-full h-64 object-cover rounded-xl"
-                    muted
-                    loop
-                    autoPlay
-                  />
-                )}
-                <div className="absolute bottom-0 left-0 w-full bg-black/30 text-white text-sm px-2 py-1">
-                  {item.title || (item.type === "image" ? "Image" : "Video")}
-                </div>
-              </div>
-            ))}
+        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center pt-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-blue-200 text-xs font-bold uppercase tracking-widest mb-4">
+            <ImageIcon size={14} /> Official TVA Gallery
           </div>
-        )}
+          <h1 className="text-4xl md:text-6xl font-black text-white mb-4 tracking-tight">
+            Our Journey in{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-500">
+              Action
+            </span>
+          </h1>
+          <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed font-light">
+            Explore the visual stories of young changemakers across Kenya—from
+            Nyambene to Nairobi.
+          </p>
+        </div>
+      </section>
+
+      {/* 🔍 STICKY FILTER BAR (Perfect Mobile View) */}
+      <div className="sticky top-0 z-40 bg-slate-50/95 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all duration-300">
+        <div className="max-w-7xl mx-auto px-4 py-3">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            {/* Mobile Search - Visible on top for easy access */}
+            <div className="relative w-full md:w-64 md:order-2">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
+              <input
+                type="text"
+                placeholder="Search moments..."
+                className="w-full pl-10 pr-4 py-2.5 rounded-full bg-white border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none text-sm font-medium text-slate-700 shadow-sm transition-all"
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+
+            {/* Scrollable Tabs */}
+            <div className="w-full md:w-auto overflow-x-auto no-scrollbar md:order-1">
+              <div className="flex items-center gap-2 pb-1 md:pb-0">
+                {tabs.map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`flex items-center gap-2 px-5 py-2 rounded-full text-sm font-bold whitespace-nowrap transition-all duration-300 transform active:scale-95 ${
+                      activeTab === tab.id
+                        ? "bg-slate-900 text-white shadow-md ring-2 ring-slate-900 ring-offset-2 ring-offset-slate-50"
+                        : "bg-white text-slate-600 border border-slate-200 hover:border-pink-300 hover:text-pink-600"
+                    }`}
+                  >
+                    {tab.icon} {tab.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Lightbox */}
+      {/* 🖼️ MASONRY GALLERY GRID */}
+      <section className="px-4 md:px-8 py-12 min-h-[50vh]">
+        <div className="max-w-7xl mx-auto">
+          {loading ? (
+            <div className="flex flex-col items-center justify-center py-20">
+              <Loader2 className="w-10 h-10 text-pink-500 animate-spin mb-4" />
+              <p className="text-slate-500 font-medium animate-pulse">
+                Fetching memories...
+              </p>
+            </div>
+          ) : filteredItems.length === 0 ? (
+            <div className="text-center py-20 bg-white rounded-3xl border border-dashed border-slate-300 mx-auto max-w-2xl">
+              <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-400">
+                <Filter size={32} />
+              </div>
+              <h3 className="text-lg font-bold text-slate-700">
+                No media found
+              </h3>
+              <p className="text-slate-500 mt-2">
+                Try adjusting your search or category filter.
+              </p>
+            </div>
+          ) : (
+            /* CSS Columns for Masonry Layout */
+            <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
+              {filteredItems.map((item) => (
+                <div
+                  key={item._id}
+                  className="group relative break-inside-avoid bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 cursor-zoom-in border border-slate-100 hover:border-pink-100"
+                  onClick={() => openLightbox(item.url, item.type, item.title)}
+                >
+                  {/* Thumbnail */}
+                  <div className="relative overflow-hidden">
+                    {item.type === "video" ? (
+                      <div className="relative aspect-video bg-slate-900">
+                        <video
+                          src={item.url}
+                          className="w-full h-full object-cover opacity-80"
+                          muted
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <PlayCircle className="w-8 h-8 text-white fill-current" />
+                          </div>
+                        </div>
+                        <span className="absolute top-2 right-2 bg-black/60 text-white text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wider">
+                          Video
+                        </span>
+                      </div>
+                    ) : (
+                      <img
+                        src={item.url}
+                        alt={item.title}
+                        className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-110"
+                        loading="lazy"
+                      />
+                    )}
+
+                    {/* Hover Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+
+                  {/* Caption */}
+                  <div className="absolute bottom-0 left-0 w-full p-5 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 opacity-0 group-hover:opacity-100">
+                    <span className="inline-block px-2 py-0.5 bg-pink-500/90 backdrop-blur-sm text-white text-[10px] font-bold uppercase tracking-wider rounded-md mb-2">
+                      {item.category || "Gallery"}
+                    </span>
+                    <h3 className="text-white font-bold text-sm leading-snug shadow-black drop-shadow-md">
+                      {item.title}
+                    </h3>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* 🎥 LIGHTBOX */}
       {lightbox.isOpen && (
         <div
-          className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 z-[100] bg-slate-950/95 backdrop-blur-xl flex items-center justify-center p-4 animate-in fade-in duration-300"
           onClick={closeLightbox}
         >
           <button
-            className="absolute top-4 right-4 text-amber-400 hover:text-white"
+            className="absolute top-4 right-4 p-2 bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors z-50"
             onClick={closeLightbox}
           >
             <X size={28} />
           </button>
-          {lightbox.type === "image" ? (
-            <img
-              src={lightbox.src}
-              alt="Lightbox"
-              className="max-h-full max-w-full rounded-lg shadow-2xl"
-            />
-          ) : (
-            <video
-              src={lightbox.src}
-              controls
-              autoPlay
-              className="max-h-full max-w-full rounded-lg shadow-2xl"
-            />
-          )}
+
+          <div
+            className="relative w-full max-w-5xl flex flex-col items-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {lightbox.type === "image" ? (
+              <img
+                src={lightbox.src}
+                alt={lightbox.title}
+                className="max-h-[85vh] w-auto rounded-lg shadow-2xl object-contain"
+              />
+            ) : (
+              <div className="w-full aspect-video max-h-[85vh]">
+                <video
+                  src={lightbox.src}
+                  controls
+                  autoPlay
+                  className="w-full h-full rounded-lg shadow-2xl"
+                />
+              </div>
+            )}
+
+            <div className="mt-4 text-center">
+              <h3 className="text-lg font-bold text-white tracking-wide">
+                {lightbox.title}
+              </h3>
+            </div>
+          </div>
         </div>
       )}
 
-      {/* CTA */}
-      <div className="text-center mt-12">
-        <p className="text-green-900 font-medium text-lg">
-          Want to see more? Follow us on our social media platforms 🌱
-        </p>
-      </div>
+      {/* 🚀 FOOTER CTA */}
+      <section className="py-20 bg-white border-t border-slate-100 text-center">
+        <div className="max-w-3xl mx-auto px-6">
+          <h2 className="text-3xl font-black text-slate-900 mb-4">
+            Follow Our Story
+          </h2>
+          <p className="text-slate-500 mb-8">
+            Stay updated with our latest campaigns, tree planting activities,
+            and youth events on our social platforms.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noreferrer"
+              className="px-6 py-3 bg-[#1877F2] text-white font-bold rounded-full hover:shadow-lg hover:-translate-y-1 transition-all"
+            >
+              Facebook
+            </a>
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noreferrer"
+              className="px-6 py-3 bg-black text-white font-bold rounded-full hover:shadow-lg hover:-translate-y-1 transition-all"
+            >
+              X (Twitter)
+            </a>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noreferrer"
+              className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-full hover:shadow-lg hover:-translate-y-1 transition-all"
+            >
+              Instagram
+            </a>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

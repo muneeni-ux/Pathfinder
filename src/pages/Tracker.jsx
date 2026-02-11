@@ -10,7 +10,7 @@ import {
   Copy, 
   Camera 
 } from "lucide-react";
-import { toast, Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 const WHATSAPP_NUMBER = "254738380692"; // REPLACE THIS WITH YOUR ACTUAL ADMIN NUMBER
@@ -165,7 +165,6 @@ const Tracker = () => {
   // -------------------------------------------------
   return (
     <div className="min-h-screen bg-gradient-to-b from-green-50 via-green-100 to-amber-50 px-6 md:px-14 lg:px-20 py-12 mt-[-2rem] mb-[-4rem] relative">
-      <Toaster position="top-center" />
 
       {/* HEADER */}
       <section className="text-center mb-14">

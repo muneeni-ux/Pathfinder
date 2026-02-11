@@ -1,147 +1,3 @@
-// import React, { useState } from "react";
-// import { Leaf, Sprout, HeartHandshake, Users } from "lucide-react";
-
-// const SERVER_URL = process.env.REACT_APP_SERVER_URL;
-
-// const Registration = () => {
-//   const [activeTab, setActiveTab] = useState("clubs");
-
-//   const tabs = [
-//     { id: "clubs", label: "Clubs", icon: <Users size={20} /> },
-//     { id: "volunteers", label: "Volunteers", icon: <Sprout size={20} /> },
-//     { id: "ambassadors", label: "Ambassadors", icon: <Leaf size={20} /> },
-//     { id: "partners", label: "Partners", icon: <HeartHandshake size={20} /> },
-//   ];
-
-//   const renderForm = () => {
-//     switch (activeTab) {
-//       case "clubs":
-//         return (
-//           <form className="flex flex-col gap-4">
-//             <input type="text" placeholder="Club Name" className="input-field" />
-//             <input type="text" placeholder="Leader Name" className="input-field" />
-//             <input type="email" placeholder="Email" className="input-field" />
-//             <input type="text" placeholder="Location/Region" className="input-field" />
-//             <button type="submit" className="btn-submit">
-//               Register Club
-//             </button>
-//           </form>
-//         );
-//       case "volunteers":
-//         return (
-//           <form className="flex flex-col gap-4">
-//             <input type="text" placeholder="Full Name" className="input-field" />
-//             <input type="email" placeholder="Email" className="input-field" />
-//             <input type="tel" placeholder="Phone Number" className="input-field" />
-//             <select className="input-field">
-//               <option value="">Select Region</option>
-//               <option value="north">North</option>
-//               <option value="south">South</option>
-//               <option value="east">East</option>
-//               <option value="west">West</option>
-//             </select>
-//             <button type="submit" className="btn-submit">
-//               Join as Volunteer
-//             </button>
-//           </form>
-//         );
-//       case "ambassadors":
-//         return (
-//           <form className="flex flex-col gap-4">
-//             <input type="text" placeholder="Full Name" className="input-field" />
-//             <input type="email" placeholder="Email" className="input-field" />
-//             <input type="text" placeholder="Club / Organization" className="input-field" />
-//             <button type="submit" className="btn-submit">
-//               Become an Ambassador
-//             </button>
-//           </form>
-//         );
-//       case "partners":
-//         return (
-//           <form className="flex flex-col gap-4">
-//             <input type="text" placeholder="Organization Name" className="input-field" />
-//             <input type="text" placeholder="Contact Person" className="input-field" />
-//             <input type="email" placeholder="Email" className="input-field" />
-//             <input type="tel" placeholder="Phone" className="input-field" />
-//             <button type="submit" className="btn-submit">
-//               Partner with Us
-//             </button>
-//           </form>
-//         );
-//       default:
-//         return null;
-//     }
-//   };
-
-//   return (
-//     <div className="bg-gradient-to-b from-green-50 via-green-100 to-amber-50 min-h-screen mt-[-2rem] px-6 md:px-12 lg:px-20  mb-[-4rem]">
-//       {/* Page Header */}
-//       <section className="text-center py-12">
-//         <h1 className="text-4xl md:text-5xl font-extrabold text-green-900 mb-4">
-//           Get Involved 🌱
-//         </h1>
-//         <p className="text-green-800 max-w-2xl mx-auto">
-//           Join the Pathfinder @75 Tree Planting Initiative by registering your club, volunteering, becoming an ambassador, or partnering with us.
-//         </p>
-//       </section>
-
-//       {/* Tabs */}
-//       <div className="flex justify-center gap-4 flex-wrap mb-10">
-//         {tabs.map((tab) => (
-//           <button
-//             key={tab.id}
-//             onClick={() => setActiveTab(tab.id)}
-//             className={`flex items-center gap-2 px-6 py-2 rounded-full font-semibold transition-all duration-300
-//               ${
-//                 activeTab === tab.id
-//                   ? "bg-amber-400 text-green-950 shadow-lg"
-//                   : "bg-white text-green-800 hover:bg-amber-200"
-//               }`}
-//           >
-//             {tab.icon} {tab.label}
-//           </button>
-//         ))}
-//       </div>
-
-//       {/* Form Container */}
-//       <div className="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-lg border border-green-200">
-//         {renderForm()}
-//       </div>
-
-//       {/* Tailwind Custom Input & Button Styles */}
-//       <style>
-//         {`
-//           .input-field {
-//             padding: 0.75rem 1rem;
-//             border-radius: 0.75rem;
-//             border: 2px solid #D1FAE5;
-//             outline: none;
-//             transition: all 0.3s;
-//           }
-//           .input-field:focus {
-//             border-color: #FBBF24;
-//             box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.3);
-//           }
-//           .btn-submit {
-//             background-color: #FBBF24;
-//             color: #065F46;
-//             padding: 0.75rem 1rem;
-//             font-weight: 600;
-//             border-radius: 0.75rem;
-//             transition: all 0.3s;
-//           }
-//           .btn-submit:hover {
-//             background-color: #F59E0B;
-//             color: #065F46;
-//           }
-//         `}
-//       </style>
-//     </div>
-//   );
-// };
-
-// export default Registration;
-
 import React, { useState } from "react";
 import {
   Leaf,
@@ -150,8 +6,18 @@ import {
   Users,
   Loader2,
   UploadCloud,
+  Heart,
+  Sparkles,
+  CheckCircle2,
+  MapPin,
+  School,
+  User,
 } from "lucide-react";
 import toast from "react-hot-toast";
+import {
+  success as toastSuccess,
+  error as toastError,
+} from "../utils/toastHelper";
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
@@ -174,7 +40,7 @@ const Registration = () => {
     contactPerson: "",
   });
 
-  // New State specifically for the file
+  // File state
   const [imageFile, setImageFile] = useState(null);
 
   const regionsList = [
@@ -203,10 +69,38 @@ const Registration = () => {
   ];
 
   const tabs = [
-    { id: "clubs", label: "Clubs", icon: <Users size={20} /> },
-    { id: "volunteers", label: "Volunteers", icon: <Sprout size={20} /> },
-    { id: "ambassadors", label: "Ambassadors", icon: <Leaf size={20} /> },
-    { id: "partners", label: "Partners", icon: <HeartHandshake size={20} /> },
+    {
+      id: "clubs",
+      label: "School Clubs",
+      icon: <School size={18} />,
+      gradient: "from-blue-500 to-indigo-600",
+      bg: "bg-blue-50",
+      text: "text-blue-600",
+    },
+    {
+      id: "volunteers",
+      label: "Volunteers",
+      icon: <Sprout size={18} />,
+      gradient: "from-green-500 to-emerald-600",
+      bg: "bg-green-50",
+      text: "text-green-600",
+    },
+    {
+      id: "ambassadors",
+      label: "Ambassadors",
+      icon: <Leaf size={18} />,
+      gradient: "from-pink-500 to-rose-600",
+      bg: "bg-pink-50",
+      text: "text-pink-600",
+    },
+    {
+      id: "partners",
+      label: "Partners",
+      icon: <HeartHandshake size={18} />,
+      gradient: "from-purple-500 to-violet-600",
+      bg: "bg-purple-50",
+      text: "text-purple-600",
+    },
   ];
 
   const handleChange = (e) => {
@@ -218,8 +112,7 @@ const Registration = () => {
     const file = e.target.files[0];
     if (file) {
       if (file.size > 5 * 1024 * 1024) {
-        // 5MB Limit
-        toast.error("File size too large (Max 5MB)");
+        toastError("File size too large (Max 5MB)");
         return;
       }
       setImageFile(file);
@@ -241,7 +134,7 @@ const Registration = () => {
       organization: "",
       contactPerson: "",
     });
-    setImageFile(null); // Reset image
+    setImageFile(null);
   };
 
   const handleSubmit = async (e) => {
@@ -249,21 +142,16 @@ const Registration = () => {
     setLoading(true);
 
     try {
-      // 1. Create FormData object
       const data = new FormData();
-
-      // 2. Append standard text fields
-      data.append("type", activeTab); // Crucial: Send 'type' separately
+      data.append("type", activeTab);
       Object.keys(formData).forEach((key) => {
         if (formData[key]) data.append(key, formData[key]);
       });
 
-      // 3. Append Image (only if exists)
       if (imageFile) {
         data.append("image", imageFile);
       }
 
-      // 4. Send Request (Do NOT set Content-Type header manually)
       const response = await fetch(`${SERVER_URL}/api/registrations`, {
         method: "POST",
         body: data,
@@ -273,10 +161,10 @@ const Registration = () => {
 
       if (!response.ok) throw new Error(result.error || "Something went wrong");
 
-      toast.success(
+      toastSuccess(
         activeTab === "clubs"
-          ? "Club registered successfully!"
-          : "Registration successful!"
+          ? "School club registered successfully!"
+          : "Registration successful!",
       );
 
       // Reset
@@ -296,123 +184,230 @@ const Registration = () => {
       setImageFile(null);
     } catch (error) {
       console.error(error);
-      toast.error(error.message || "Failed to register.");
+      toastError(error.message || "Failed to register.");
     } finally {
       setLoading(false);
     }
   };
 
+  const getTabInfo = () => {
+    switch (activeTab) {
+      case "clubs":
+        return {
+          title: "Register Your School Club",
+          description:
+            "Join the TVA movement by registering your school's environmental or peace club.",
+        };
+      case "volunteers":
+        return {
+          title: "Become a Volunteer",
+          description:
+            "Support youth programs and environmental initiatives in your community.",
+        };
+      case "ambassadors":
+        return {
+          title: "Join as Youth Ambassador",
+          description:
+            "Lead by example and inspire others to take action for peace and the environment.",
+        };
+      case "partners":
+        return {
+          title: "Partner With Us",
+          description:
+            "Collaborate with TVA to create lasting impact for youth and the environment.",
+        };
+      default:
+        return { title: "", description: "" };
+    }
+  };
+
+  const currentTabStyle = tabs.find((t) => t.id === activeTab);
+
   const renderForm = () => {
     switch (activeTab) {
       case "clubs":
         return (
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <div className="grid md:grid-cols-2 gap-4">
-              <input
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                type="text"
-                placeholder="Club Name"
-                required
-                className="input-field"
-              />
-              <input
-                name="leader"
-                value={formData.leader}
-                onChange={handleChange}
-                type="text"
-                placeholder="Leader Name"
-                required
-                className="input-field"
-              />
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <label className="text-sm font-bold text-slate-700 uppercase tracking-wide">
+                  School Club Name <span className="text-red-500">*</span>
+                </label>
+                <div className="relative">
+                  <School
+                    className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+                    size={18}
+                  />
+                  <input
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    type="text"
+                    placeholder="e.g., Green Peace Club"
+                    required
+                    className="w-full pl-12 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all"
+                  />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-bold text-slate-700 uppercase tracking-wide">
+                  Patron / Leader Name <span className="text-red-500">*</span>
+                </label>
+                <div className="relative">
+                  <User
+                    className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+                    size={18}
+                  />
+                  <input
+                    name="leader"
+                    value={formData.leader}
+                    onChange={handleChange}
+                    type="text"
+                    placeholder="Club leader's name"
+                    required
+                    className="w-full pl-12 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all"
+                  />
+                </div>
+              </div>
             </div>
-            <div className="grid md:grid-cols-2 gap-4">
-              <input
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                type="email"
-                placeholder="Email"
-                required
-                className="input-field"
-              />
-              <input
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                type="tel"
-                placeholder="Phone"
-                required
-                className="input-field"
-              />
-            </div>
-            <div className="grid md:grid-cols-2 gap-4">
-              <select
-                name="region"
-                value={formData.region}
-                onChange={handleChange}
-                required
-                className="input-field bg-white"
-              >
-                <option value="">Select Region</option>
-                {regionsList.map((r) => (
-                  <option key={r} value={r}>
-                    {r}
-                  </option>
-                ))}
-              </select>
-              <input
-                name="station"
-                value={formData.station}
-                onChange={handleChange}
-                type="text"
-                placeholder="Station"
-                required
-                className="input-field"
-              />
-            </div>
-            <div className="grid md:grid-cols-2 gap-4">
-              <input
-                name="members"
-                value={formData.members}
-                onChange={handleChange}
-                type="number"
-                placeholder="Number of Members"
-                required
-                className="input-field"
-              />
-              <input
-                name="founded"
-                value={formData.founded}
-                onChange={handleChange}
-                type="number"
-                placeholder="Year Founded"
-                required
-                className="input-field"
-              />
-            </div>
-            <textarea
-              name="activities"
-              value={formData.activities}
-              onChange={handleChange}
-              placeholder="Club Activities..."
-              className="input-field h-24 resize-none"
-            />
 
-            {/* FILE UPLOAD INPUT */}
-            <div className="relative border-2 border-dashed border-green-200 rounded-xl p-4 text-center hover:bg-green-50 transition cursor-pointer">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <label className="text-sm font-bold text-slate-700 uppercase tracking-wide">
+                  Email <span className="text-red-500">*</span>
+                </label>
+                <input
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  type="email"
+                  placeholder="club@school.ac.ke"
+                  required
+                  className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-bold text-slate-700 uppercase tracking-wide">
+                  Phone <span className="text-red-500">*</span>
+                </label>
+                <input
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  type="tel"
+                  placeholder="+254..."
+                  required
+                  className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all"
+                />
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <label className="text-sm font-bold text-slate-700 uppercase tracking-wide">
+                  Region <span className="text-red-500">*</span>
+                </label>
+                <div className="relative">
+                  <MapPin
+                    className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+                    size={18}
+                  />
+                  <select
+                    name="region"
+                    value={formData.region}
+                    onChange={handleChange}
+                    required
+                    className="w-full pl-12 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all appearance-none"
+                  >
+                    <option value="">Select Region</option>
+                    {regionsList.map((r) => (
+                      <option key={r} value={r}>
+                        {r}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-bold text-slate-700 uppercase tracking-wide">
+                  Station / Town <span className="text-red-500">*</span>
+                </label>
+                <input
+                  name="station"
+                  value={formData.station}
+                  onChange={handleChange}
+                  type="text"
+                  placeholder="Town/Location"
+                  required
+                  className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all"
+                />
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <label className="text-sm font-bold text-slate-700 uppercase tracking-wide">
+                  Number of Members <span className="text-red-500">*</span>
+                </label>
+                <input
+                  name="members"
+                  value={formData.members}
+                  onChange={handleChange}
+                  type="number"
+                  placeholder="e.g., 25"
+                  required
+                  className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-bold text-slate-700 uppercase tracking-wide">
+                  Year Founded <span className="text-red-500">*</span>
+                </label>
+                <input
+                  name="founded"
+                  value={formData.founded}
+                  onChange={handleChange}
+                  type="number"
+                  placeholder="e.g., 2024"
+                  required
+                  className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-sm font-bold text-slate-700 uppercase tracking-wide">
+                Club Activities
+              </label>
+              <textarea
+                name="activities"
+                value={formData.activities}
+                onChange={handleChange}
+                placeholder="Describe your club's environmental and peace activities..."
+                className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all h-24 resize-none"
+              />
+            </div>
+
+            {/* FILE UPLOAD */}
+            <div className="relative border-2 border-dashed border-slate-200 rounded-2xl p-8 text-center hover:bg-slate-50 hover:border-blue-400 transition-all cursor-pointer group">
               <input
                 type="file"
                 name="image"
                 accept="image/*"
                 onChange={handleFileChange}
-                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
               />
-              <div className="flex flex-col items-center justify-center text-green-700">
-                <UploadCloud size={32} className="mb-2 text-amber-500" />
-                <span className="font-medium text-sm">
+              <div className="flex flex-col items-center justify-center text-slate-500 group-hover:text-blue-500 transition-colors">
+                <div
+                  className={`w-12 h-12 rounded-full ${imageFile ? "bg-green-100 text-green-600" : "bg-blue-50 text-blue-500"} flex items-center justify-center mb-3`}
+                >
+                  {imageFile ? <CheckCircle2 /> : <UploadCloud />}
+                </div>
+                <span className="font-bold text-sm">
                   {imageFile ? imageFile.name : "Click to Upload Club Photo"}
+                </span>
+                <span className="text-xs mt-1 opacity-70">
+                  Max 5MB (Optional)
                 </span>
               </div>
             </div>
@@ -420,66 +415,87 @@ const Registration = () => {
             <button
               type="submit"
               disabled={loading}
-              className="btn-submit flex justify-center items-center"
+              className={`w-full bg-gradient-to-r ${currentTabStyle.gradient} text-white font-bold py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 flex justify-center items-center gap-2`}
             >
-              {loading ? <Loader2 className="animate-spin" /> : "Register Club"}
+              {loading ? (
+                <Loader2 className="animate-spin" />
+              ) : (
+                "Register School Club"
+              )}
             </button>
           </form>
         );
 
-      // ... (Keep Volunteers, Ambassadors, Partners exactly as they were in previous code)
-      // They don't have file uploads, but the shared handleSubmit will handle them fine
-      // because imageFile will be null.
-
       case "volunteers":
-        // ... copy previous volunteer form code ...
         return (
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <input
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              type="text"
-              placeholder="Full Name"
-              required
-              className="input-field"
-            />
-            <input
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              type="email"
-              placeholder="Email"
-              required
-              className="input-field"
-            />
-            <input
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              type="tel"
-              placeholder="Phone"
-              required
-              className="input-field"
-            />
-            <select
-              name="region"
-              value={formData.region}
-              onChange={handleChange}
-              required
-              className="input-field bg-white"
-            >
-              <option value="">Select Region</option>
-              {regionsList.map((r) => (
-                <option key={r} value={r}>
-                  {r}
-                </option>
-              ))}
-            </select>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="space-y-2">
+              <label className="text-sm font-bold text-slate-700 uppercase tracking-wide">
+                Full Name <span className="text-red-500">*</span>
+              </label>
+              <input
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                type="text"
+                placeholder="Your full name"
+                required
+                className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-green-500 focus:ring-4 focus:ring-green-500/10 outline-none transition-all"
+              />
+            </div>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <label className="text-sm font-bold text-slate-700 uppercase tracking-wide">
+                  Email <span className="text-red-500">*</span>
+                </label>
+                <input
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  type="email"
+                  placeholder="your@email.com"
+                  required
+                  className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-green-500 focus:ring-4 focus:ring-green-500/10 outline-none transition-all"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-bold text-slate-700 uppercase tracking-wide">
+                  Phone <span className="text-red-500">*</span>
+                </label>
+                <input
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  type="tel"
+                  placeholder="+254..."
+                  required
+                  className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-green-500 focus:ring-4 focus:ring-green-500/10 outline-none transition-all"
+                />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <label className="text-sm font-bold text-slate-700 uppercase tracking-wide">
+                Region <span className="text-red-500">*</span>
+              </label>
+              <select
+                name="region"
+                value={formData.region}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-green-500 focus:ring-4 focus:ring-green-500/10 outline-none transition-all appearance-none"
+              >
+                <option value="">Select your region</option>
+                {regionsList.map((r) => (
+                  <option key={r} value={r}>
+                    {r}
+                  </option>
+                ))}
+              </select>
+            </div>
             <button
               type="submit"
               disabled={loading}
-              className="btn-submit flex justify-center items-center"
+              className={`w-full bg-gradient-to-r ${currentTabStyle.gradient} text-white font-bold py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 flex justify-center items-center gap-2`}
             >
               {loading ? (
                 <Loader2 className="animate-spin" />
@@ -489,94 +505,131 @@ const Registration = () => {
             </button>
           </form>
         );
+
       case "ambassadors":
-        // ... copy previous ambassador form code ...
         return (
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <input
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              type="text"
-              placeholder="Full Name"
-              required
-              className="input-field"
-            />
-            <input
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              type="email"
-              placeholder="Email"
-              required
-              className="input-field"
-            />
-            <input
-              name="organization"
-              value={formData.organization}
-              onChange={handleChange}
-              type="text"
-              placeholder="Club / Organization"
-              required
-              className="input-field"
-            />
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="space-y-2">
+              <label className="text-sm font-bold text-slate-700 uppercase tracking-wide">
+                Full Name <span className="text-red-500">*</span>
+              </label>
+              <input
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                type="text"
+                placeholder="Your full name"
+                required
+                className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-pink-500 focus:ring-4 focus:ring-pink-500/10 outline-none transition-all"
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="text-sm font-bold text-slate-700 uppercase tracking-wide">
+                Email <span className="text-red-500">*</span>
+              </label>
+              <input
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                type="email"
+                placeholder="your@email.com"
+                required
+                className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-pink-500 focus:ring-4 focus:ring-pink-500/10 outline-none transition-all"
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="text-sm font-bold text-slate-700 uppercase tracking-wide">
+                School / Organization <span className="text-red-500">*</span>
+              </label>
+              <input
+                name="organization"
+                value={formData.organization}
+                onChange={handleChange}
+                type="text"
+                placeholder="Your school or organization"
+                required
+                className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-pink-500 focus:ring-4 focus:ring-pink-500/10 outline-none transition-all"
+              />
+            </div>
             <button
               type="submit"
               disabled={loading}
-              className="btn-submit flex justify-center items-center"
+              className={`w-full bg-gradient-to-r ${currentTabStyle.gradient} text-white font-bold py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 flex justify-center items-center gap-2`}
             >
               {loading ? (
                 <Loader2 className="animate-spin" />
               ) : (
-                "Become an Ambassador"
+                "Apply as Ambassador"
               )}
             </button>
           </form>
         );
+
       case "partners":
-        // ... copy previous partner form code ...
         return (
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <input
-              name="organization"
-              value={formData.organization}
-              onChange={handleChange}
-              type="text"
-              placeholder="Organization Name"
-              required
-              className="input-field"
-            />
-            <input
-              name="contactPerson"
-              value={formData.contactPerson}
-              onChange={handleChange}
-              type="text"
-              placeholder="Contact Person"
-              required
-              className="input-field"
-            />
-            <input
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              type="email"
-              placeholder="Email"
-              required
-              className="input-field"
-            />
-            <input
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              type="tel"
-              placeholder="Phone"
-              required
-              className="input-field"
-            />
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="space-y-2">
+              <label className="text-sm font-bold text-slate-700 uppercase tracking-wide">
+                Organization Name <span className="text-red-500">*</span>
+              </label>
+              <input
+                name="organization"
+                value={formData.organization}
+                onChange={handleChange}
+                type="text"
+                placeholder="Your organization"
+                required
+                className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all"
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="text-sm font-bold text-slate-700 uppercase tracking-wide">
+                Contact Person <span className="text-red-500">*</span>
+              </label>
+              <input
+                name="contactPerson"
+                value={formData.contactPerson}
+                onChange={handleChange}
+                type="text"
+                placeholder="Full name of contact person"
+                required
+                className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all"
+              />
+            </div>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <label className="text-sm font-bold text-slate-700 uppercase tracking-wide">
+                  Email <span className="text-red-500">*</span>
+                </label>
+                <input
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  type="email"
+                  placeholder="contact@organization.org"
+                  required
+                  className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-bold text-slate-700 uppercase tracking-wide">
+                  Phone <span className="text-red-500">*</span>
+                </label>
+                <input
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  type="tel"
+                  placeholder="+254..."
+                  required
+                  className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all"
+                />
+              </div>
+            </div>
             <button
               type="submit"
               disabled={loading}
-              className="btn-submit flex justify-center items-center"
+              className={`w-full bg-gradient-to-r ${currentTabStyle.gradient} text-white font-bold py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 flex justify-center items-center gap-2`}
             >
               {loading ? (
                 <Loader2 className="animate-spin" />
@@ -586,48 +639,99 @@ const Registration = () => {
             </button>
           </form>
         );
+
       default:
         return null;
     }
   };
 
+  const tabInfo = getTabInfo();
+
   return (
-    // ... Same layout wrapper as before ...
-    <div className="bg-gradient-to-b from-green-50 via-green-100 to-amber-50 min-h-screen mt-[-2rem] px-6 md:px-12 lg:px-20 mb-[-4rem]">
-      
-      <section className="text-center py-12">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-green-900 mb-4">
-          Get Involved 🌱
-        </h1>
-        <p className="text-green-800 max-w-2xl mx-auto">
-          Join the Pathfinder @75 Tree Planting Initiative.
-        </p>
+    <div className="bg-slate-50 overflow-x-hidden min-h-screen font-sans selection:bg-pink-200">
+      {/* 🌟 HERO SECTION */}
+      <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden bg-slate-900 pt-20">
+        <div className="absolute inset-0">
+          <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-blue-600/20 rounded-full blur-[120px] animate-pulse-slow"></div>
+          <div className="absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px] bg-purple-600/20 rounded-full blur-[120px] animate-pulse-slow delay-1000"></div>
+          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+        </div>
+
+        {/* Floating Elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <Sparkles className="absolute top-20 left-10 w-12 h-12 text-white/20 animate-pulse" />
+          <Heart className="absolute top-40 right-20 w-16 h-16 text-pink-300/20 animate-float" />
+          <Leaf
+            className="absolute bottom-20 left-1/4 w-14 h-14 text-green-300/20 animate-float"
+            style={{ animationDelay: "1s" }}
+          />
+        </div>
+
+        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center animate-fade-in-up pb-24">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-blue-200 text-xs font-bold uppercase tracking-widest mb-6">
+            <Users size={14} /> Join The TVA Community
+          </div>
+          <h1 className="text-5xl md:text-7xl font-black text-white mb-6 drop-shadow-2xl tracking-tight">
+            Take Action <br />{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-500">
+              Today
+            </span>
+          </h1>
+          <p className="text-xl md:text-2xl text-slate-300 max-w-2xl mx-auto leading-relaxed font-light">
+            Join the movement for peace, environmental action, and youth
+            empowerment across Africa.
+          </p>
+        </div>
       </section>
-      <div className="flex justify-center gap-4 flex-wrap mb-10">
-        {tabs.map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => handleTabChange(tab.id)}
-            className={`flex items-center gap-2 px-6 py-2 rounded-full font-semibold transition-all duration-300 ${
-              activeTab === tab.id
-                ? "bg-amber-400 text-green-950 shadow-lg"
-                : "bg-white text-green-800 hover:bg-amber-200"
-            }`}
-          >
-            {tab.icon} {tab.label}
-          </button>
-        ))}
-      </div>
-      <div className="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-lg border border-green-200">
-        {renderForm()}
-      </div>
-      <style>{`
-        .input-field { padding: 0.75rem 1rem; border-radius: 0.75rem; border: 2px solid #D1FAE5; outline: none; transition: all 0.3s; width: 100%; }
-        .input-field:focus { border-color: #FBBF24; box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.3); }
-        .btn-submit { background-color: #FBBF24; color: #065F46; padding: 0.75rem 1rem; font-weight: 600; border-radius: 0.75rem; transition: all 0.3s; width: 100%; }
-        .btn-submit:hover:not(:disabled) { background-color: #F59E0B; }
-        .btn-submit:disabled { background-color: #FDE68A; cursor: not-allowed; }
-      `}</style>
+
+      {/* 🔘 TABS SECTION */}
+      <section className="relative z-20 -mt-8 px-4">
+        <div className="max-w-4xl mx-auto bg-white rounded-full shadow-xl p-2 flex flex-wrap justify-center gap-2 border border-slate-100">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => handleTabChange(tab.id)}
+              className={`flex items-center gap-2 px-6 py-3 rounded-full font-bold transition-all duration-300 flex-1 sm:flex-none justify-center ${
+                activeTab === tab.id
+                  ? `bg-slate-900 text-white shadow-lg transform scale-105`
+                  : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
+              }`}
+            >
+              {tab.icon} {tab.label}
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {/* 📝 FORM SECTION */}
+      <section className="py-16 px-6 md:px-12 lg:px-20">
+        <div className="max-w-3xl mx-auto">
+          {/* Dynamic Header */}
+          <div className="text-center mb-10 animate-fade-in-up">
+            <span
+              className={`inline-block p-4 rounded-2xl mb-4 ${currentTabStyle.bg} ${currentTabStyle.text}`}
+            >
+              {currentTabStyle.icon}
+            </span>
+            <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-4">
+              {tabInfo.title}
+            </h2>
+            <p className="text-lg text-slate-500 max-w-lg mx-auto">
+              {tabInfo.description}
+            </p>
+          </div>
+
+          {/* Form Card */}
+          <div className="bg-white p-8 md:p-10 rounded-[2.5rem] shadow-2xl border border-slate-100 relative overflow-hidden">
+            {/* Top Decoration Line */}
+            <div
+              className={`absolute top-0 left-0 w-full h-2 bg-gradient-to-r ${currentTabStyle.gradient}`}
+            ></div>
+
+            {renderForm()}
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

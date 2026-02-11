@@ -1,345 +1,305 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
-  Leaf,
-  Sprout,
+  Target,
+  Eye,
+  Users,
+  Heart,
+  Shield,
+  HandshakeIcon,
+  Award,
+  Globe,
   TreePine,
-  HeartHandshake,
-  CalendarDays,
-  Loader2,
-  AlertTriangle,
+  Sparkles,
+  ArrowRight,
+  Zap,
+  CheckCircle2
 } from "lucide-react";
-import axios from "axios";
-
-const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 const About = () => {
   const [offsetY, setOffsetY] = useState(0);
-  const [honorThemes, setHonorThemes] = useState([]);
-  const [loadingThemes, setLoadingThemes] = useState(true);
-  const [themeError, setThemeError] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => setOffsetY(window.pageYOffset);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  useEffect(() => {
-    const fetchHonorThemes = async () => {
-      try {
-        setLoadingThemes(true);
-        setThemeError(null);
 
-        const res = await axios.get(`${SERVER_URL}/api/honor-themes`);
+  const coreValues = [
+    { icon: <Shield className="w-6 h-6" />, title: "Integrity", desc: "Upholding honesty and strong moral principles in all our actions." },
+    { icon: <Target className="w-6 h-6" />, title: "Perseverance", desc: "Continuing in a course of action despite difficulty or delay in achieving success." },
+    { icon: <Sparkles className="w-6 h-6" />, title: "Openness", desc: "Transparency and receptiveness to new ideas and diverse perspectives." },
+    { icon: <Award className="w-6 h-6" />, title: "Fairness", desc: "Impartial and just treatment for all without favoritism or discrimination." },
+    { icon: <Heart className="w-6 h-6" />, title: "Respect", desc: "Valuing and honoring others, their rights, and their dignity." },
+    { icon: <HandshakeIcon className="w-6 h-6" />, title: "Teamwork", desc: "Working collaboratively toward common goals to achieve greater impact." },
+  ];
 
-        setHonorThemes(res.data);
-      } catch (error) {
-        setThemeError(
-          "We couldn’t load the weekly honor themes at the moment. Please try again shortly."
-        );
-      } finally {
-        setLoadingThemes(false);
-      }
-    };
+  const objectives = [
+    "Provide youth with adequate space for airing their challenges and solutions.",
+    "Create employment and catalyze innovation through youth participation.",
+    "Promote environmental conservation and climate action.",
+    "Build peace and unity across diverse communities.",
+    "Develop leadership skills through practical programs.",
+  ];
 
-    fetchHonorThemes();
-  }, []);
+  const impactAreas = [
+    {
+      icon: <TreePine className="w-10 h-10" />,
+      title: "Environmental Action",
+      desc: "Tree planting, school gardens, and restoration of degraded sites across Kenya.",
+      gradient: "from-green-400 to-green-600",
+      bg: "bg-green-50"
+    },
+    {
+      icon: <Heart className="w-10 h-10" />,
+      title: "Peacebuilding",
+      desc: "Using sports and dialogue to promote peaceful coexistence among communities.",
+      gradient: "from-pink-400 to-pink-600",
+      bg: "bg-pink-50"
+    },
+    {
+      icon: <Users className="w-10 h-10" />,
+      title: "Youth Leadership",
+      desc: "Training student leaders through clubs and exchange programs.",
+      gradient: "from-blue-400 to-blue-600",
+      bg: "bg-blue-50"
+    },
+    {
+      icon: <Globe className="w-10 h-10" />,
+      title: "Community Impact",
+      desc: "School-based programs creating lasting positive change in society.",
+      gradient: "from-purple-400 to-purple-600",
+      bg: "bg-purple-50"
+    },
+  ];
 
   return (
-    <div className="bg-gradient-to-b from-green-50 via-green-100 to-amber-50 text-green-900 overflow-x-hidden mt-[-2rem] mb-[-4rem]">
-      {/* 🌿 Hero Section */}
-      <section className="relative h-[60vh] flex items-center justify-center text-center px-6 overflow-hidden">
-        <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQd2hf8zDWGJ9bh3EQJ6SCibELPkM3V2wIvA&s"
-          alt="Trees"
-          className="absolute inset-0 w-full h-full object-cover opacity-30"
-          style={{ transform: `translateY(${offsetY * 0.3}px)` }}
-        />
-        <div className="relative z-10 max-w-3xl">
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-green-800 drop-shadow-lg">
-            About Pathfinder @75 Tree Planting Initiative 🌳
+    <div className="bg-white overflow-x-hidden font-sans">
+      
+      {/* 🌟 HERO SECTION (Parallax & Modern) */}
+      <section className="relative min-h-[60vh] lg:min-h-[70vh] flex items-center justify-center overflow-hidden pt-20">
+        {/* Background Image with Parallax */}
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: "url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&q=80')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            transform: `translateY(${offsetY * 0.4}px)`,
+          }}
+        ></div>
+        
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/90 via-purple-900/80 to-pink-900/90 z-10 mix-blend-multiply"></div>
+        <div className="absolute inset-0 bg-black/30 z-10"></div>
+
+        {/* Content */}
+        <div className="relative z-20 max-w-5xl mx-auto px-6 text-center text-white">
+          <div className="inline-block mb-4 px-4 py-1.5 rounded-full border border-white/30 bg-white/10 backdrop-blur-md">
+            <span className="text-xs font-bold tracking-widest uppercase">About Us</span>
+          </div>
+          <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tight leading-tight">
+            Empowering the <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-400">Next Generation</span>
           </h1>
-          <p className="text-lg md:text-xl text-green-700">
-            Celebrating 75 years of faith, service, and environmental
-            stewardship. Learn how this initiative empowers communities to plant
-            trees and nurture our planet.
-          </p>
-        </div>
-      </section>
-
-      {/* 🌿 Background + Objectives */}
-      <section className="py-20 px-6 md:px-12 lg:px-20 max-w-6xl mx-auto grid md:grid-cols-2 gap-12 relative">
-        {/* Background */}
-        <div className="bg-white p-8 rounded-2xl shadow-lg border border-green-200 relative overflow-hidden">
-          <img
-            src="https://img.freepik.com/free-vector/nature-landscape-beautiful-tree-background_1035-27115.jpg"
-            alt="Background"
-            className="absolute inset-0 w-full h-full object-cover opacity-10"
-            style={{ transform: `translateY(${offsetY * 0.2}px)` }}
-          />
-          <h2 className="text-3xl font-bold text-green-900 mb-4 flex items-center gap-2 relative z-10">
-            <Leaf className="text-amber-400" /> Background
-          </h2>
-          <p className="text-green-800 leading-relaxed relative z-10">
-            The Pathfinder @75 Tree Planting Initiative builds on decades of
-            youth empowerment and environmental awareness within the church
-            community. It engages young leaders and clubs across the region in
-            planting trees that symbolize growth, faith, and stewardship.
+          <p className="text-lg md:text-2xl text-blue-100 leading-relaxed max-w-3xl mx-auto font-light">
+            Nurturing a generation of <span className="font-semibold text-white">peaceful</span>, 
+            <span className="font-semibold text-white"> responsible</span>, and 
+            <span className="font-semibold text-white"> environmentally conscious</span> leaders.
           </p>
         </div>
 
-        {/* Objectives */}
-        <div className="bg-white p-8 rounded-2xl shadow-lg border border-green-200 relative overflow-hidden">
-          <img
-            src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6"
-            alt="Objectives"
-            className="absolute inset-0 w-full h-full object-cover opacity-10"
-            style={{ transform: `translateY(${offsetY * 0.2}px)` }}
-          />
-          <h2 className="text-3xl font-bold text-green-900 mb-4 flex items-center gap-2 relative z-10">
-            <Sprout className="text-amber-400" /> Objectives
-          </h2>
-          <p className="text-green-800 leading-relaxed relative z-10">
-            By 2030, every Pathfinder will have their own garden of trees
-            through this initiative. <br />
-            <br />
-            Our key objectives include: <br />
-            - Plant millions of trees across all regions and clubs. <br />
-            - Train youth in sustainable environmental practices. <br />-
-            Encourage community engagement and faith-based service.
-          </p>
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 animate-bounce">
+          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center p-1">
+             <div className="w-1 h-2 bg-white rounded-full"></div>
+          </div>
         </div>
       </section>
 
-      {/* ⛪ Church Connection */}
-      <section className="py-20 px-6 md:px-12 lg:px-20 text-center bg-green-100 rounded-2xl mx-6 md:mx-12 lg:mx-20 shadow-inner relative overflow-hidden">
-        <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmRtodFo1eW8Q1HOdbaTDMS1p3AjN0tsGqQA&s"
-          alt="Church"
-          className="absolute inset-0 w-full h-full object-cover opacity-10"
-          style={{ transform: `translateY(${offsetY * 0.15}px)` }}
-        />
-        <h2 className="text-3xl md:text-4xl font-bold text-green-900 mb-6 flex items-center justify-center gap-2 relative z-10">
-          <HeartHandshake className="text-amber-400" /> Church Connection
-        </h2>
-        <p className="max-w-3xl mx-auto text-green-800 leading-relaxed text-lg relative z-10">
-          The initiative is deeply rooted in our church's mission of nurturing
-          young leaders through service, discipline, outdoor skills, and faith.
-          It strengthens teamwork and empowers Pathfinders to take meaningful
-          environmental action.
-        </p>
-      </section>
-
-      {/* 📅 Honor Themes */}
-      <section className="py-16 px-6 md:px-12 lg:px-20 max-w-6xl mx-auto">
-        {" "}
-        {/* Adjusted max-width for more columns */}
-        <h2 className="text-3xl md:text-4xl font-bold text-green-900 mb-4 text-center flex justify-center items-center gap-3">
-          <CalendarDays className="text-amber-500 w-8 h-8" />
-          Weekly Pathfinder Honor Themes
-        </h2>
-        <p className="text-center text-green-800 max-w-4xl mx-auto mb-10 text-lg">
-          {" "}
-          {/* Increased text size slightly */}
-          With over <strong>600 Pathfinder honors</strong>, we focus on one
-          theme per day. Each day highlights achievements, activities, and
-          stories in that category.
-        </p>
-        {/* 🌟 Beautiful & Compact Grid Implementation */}
-        {/* 🌟 Beautiful & Compact Grid Implementation */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-3 md:gap-4">
-          {/* Loader */}
-          {loadingThemes && (
-            <div className="col-span-full flex flex-col items-center justify-center py-12">
-              <Loader2 className="w-10 h-10 text-amber-500 animate-spin mb-3" />
-              <p className="text-green-800 font-medium">
-                Loading weekly honor themes…
+      {/* 🎯 MISSION & VISION (Floating Cards) */}
+      <section className="relative py-24 px-6 -mt-20 z-30">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+            
+            {/* Mission Card */}
+            <div className="group bg-white p-10 rounded-[2.5rem] shadow-xl border border-slate-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-pink-50 rounded-bl-[10rem] -z-10 group-hover:scale-110 transition-transform duration-500"></div>
+              
+              <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-600 rounded-2xl flex items-center justify-center text-white mb-8 shadow-lg group-hover:rotate-6 transition-transform">
+                <Target size={32} />
+              </div>
+              
+              <h2 className="text-3xl font-bold text-slate-900 mb-4">Our Mission</h2>
+              <p className="text-lg text-slate-600 leading-relaxed">
+                To empower young people to promote <span className="text-pink-600 font-bold">peace</span>, <span className="text-green-600 font-bold">environmental sustainability</span>, and <span className="text-blue-600 font-bold">positive social transformation</span> through school-based programs, media engagement, and community action.
               </p>
             </div>
-          )}
 
-          {/* Error */}
-          {!loadingThemes && themeError && (
-            <div className="col-span-full flex flex-col items-center justify-center py-12 bg-white rounded-xl border border-red-200 shadow-md">
-              <AlertTriangle className="w-10 h-10 text-red-500 mb-3" />
-              <p className="text-red-600 font-semibold text-center max-w-md">
-                {themeError}
+            {/* Vision Card */}
+            <div className="group bg-white p-10 rounded-[2.5rem] shadow-xl border border-slate-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-bl-[10rem] -z-10 group-hover:scale-110 transition-transform duration-500"></div>
+              
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center text-white mb-8 shadow-lg group-hover:rotate-6 transition-transform">
+                <Eye size={32} />
+              </div>
+              
+              <h2 className="text-3xl font-bold text-slate-900 mb-4">Our Vision</h2>
+              <p className="text-lg text-slate-600 leading-relaxed">
+                A united Africa where young people lead in building <span className="text-blue-600 font-bold">peaceful societies</span> and a <span className="text-green-600 font-bold">restored environment</span>, creating a legacy of resilience and prosperity.
               </p>
             </div>
-          )}
 
-          {/* Data */}
-          {!loadingThemes &&
-            !themeError &&
-            honorThemes.map((item, i) => (
+          </div>
+        </div>
+      </section>
+
+      {/* 💎 CORE VALUES (Grid Layout) */}
+      <section className="py-20 px-6 bg-slate-50 relative overflow-hidden">
+        {/* Background Decoration */}
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+           <div className="absolute top-10 left-10 w-72 h-72 bg-blue-200/20 rounded-full blur-3xl"></div>
+           <div className="absolute bottom-10 right-10 w-96 h-96 bg-pink-200/20 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900">
+              Our Core <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-pink-600">Values</span>
+            </h2>
+            <p className="mt-4 text-xl text-slate-600 max-w-2xl mx-auto">
+              The guiding principles that define our culture and drive our impact.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {coreValues.map((value, index) => (
               <div
-                key={item._id || i}
-                className="relative bg-white p-4 rounded-xl shadow-md border border-green-100 hover:shadow-lg transition-all duration-300 group overflow-hidden cursor-pointer h-full"
+                key={index}
+                className="group p-8 bg-white rounded-3xl border border-slate-100 hover:border-pink-200 hover:shadow-xl transition-all duration-300"
               >
-                {/* Hover Accent */}
-                <div className="absolute top-0 left-0 w-full h-1 bg-amber-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
-
-                <div className="relative z-10 flex flex-col items-center justify-between h-full">
-                  {/* Icon */}
-                  <div className="text-3xl mb-2 p-1 rounded-full bg-green-50 group-hover:bg-amber-100 transition-colors duration-300">
-                    {item.icon}
-                  </div>
-
-                  <div className="text-center mt-2 flex-grow">
-                    <h3 className="text-base font-extrabold text-amber-600 uppercase tracking-widest">
-                      {item.day}
-                    </h3>
-
-                    <p className="text-green-800 mt-1 text-xs font-medium leading-tight">
-                      {item.theme}
-                    </p>
-                  </div>
+                <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center text-slate-700 mb-6 group-hover:bg-gradient-to-br group-hover:from-blue-500 group-hover:to-pink-500 group-hover:text-white transition-all duration-300">
+                  {value.icon}
                 </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">{value.title}</h3>
+                <p className="text-slate-600 text-sm leading-relaxed group-hover:text-slate-700">{value.desc}</p>
               </div>
             ))}
-        </div>
-      </section>
-      {/* 🌟 Projects & Initiatives */}
-      <section className="pb-20 px-6 md:px-12 lg:px-20 max-w-6xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-green-900 mb-12 text-center">
-          Projects & Initiatives
-        </h2>
-        <p className="text-green-800 mb-8 text-center max-w-3xl mx-auto">
-          Pathfinders actively participate in environmental, community, and
-          youth empowerment projects. These initiatives provide hands-on
-          experience, leadership development, and opportunities to make a real
-          impact.
-        </p>
-
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {[
-            {
-              icon: <TreePine size={36} className="text-amber-400" />,
-              title: "Environmental Projects",
-              desc: "Tree planting campaigns, clean-up drives, and sustainability programs to protect our environment.",
-            },
-            {
-              icon: <HeartHandshake size={36} className="text-amber-400" />,
-              title: "Community Service",
-              desc: "Supporting local communities through outreach programs, charity work, and social initiatives.",
-            },
-            {
-              icon: <Sprout size={36} className="text-amber-400" />,
-              title: "Youth Empowerment",
-              desc: "Programs and workshops designed to enhance skills, leadership, and personal growth for young Pathfinders.",
-            },
-          ].map((item, i) => (
-            <div
-              key={i}
-              className="bg-white p-6 rounded-2xl shadow-md border border-green-200 hover:shadow-lg transition-all"
-            >
-              <div className="flex justify-center text-amber-400 mb-4">
-                {item.icon}
-              </div>
-              <h4 className="text-xl font-semibold mb-2 text-green-900">
-                {item.title}
-              </h4>
-              <p className="text-green-800 text-sm">{item.desc}</p>
-            </div>
-          ))}
+          </div>
         </div>
       </section>
 
-      {/* 🌱 Expected Outcomes */}
-      <section className="pb-20 px-6 md:px-12 lg:px-20 max-w-6xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-green-900 mb-12 text-center">
-          Expected Outcomes
-        </h2>
-        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
-          {[
-            {
-              icon: <TreePine size={36} />,
-              title: "Tree Growth",
-              desc: "Millions of trees planted and nurtured.",
-            },
-            {
-              icon: <Sprout size={36} />,
-              title: "Youth Engagement",
-              desc: "Active involvement of clubs and leaders.",
-            },
-            {
-              icon: <Leaf size={36} />,
-              title: "Environmental Awareness",
-              desc: "Training in sustainable practices.",
-            },
-            {
-              icon: <HeartHandshake size={36} />,
-              title: "Community Impact",
-              desc: "Stronger community bonds through service.",
-            },
-          ].map((item, i) => (
-            <div
-              key={i}
-              className="bg-white p-6 rounded-2xl shadow-md border border-green-200 hover:shadow-lg transition-all"
-            >
-              <div className="flex justify-center text-amber-400 mb-4">
-                {item.icon}
-              </div>
-              <h4 className="text-xl font-semibold mb-2 text-green-900">
-                {item.title}
-              </h4>
-              <p className="text-green-800 text-sm">{item.desc}</p>
-            </div>
-          ))}
+      {/* 📜 BACKGROUND & OBJECTIVES (Split Layout) */}
+      <section className="md:py-24 px-6">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-start">
+          
+          {/* Left: Background Story */}
+          <div className="space-y-8">
+             <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-bold uppercase tracking-wider">
+                <Zap size={12} /> Our Story
+             </div>
+             <h2 className="text-4xl font-extrabold text-slate-900">
+                Building a Legacy of <br />
+                <span className="text-blue-600">Change & Resilience</span>
+             </h2>
+             <div className="prose prose-lg text-slate-600">
+                <p>
+                   <strong className="text-slate-900">Teens Voice Africa (TVA)</strong> is a registered NGO operating in Kenya. Starting in Kajiado, Muranga, Meru, Nairobi, and Kiambu, we are expanding our reach across all 47 counties.
+                </p>
+                <p>
+                   We understand that teens face unique challenges—social, economic, and personal. We don't just provide services; we innovate solutions to bridge the gap between youth and society.
+                </p>
+                <p className="border-l-4 border-pink-500 pl-4 italic text-slate-800 bg-slate-50 py-2 rounded-r-lg">
+                   "Our value proposition is ensuring that every teen leads a productive life and is accountable for their actions."
+                </p>
+             </div>
+          </div>
+
+          {/* Right: Objectives List */}
+          <div className="bg-slate-900 text-white p-10 rounded-[2.5rem] shadow-2xl relative overflow-hidden">
+             {/* Decor */}
+             <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-600 to-pink-600 opacity-20 blur-3xl rounded-full"></div>
+
+             <h3 className="text-2xl font-bold mb-8 relative z-10">Strategic Objectives</h3>
+             <ul className="space-y-6 relative z-10">
+                {objectives.map((obj, idx) => (
+                   <li key={idx} className="flex gap-4 items-start group">
+                      <div className="mt-1 flex-shrink-0 w-6 h-6 rounded-full bg-blue-600/30 flex items-center justify-center border border-blue-500/50 group-hover:bg-pink-600/30 group-hover:border-pink-500/50 transition-colors">
+                         <CheckCircle2 size={14} className="text-blue-300 group-hover:text-pink-300" />
+                      </div>
+                      <p className="text-slate-300 text-sm leading-relaxed group-hover:text-white transition-colors">
+                         {obj}
+                      </p>
+                   </li>
+                ))}
+             </ul>
+             
+             <div className="mt-10 pt-8 border-t border-white/10">
+                <p className="text-xs text-slate-400 uppercase tracking-widest font-bold">Target Impact</p>
+                <div className="flex items-center gap-2 mt-2">
+                   <span className="text-3xl font-black text-white">100k+</span>
+                   <span className="text-sm text-slate-400">Youths Empowered by 2030</span>
+                </div>
+             </div>
+          </div>
+
         </div>
       </section>
 
-      {/* 🌟 Lifestyle & Jobs / Opportunities & Pathfinder History */}
-      <section className="pb-20 px-6 md:px-12 lg:px-20 max-w-6xl mx-auto space-y-12">
-        {/* Lifestyle */}
-        <div className="bg-white p-8 rounded-2xl shadow-lg border border-green-200">
-          <h3 className="text-2xl font-bold text-green-900 mb-4">Lifestyle</h3>
-          <p className="text-green-800 mb-4">
-            Pathfinders are encouraged to maintain holistic wellness. This
-            includes physical health, mental well-being, and spiritual growth.
-            Our lifestyle section provides practical tips:
+      {/* 🌟 IMPACT AREAS (Modern Cards) */}
+      <section className="py-24 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+             <h2 className="text-4xl font-extrabold text-slate-900">Where We Make an Impact</h2>
+             <p className="text-slate-500 mt-4">Driving change through four key pillars</p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {impactAreas.map((area, index) => (
+               <div key={index} className="group relative bg-white border border-slate-100 rounded-3xl p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 text-center overflow-hidden">
+                  <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${area.gradient}`}></div>
+                  
+                  <div className={`mx-auto w-20 h-20 ${area.bg} rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                     <div className="text-slate-700 group-hover:text-slate-900 transition-colors">
+                        {area.icon}
+                     </div>
+                  </div>
+                  
+                  <h3 className="text-lg font-bold text-slate-900 mb-2">{area.title}</h3>
+                  <p className="text-sm text-slate-500 leading-relaxed">
+                     {area.desc}
+                  </p>
+               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 🚀 CTA SECTION */}
+      <section className="relative py-24 px-6 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900 to-slate-900"></div>
+        {/* Animated Shapes */}
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-pink-600/10 rounded-full blur-[100px] animate-pulse-slow"></div>
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[100px] animate-pulse-slow delay-1000"></div>
+
+        <div className="relative z-10 max-w-4xl mx-auto text-center text-white">
+          <h2 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
+             Ready to Join the Movement?
+          </h2>
+          <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
+             Whether you're a student, professional, or partner organization, there is a place for you at Teens Voice Africa.
           </p>
-          <ul className="text-green-800 list-disc list-inside space-y-2">
-            <li>
-              <strong>Health & wellness:</strong> Nutrition guidance, regular
-              exercise, mindfulness, and healthy routines.
-            </li>
-            <li>
-              <strong>Travel & outdoor activities:</strong> Camping, hiking,
-              nature exploration, and team-building adventures.
-            </li>
-            <li>
-              <strong>Camping Guides:</strong> How to set up tents, plan meals,
-              and safely enjoy outdoor expeditions.
-            </li>
-          </ul>
-        </div>
-
-        {/* Jobs / Opportunities */}
-        <div className="bg-white p-8 rounded-2xl shadow-lg border border-green-200">
-          <h3 className="text-2xl font-bold text-green-900 mb-4">
-            Jobs & Opportunities
-          </h3>
-          <p className="text-green-800 mb-4">
-            Pathfinders can grow personally and professionally. We provide
-            guidance and access to opportunities that strengthen youth
-            development:
-          </p>
-          <ul className="text-green-800 list-disc list-inside space-y-2">
-            <li>
-              <strong>Volunteering:</strong> Local and regional projects,
-              community service, and leadership roles.
-            </li>
-            <li>
-              <strong>Scholarships & Internships:</strong> Educational grants
-              and placements supporting career growth.
-            </li>
-            <li>
-              <strong>Career Guidance:</strong> Workshops and mentorships to
-              explore STEM, arts, and vocational pathways.
-            </li>
-          </ul>
+          
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+             <a href="/get-involved" className="px-8 py-4 bg-white text-blue-900 font-bold rounded-full hover:bg-blue-50 transition-all shadow-lg hover:shadow-white/20 hover:-translate-y-1 flex items-center justify-center gap-2">
+                Get Involved <ArrowRight size={20} />
+             </a>
+             <a href="/programs" className="px-8 py-4 bg-transparent border border-white/30 text-white font-bold rounded-full hover:bg-white/10 transition-all backdrop-blur-sm">
+                View Programs
+             </a>
+          </div>
         </div>
       </section>
+
     </div>
   );
 };

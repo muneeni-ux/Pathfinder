@@ -9,7 +9,6 @@ import {
   CreditCard,
   Calendar,
   Mic,
-  BookOpen,
   ShoppingBag,
   LogOut,
   Menu,
@@ -42,9 +41,7 @@ const AdminDashboard = () => {
               alt="Eusda logo"
               className="w-9 h-9 rounded-full border-2 border-amber-500 object-cover"
             />
-            <h2 className="text-2xl font-extrabold text-amber-400">
-              @75
-            </h2>
+            <h2 className="text-2xl font-extrabold text-amber-400">@75</h2>
           </div>
 
           {/* Close button (mobile) */}
