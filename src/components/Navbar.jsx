@@ -6,11 +6,11 @@ import {
   Home as HomeIcon,
   Info,
   Users,
-  Image,
   Sparkles,
   HeartHandshake,
   Phone,
   ChevronRight,
+  Newspaper,
 } from "lucide-react";
 
 const Navbar = () => {
@@ -31,7 +31,8 @@ const Navbar = () => {
     { to: "/", label: "Home", icon: <HomeIcon size={18} /> },
     { to: "/about", label: "About TVA", icon: <Info size={18} /> },
     { to: "/programs", label: "Our Impact", icon: <Users size={18} /> },
-    { to: "/media", label: "Gallery", icon: <Image size={18} /> },
+    // { to: "/media", label: "Gallery", icon: <Image size={18} /> },
+    {to: "/news-updates", label: "News & Updates", icon: <Newspaper size={18} /> },
     { to: "/contact", label: "Contact", icon: <Phone size={18} /> },
   ];
 

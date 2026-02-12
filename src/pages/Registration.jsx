@@ -13,7 +13,6 @@ import {
   School,
   User,
 } from "lucide-react";
-import toast from "react-hot-toast";
 import {
   success as toastSuccess,
   error as toastError,

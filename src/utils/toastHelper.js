@@ -49,4 +49,6 @@ export function loading(message = "Loading...", opts = {}) {
   );
 }
 
-export default { success, error, info, loading };
+const toastHelper = { success, error, info, loading };
+
+export default toastHelper;
