@@ -119,10 +119,11 @@ const About = () => {
       {/* 🎯 MISSION & VISION (Floating Cards) */}
       <section className="relative py-24 px-6 -mt-20 z-30">
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+<div className="grid md:grid-cols-2 gap-8 lg:gap-12">
             
             {/* Mission Card */}
             <div className="group bg-white p-10 rounded-[2.5rem] shadow-xl border border-slate-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 relative overflow-hidden">
+              {/* Background Decor */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-pink-50 rounded-bl-[10rem] -z-10 group-hover:scale-110 transition-transform duration-500"></div>
               
               <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-600 rounded-2xl flex items-center justify-center text-white mb-8 shadow-lg group-hover:rotate-6 transition-transform">
@@ -131,12 +132,15 @@ const About = () => {
               
               <h2 className="text-3xl font-bold text-slate-900 mb-4">Our Mission</h2>
               <p className="text-lg text-slate-600 leading-relaxed">
-                To empower young people to promote <span className="text-pink-600 font-bold">peace</span>, <span className="text-green-600 font-bold">environmental sustainability</span>, and <span className="text-blue-600 font-bold">positive social transformation</span> through school-based programs, media engagement, and community action.
+                To empower young people to promote <span className="text-pink-600 font-bold">peace</span>, <span className="text-green-600 font-bold">environmental sustainability</span>, and <span className="text-purple-600 font-bold">social transformation</span>. 
+                <br /><br />
+                We provide a dynamic platform to address youth challenges through <span className="text-slate-900 font-semibold">income-generating projects</span>, life-skills mentorship, and career seminars, stepping up synergy with stakeholders to drive behavioral change.
               </p>
             </div>
 
             {/* Vision Card */}
             <div className="group bg-white p-10 rounded-[2.5rem] shadow-xl border border-slate-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 relative overflow-hidden">
+              {/* Background Decor */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-bl-[10rem] -z-10 group-hover:scale-110 transition-transform duration-500"></div>
               
               <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center text-white mb-8 shadow-lg group-hover:rotate-6 transition-transform">
@@ -146,6 +150,8 @@ const About = () => {
               <h2 className="text-3xl font-bold text-slate-900 mb-4">Our Vision</h2>
               <p className="text-lg text-slate-600 leading-relaxed">
                 A united Africa where young people lead in building <span className="text-blue-600 font-bold">peaceful societies</span> and a <span className="text-green-600 font-bold">restored environment</span>, creating a legacy of resilience and prosperity.
+                <br /><br />
+                We aspire to be the <span className="text-slate-900 font-semibold">premier youth platform</span> in Kenya and Africa, ensuring every challenge is heard, expressed, and attended to effectively.
               </p>
             </div>
 
