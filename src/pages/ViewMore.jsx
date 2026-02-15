@@ -188,7 +188,7 @@ const ViewMore = () => {
               </div>
               <div className="text-sm">
                 <p className="font-semibold text-gray-800">
-                  Pathfinder@75 Team
+                  TVA Team
                 </p>
                 <p className="text-gray-500">Author</p>
               </div>
