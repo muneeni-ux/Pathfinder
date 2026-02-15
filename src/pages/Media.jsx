@@ -115,7 +115,7 @@ const Media = () => {
             </span>
           </h1>
           <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed font-light">
-            Explore the visual stories of young changemakers across Kenya—from
+            Explore the visual stories of young changemakers across Kenya from
             Nyambene to Nairobi.
           </p>
         </div>

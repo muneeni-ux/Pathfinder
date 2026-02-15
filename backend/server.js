@@ -33,6 +33,7 @@ const allowedOrigins = [
   "http://192.168.101.234:3000",
   "https://eusda-1.onrender.com", // Added Render production URL 
   "https://eusda.co.ke", // Production URL
+  "https://pathfinder-xg2o.onrender.com/", // Added Render production URL
 ];
 
 app.use(cors({

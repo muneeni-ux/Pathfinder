@@ -14,9 +14,14 @@ const gallerySchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    category:{
+      type: String,
+      enum: ["tree-planting", "events", "scouts"],
+      default: "events",
+    },
     type: {
       type: String,
-      enum: ["image", "video", "entertainment"],
+      enum: ["image", "video"],
       default: "image",
     },
   },

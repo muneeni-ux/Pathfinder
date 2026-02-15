@@ -7,6 +7,10 @@ import {
   Trash2,
   UploadCloud,
   Copy,
+  Trees,
+  Tent,
+  CalendarDays,
+  Layers,
 } from "lucide-react";
 import AdminLoader from "./components/AdminLoader";
 import Pagination from "./components/Pagination";
@@ -14,16 +18,21 @@ import Pagination from "./components/Pagination";
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 const TABS = [
-  { id: "image", label: "Images", icon: <ImageIcon size={18} /> },
-  { id: "video", label: "Videos", icon: <Video size={18} /> },
-  { id: "entertainment", label: "Entertainment", icon: <Film size={18} /> },
+  { id: "all", label: "All", icon: <Layers size={16} /> },
+  { id: "tree-planting", label: "Tree Planting", icon: <Trees size={16} /> },
+  { id: "events", label: "Events", icon: <CalendarDays size={16} /> },
+  { id: "scouts", label: "Scouts", icon: <Tent size={16} /> },
+  { id: "videos", label: "Video Stories", icon: <Video size={16} /> },
 ];
+
+const CATEGORY_IDS = ["tree-planting", "events", "scouts", "entertainment"];
 
 function ManageMedia() {
   const [loading, setLoading] = useState(true);
   const [media, setMedia] = useState([]);
   const [uploading, setUploading] = useState(false);
   const [activeTab, setActiveTab] = useState("image");
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Upload State
   const [title, setTitle] = useState("");
@@ -39,8 +48,27 @@ function ManageMedia() {
   const fetchMedia = async () => {
     try {
       setLoading(true);
-      // Pass the activeTab as the 'type' query parameter to filter on backend
-      const res = await fetch(`${SERVER_URL}/api/gallery?type=${activeTab}`);
+
+      // Build query params according to backend expectations: type + optional category + search
+      const params = new URLSearchParams();
+
+      if (activeTab === "videos") {
+        params.set("type", "video");
+      } else if (activeTab === "all") {
+        // no type/category filter -> fetch everything
+      } else if (CATEGORY_IDS.includes(activeTab)) {
+        params.set("type", "image");
+        params.set("category", activeTab);
+      } else if (activeTab === "image") {
+        params.set("type", "image");
+      }
+
+      if (searchQuery && searchQuery.trim() !== "") {
+        params.set("search", searchQuery.trim());
+      }
+
+      const q = params.toString() ? `?${params.toString()}` : "";
+      const res = await fetch(`${SERVER_URL}/api/gallery${q}`);
       const data = await res.json();
 
       if (!res.ok) throw new Error(data.message || "Failed to load media");
@@ -60,12 +88,12 @@ function ManageMedia() {
     }
   };
 
-  // Re-fetch when tab changes
+  // Re-fetch when tab, search changes
   useEffect(() => {
     fetchMedia();
-    setPage(1); // Reset pagination on tab change
+    setPage(1); // Reset pagination on tab change or search
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeTab]);
+  }, [activeTab, searchQuery]);
 
   // --- UPLOAD HANDLER ---
   const handleUpload = async (e) => {
@@ -79,7 +107,13 @@ function ManageMedia() {
     // 'media' must match the field name expected by your Multer middleware
     fd.append("media", fileInputRef.current.files[0]);
     fd.append("title", title);
-    fd.append("type", activeTab); // Automatically set type based on current tab
+    // Determine upload type and category to send to backend
+    const uploadType = activeTab === "videos" ? "video" : "image";
+    fd.append("type", uploadType);
+
+    if (CATEGORY_IDS.includes(activeTab)) {
+      fd.append("category", activeTab);
+    }
 
     try {
       setUploading(true);
@@ -165,6 +199,16 @@ function ManageMedia() {
           ))}
         </div>
 
+        {/* Search (server-side) */}
+        <div className="mt-4 mb-4">
+          <input
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search by title (server-side)"
+            className="w-full md:w-1/2 p-2 border rounded-lg"
+          />
+        </div>
+
         {/* Upload Form */}
         <form
           onSubmit={handleUpload}
@@ -189,7 +233,11 @@ function ManageMedia() {
             <input
               ref={fileInputRef}
               type="file"
-              accept={activeTab === "image" ? "image/*" : "video/*"}
+              accept={
+                activeTab === "videos" || activeTab === "video"
+                  ? "video/*"
+                  : "image/*"
+              }
               className="w-full p-2 border rounded-lg bg-gray-50 text-sm file:mr-4 file:py-1 file:px-4 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-green-600 file:text-white hover:file:bg-green-700"
             />
           </div>
@@ -215,7 +263,7 @@ function ManageMedia() {
       {/* --- GALLERY GRID --- */}
       {pageItems.length === 0 ? (
         <div className="p-12 text-center bg-white rounded-xl border border-dashed border-gray-300 text-gray-400">
-          No media found in {activeTab}s.
+          No media found for "{activeTab}".
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -243,7 +291,7 @@ function ManageMedia() {
                 {/* Overlay Badge */}
                 <div className="absolute top-2 right-2">
                   <span className="bg-black/50 text-white text-[10px] px-2 py-1 rounded uppercase font-bold backdrop-blur-sm">
-                    {m.type || activeTab}
+                    {m.category || m.type || activeTab}
                   </span>
                 </div>
               </div>
