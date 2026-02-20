@@ -150,9 +150,22 @@ const Donate = () => {
               clearInterval(poll);
               toast.dismiss(toastId);
               toast.success(
-                statusData.mpesaReceiptNumber
-                  ? `Donation Successful! Receipt: ${statusData.mpesaReceiptNumber}`
-                  : "Donation Successful!",
+                (t) => (
+                  <div className="flex flex-col gap-1 text-sm">
+                    <span className="font-bold text-slate-800 text-base">
+                      🎉 Thank you for your generosity!
+                    </span>
+                    <span className="text-slate-600">
+                      Your donation means the world to us.
+                    </span>
+                    {statusData.mpesaReceiptNumber && (
+                      <span className="text-xs text-slate-400 font-mono mt-1 bg-slate-100 p-1 rounded inline-block w-fit">
+                        Receipt: {statusData.mpesaReceiptNumber}
+                      </span>
+                    )}
+                  </div>
+                ),
+                { duration: 5000 },
               );
               setLoading(false);
               setAmount("");
@@ -162,7 +175,21 @@ const Donate = () => {
               clearInterval(poll);
               toast.dismiss(toastId);
               toast.error(
-                `Payment failed: ${statusData.resultDesc || "Request cancelled by user."}`,
+                (t) => (
+                  <div className="flex flex-col gap-1 text-sm">
+                    <span className="font-bold text-slate-800 text-base">
+                      Payment Unsuccessful
+                    </span>
+                    <span className="text-slate-600">
+                      We couldn't process your donation at this time.
+                    </span>
+                    <span className="text-xs text-red-500 font-medium mt-1">
+                      Reason:{" "}
+                      {statusData.resultDesc || "Request cancelled by user"}
+                    </span>
+                  </div>
+                ),
+                { duration: 6000 },
               );
               setLoading(false);
             }

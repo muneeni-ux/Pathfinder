@@ -477,7 +477,7 @@ const Home = () => {
                     {formatDate(event.date)}
                   </p>
                   <Link
-                    to={`/view-more/${event.id}`}
+                    to={`/view-more/${event._id}`}
                     className="text-sm font-bold text-white flex items-center gap-2 group-hover:gap-3 transition-all"
                   >
                     Read More <ArrowRight size={16} />

@@ -4,14 +4,18 @@ import { Toaster } from "react-hot-toast";
 const toastStyle = {
   duration: 4500,
   style: {
-    background: "linear-gradient(90deg,#0f172a, #064e3b)",
-    color: "#fff",
-    fontSize: "15px",
-    fontWeight: 700,
-    padding: "14px 20px",
-    borderRadius: "14px",
-    boxShadow: "0 10px 30px rgba(2,6,23,0.6)",
-    border: "1px solid rgba(255,255,255,0.06)",
+    background: "rgba(15, 23, 42, 0.85)", // sleek slate-900 with transparency
+    backdropFilter: "blur(12px)",
+    color: "#f8fafc",
+    fontSize: "14px",
+    fontWeight: 600,
+    padding: "16px 24px",
+    borderRadius: "16px",
+    boxShadow:
+      "0 20px 40px -10px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1)",
+    border: "1px solid rgba(255, 255, 255, 0.08)",
+    fontFamily: "system-ui, -apple-system, sans-serif",
+    letterSpacing: "0.3px",
   },
 };
 
@@ -24,32 +28,39 @@ export default function CustomToaster() {
       toastOptions={{
         ...toastStyle,
         success: {
-          duration: 3500,
-          iconTheme: { primary: "#10B981", secondary: "#065F46" },
+          duration: 4000,
+          iconTheme: { primary: "#ffffff", secondary: "#10B981" },
           style: {
-            background: "linear-gradient(90deg,#10B981,#059669)",
-            color: "#063F2B",
-            border: "2px solid rgba(16,185,129,0.12)",
-            boxShadow: "0 8px 24px rgba(6,95,70,0.25)",
+            background:
+              "linear-gradient(135deg, rgba(6, 78, 59, 0.95), rgba(16, 185, 129, 0.85))",
+            backdropFilter: "blur(12px)",
+            color: "#ffffff",
+            border: "1px solid rgba(16, 185, 129, 0.4)",
+            boxShadow: "0 10px 30px -5px rgba(16, 185, 129, 0.3)",
           },
         },
         error: {
-          duration: 6000,
-          iconTheme: { primary: "#DC2626", secondary: "#fff5f5" },
+          duration: 5000,
+          iconTheme: { primary: "#ffffff", secondary: "#E11D48" },
           style: {
-            background: "linear-gradient(90deg,#FEE2E2,#FCA5A5)",
-            color: "#7F1D1D",
-            border: "2px solid rgba(220,38,38,0.12)",
-            boxShadow: "0 8px 24px rgba(124,58,58,0.12)",
+            background:
+              "linear-gradient(135deg, rgba(127, 29, 29, 0.95), rgba(225, 29, 72, 0.85))",
+            backdropFilter: "blur(12px)",
+            color: "#ffffff",
+            border: "1px solid rgba(225, 29, 72, 0.4)",
+            boxShadow: "0 10px 30px -5px rgba(225, 29, 72, 0.3)",
           },
         },
         loading: {
           duration: Infinity,
-          iconTheme: { primary: "#F59E0B", secondary: "#FFF7ED" },
+          iconTheme: { primary: "#ffffff", secondary: "#3B82F6" },
           style: {
-            background: "linear-gradient(90deg,#FFFBEB,#FEF3C7)",
-            color: "#78350F",
-            border: "1px solid rgba(245,158,11,0.08)",
+            background:
+              "linear-gradient(135deg, rgba(30, 58, 138, 0.95), rgba(59, 130, 246, 0.85))",
+            backdropFilter: "blur(12px)",
+            color: "#ffffff",
+            border: "1px solid rgba(59, 130, 246, 0.4)",
+            boxShadow: "0 10px 30px -5px rgba(59, 130, 246, 0.3)",
           },
         },
         custom: { duration: 5000 },

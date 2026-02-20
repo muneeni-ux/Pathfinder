@@ -110,7 +110,7 @@ function ManageDonations() {
 
   // --- CALCULATE STATS ---
   const totalRaised = donations
-    .filter((d) => d.status === "Success") // Only count successful
+    .filter((d) => d.status === "COMPLETED") // Only count successful
     .reduce((acc, curr) => acc + (Number(curr.amount) || 0), 0);
 
   if (loading) return <AdminLoader message="Loading financial records..." />;
@@ -233,11 +233,11 @@ function ManageDonations() {
                     </td>
                     <td className="p-4">
                       {/* Status Logic */}
-                      {d.status === "Success" || d.status === "Completed" ? (
+                      {d.status === "Success" || d.status === "COMPLETED" ? (
                         <span className="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 text-blue-700 border border-blue-200 rounded-full text-xs font-medium">
                           <CheckCircle size={12} /> Success
                         </span>
-                      ) : d.status === "Failed" ? (
+                      ) : d.status === "FAILED" ? (
                         <span className="inline-flex items-center gap-1 px-2 py-1 bg-red-100 text-red-700 border border-red-200 rounded-full text-xs font-medium">
                           <XCircle size={12} /> Failed
                         </span>
