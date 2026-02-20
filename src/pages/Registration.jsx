@@ -43,30 +43,15 @@ const Registration = () => {
   const [imageFile, setImageFile] = useState(null);
 
   const regionsList = [
-    "Central Nyanza Conference",
-    "Greater Rift Valley",
-    "Kenya Lake Conference",
-    "Ranen Conference",
-    "Western Kenya Conference",
-    "Lake Victoria Field",
-    "North Rift Valley Field",
-    "South East Nyanza Field",
-    "South West Nyanza Field",
-    "Southern Kenya Lake Field",
-    "West Rift Valley Field",
-    "Central Kenya Conference",
-    "Central Rift Valley Conference",
-    "East Nairobi Field",
-    "Kenya Coast Field",
-    "North East Kenya Field",
-    "Nyamira Conference",
-    "Nyamira West Field",
-    "South East Kenya Field",
-    "South Kenya Conference",
-    "South Nairobi Kajiado Field",
-    "South Rift Valley Field",
+    "Nairobi",
+    "Central",
+    "Coast",
+    "Eastern",
+    "North Eastern",
+    "Nyanza",
+    "Rift Valley",
+    "Western",
   ];
-
   const tabs = [
     {
       id: "clubs",
@@ -103,7 +88,31 @@ const Registration = () => {
   ];
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    let { name, value } = e.target;
+
+    // Prevent invalid characters for phone
+    if (name === "phone") {
+      value = value.replace(/[^0-9+\-\s()]/g, "");
+    }
+
+    // Prevent non-digits and limit length for founded year
+    if (name === "founded") {
+      value = value.replace(/\D/g, "");
+      if (value.length > 4) value = value.slice(0, 4);
+    }
+
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    if (name === "founded" && value) {
+      const currentYear = new Date().getFullYear();
+      if (parseInt(value, 10) > currentYear) {
+        setFormData((prev) => ({ ...prev, founded: currentYear.toString() }));
+        toastError(`Year founded cannot be beyond ${currentYear}`);
+      }
+    }
   };
 
   // Handle File Selection
@@ -138,6 +147,45 @@ const Registration = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // ---------------- VALIDATION ----------------
+    if (formData.email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        return toastError("Please enter a valid email address.");
+      }
+    }
+
+    if (formData.phone) {
+      const phoneClean = formData.phone.replace(/[\s\-()]/g, "");
+      if (
+        phoneClean.length < 10 ||
+        phoneClean.length > 15 ||
+        !/^\+?[0-9]+$/.test(phoneClean)
+      ) {
+        return toastError("Please enter a valid phone number (min 10 digits).");
+      }
+    }
+
+    if (activeTab === "clubs" && formData.founded) {
+      const currentYear = new Date().getFullYear();
+      if (parseInt(formData.founded, 10) > currentYear) {
+        return toastError(
+          `Year founded cannot be after the current year (${currentYear}).`,
+        );
+      }
+      if (parseInt(formData.founded, 10) < 1800) {
+        return toastError("Please enter a valid year founded.");
+      }
+    }
+
+    if (activeTab === "clubs" && formData.members) {
+      if (parseInt(formData.members, 10) < 1) {
+        return toastError("Number of members must be at least 1.");
+      }
+    }
+    // --------------------------------------------
+
     setLoading(true);
 
     try {
@@ -293,7 +341,9 @@ const Registration = () => {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  type="tel"
+                  type="text"
+                  inputMode="tel"
+                  maxLength="15"
                   placeholder="+254..."
                   required
                   className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all"
@@ -355,6 +405,7 @@ const Registration = () => {
                   type="number"
                   placeholder="e.g., 25"
                   required
+                  min="1"
                   className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all"
                 />
               </div>
@@ -366,7 +417,9 @@ const Registration = () => {
                   name="founded"
                   value={formData.founded}
                   onChange={handleChange}
-                  type="number"
+                  onBlur={handleBlur}
+                  type="text"
+                  inputMode="numeric"
                   placeholder="e.g., 2024"
                   required
                   className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all"
@@ -465,7 +518,9 @@ const Registration = () => {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  type="tel"
+                  type="text"
+                  inputMode="tel"
+                  maxLength="15"
                   placeholder="+254..."
                   required
                   className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-green-500 focus:ring-4 focus:ring-green-500/10 outline-none transition-all"
@@ -618,7 +673,9 @@ const Registration = () => {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  type="tel"
+                  type="text"
+                  inputMode="tel"
+                  maxLength="15"
                   placeholder="+254..."
                   required
                   className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all"

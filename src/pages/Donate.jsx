@@ -102,8 +102,11 @@ const Donate = () => {
 
     const formattedPhone = formatPhoneNumber(phone);
 
-    if (formattedPhone.length !== 12) {
-      toast.error("Invalid phone number format. Please use 07... or 01...");
+    // Validate that the phone number matches the Kenyan format (e.g., 2547..., 2541...)
+    if (!/^254[17]\d{8}$/.test(formattedPhone)) {
+      toast.error(
+        "Invalid phone number. Please enter a valid Kenyan number (e.g., 07... or 01...).",
+      );
       return;
     }
 
@@ -125,18 +128,58 @@ const Donate = () => {
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Donation failed");
 
-      toastId = toast.loading("Processing your M-Pesa donation...", {
-        duration: 30000,
+      toastId = toast.loading("Please enter your M-Pesa PIN on your phone...", {
+        duration: 60000,
       });
 
-      // Poll logic remains same...
-      // (Simplified for UI focus, ensure your original polling logic is kept if copying full file)
-      setTimeout(() => {
-        toast.dismiss(toastId);
-        toast.success("Simulation: Donation Successful!");
-        setLoading(false);
-        setAmount("");
-      }, 2000);
+      const checkoutRequestID = data.checkoutRequestID;
+      if (!checkoutRequestID) throw new Error("Missing checkout request ID");
+
+      let attempts = 0;
+      const maxAttempts = 20; // 20 * 3s = 60 seconds of polling
+
+      const poll = setInterval(async () => {
+        attempts++;
+        try {
+          const statusRes = await fetch(
+            `${SERVER_URL}/api/donate/status/${checkoutRequestID}`,
+          );
+          if (statusRes.ok) {
+            const statusData = await statusRes.json();
+            if (statusData.status === "COMPLETED") {
+              clearInterval(poll);
+              toast.dismiss(toastId);
+              toast.success(
+                statusData.mpesaReceiptNumber
+                  ? `Donation Successful! Receipt: ${statusData.mpesaReceiptNumber}`
+                  : "Donation Successful!",
+              );
+              setLoading(false);
+              setAmount("");
+              setDonorName("");
+              setPhone("");
+            } else if (statusData.status === "FAILED") {
+              clearInterval(poll);
+              toast.dismiss(toastId);
+              toast.error(
+                `Payment failed: ${statusData.resultDesc || "Request cancelled by user."}`,
+              );
+              setLoading(false);
+            }
+          }
+        } catch (err) {
+          console.error("Polling error:", err);
+        }
+
+        if (attempts >= maxAttempts) {
+          clearInterval(poll);
+          toast.dismiss(toastId);
+          toast.error(
+            "Timeout waiting for payment. If you paid, it will reflect shortly.",
+          );
+          setLoading(false);
+        }
+      }, 3000);
     } catch (err) {
       if (toastId) toast.dismiss(toastId);
       toast.error(err.message || "Something went wrong.");
@@ -367,11 +410,12 @@ const Donate = () => {
                           M-Pesa Number
                         </label>
                         <input
-                          type="tel"
+                          type="number"
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
                           placeholder="07XX XXX XXX"
                           required
+                          maxLength={15}
                           className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-green-500 outline-none transition-all font-medium"
                         />
                       </div>

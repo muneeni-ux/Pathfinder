@@ -59,7 +59,7 @@ const ViewMore = () => {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: post?.title || "Pathfinder Update",
+          title: post?.title || "TVA Update",
           text: post?.excerpt || post?.title || "Check out this article",
           url: shareUrl,
         });
@@ -138,7 +138,7 @@ const ViewMore = () => {
         <img
           src={
             post.image ||
-            "https://via.placeholder.com/1200x600?text=Pathfinder+Update"
+            "https://via.placeholder.com/1200x600?text=TVA+Update"
           }
           alt={post.title}
           className="w-full h-full object-cover opacity-90"

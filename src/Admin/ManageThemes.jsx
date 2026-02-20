@@ -130,7 +130,7 @@ function ManageThemes() {
         </div>
         <button
           onClick={openNew}
-          className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition shadow-sm font-medium"
+          className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 transition shadow-md font-medium"
         >
           <Plus size={18} /> Add Day
         </button>
@@ -161,7 +161,7 @@ function ManageThemes() {
                   <select
                     value={form.day}
                     onChange={(e) => setForm({ ...form, day: e.target.value })}
-                    className="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-green-500 outline-none bg-white"
+                    className="w-full mt-1 p-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none bg-slate-50"
                   >
                     {DAYS.map((d) => (
                       <option key={d} value={d}>
@@ -180,7 +180,7 @@ function ManageThemes() {
                     onChange={(e) =>
                       setForm({ ...form, order: e.target.value })
                     }
-                    className="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-green-500 outline-none"
+                    className="w-full mt-1 p-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none bg-slate-50"
                   />
                 </div>
               </div>
@@ -193,7 +193,7 @@ function ManageThemes() {
                   required
                   value={form.theme}
                   onChange={(e) => setForm({ ...form, theme: e.target.value })}
-                  className="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-green-500 outline-none"
+                  className="w-full mt-1 p-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none bg-slate-50"
                   placeholder="e.g. Nature Appreciation"
                 />
               </div>
@@ -210,8 +210,8 @@ function ManageThemes() {
                       onClick={() => setForm({ ...form, icon })}
                       className={`w-10 h-10 flex items-center justify-center rounded-lg border text-xl transition-all ${
                         form.icon === icon
-                          ? "bg-green-100 border-green-500 scale-110 shadow-sm"
-                          : "bg-gray-50 border-gray-200 hover:bg-gray-100"
+                          ? "bg-blue-100 border-blue-500 text-blue-700 scale-110 shadow-sm"
+                          : "bg-slate-50 border-slate-200 hover:bg-slate-100"
                       }`}
                     >
                       {icon}
@@ -223,7 +223,7 @@ function ManageThemes() {
                   placeholder="Or type custom emoji/text"
                   value={form.icon}
                   onChange={(e) => setForm({ ...form, icon: e.target.value })}
-                  className="mt-2 w-full p-2 text-sm border rounded bg-gray-50"
+                  className="mt-2 w-full p-2 text-sm border border-slate-200 rounded-xl bg-slate-50 focus:ring-2 focus:ring-blue-500 outline-none"
                 />
               </div>
 
@@ -237,7 +237,7 @@ function ManageThemes() {
                 </button>
                 <button
                   type="submit"
-                  className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 shadow"
+                  className="px-6 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 shadow-md transition-all"
                 >
                   Save
                 </button>
@@ -257,14 +257,14 @@ function ManageThemes() {
           {sortedThemes.map((t) => (
             <div
               key={t._id}
-              className="bg-white rounded-xl shadow-sm border border-green-100 hover:shadow-md transition-all group overflow-hidden flex flex-col h-full"
+              className="bg-white rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-all group overflow-hidden flex flex-col h-full hover:border-blue-200"
             >
               {/* Day Header */}
-              <div className="bg-green-50/50 p-3 border-b border-green-100 flex justify-between items-center">
-                <span className="font-bold text-green-700 text-sm tracking-wide">
+              <div className="bg-slate-50/80 p-3 border-b border-slate-100 flex justify-between items-center">
+                <span className="font-bold text-slate-700 text-sm tracking-wide">
                   {t.day}
                 </span>
-                <span className="text-[10px] text-green-400 bg-white px-1.5 rounded border border-green-100">
+                <span className="text-[10px] text-blue-500 bg-blue-50 px-1.5 rounded border border-blue-100 font-bold">
                   #{t.order}
                 </span>
               </div>

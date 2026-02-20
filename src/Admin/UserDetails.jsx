@@ -125,7 +125,7 @@ const UsersDetails = () => {
                 <h3 className="text-4xl font-black text-slate-900 leading-none">
                   {visitorCount.toLocaleString()}
                 </h3>
-                <div className="mt-4 inline-flex items-center gap-1.5 px-2 py-1 bg-emerald-50 text-emerald-600 rounded-md text-xs font-bold">
+                <div className="mt-4 inline-flex items-center gap-1.5 px-2 py-1 bg-pink-50 text-pink-600 rounded-md text-xs font-bold">
                   <TrendingUp size={14} />
                   Active Users
                 </div>

@@ -19,10 +19,10 @@ const Pagination = ({ page, setPage, totalPages }) => {
         <button
           key={p}
           onClick={() => setPage(p)}
-          className={`px-3 py-1 rounded ${
+          className={`px-3 py-1 rounded transition-colors ${
             p === page
-              ? "bg-green-600 text-white"
-              : "bg-gray-100 hover:bg-gray-200"
+              ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-sm"
+              : "bg-slate-100 hover:bg-slate-200 text-slate-700"
           }`}
         >
           {p}

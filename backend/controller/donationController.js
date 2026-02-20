@@ -82,6 +82,96 @@ async function donateViaMpesa(req, res) {
 }
 
 // --------------------
+// MPesa Callback Webhook
+// --------------------
+async function mpesaCallback(req, res) {
+  try {
+    const callbackData = req.body?.Body?.stkCallback;
+    if (!callbackData) {
+      console.error("Invalid MPesa callback payload");
+      return res.status(400).send("Invalid payload");
+    }
+
+    const { CheckoutRequestID, ResultCode, ResultDesc, CallbackMetadata } = callbackData;
+
+    if (ResultCode === 0) {
+      // Success
+      let mpesaReceiptNumber = "";
+      if (CallbackMetadata && CallbackMetadata.Item) {
+        const receiptItem = CallbackMetadata.Item.find((item) => item.Name === "MpesaReceiptNumber");
+        if (receiptItem) {
+          mpesaReceiptNumber = receiptItem.Value;
+        }
+      }
+
+      const txn = await Transaction.findOneAndUpdate(
+        { checkoutRequestID: CheckoutRequestID },
+        {
+          status: "COMPLETED",
+          mpesaReceiptNumber,
+          resultDesc: ResultDesc,
+          updatedAt: new Date(),
+        },
+        { new: true }
+      );
+
+      if (txn) {
+        // Update total tracker
+        await Total.findOneAndUpdate(
+          { purpose: typeof txn.purpose === "string" ? txn.purpose : "Donation" },
+          { $inc: { total: txn.amount }, updatedAt: new Date() },
+          { upsert: true }
+        );
+
+        // Emit socket update if socket.io is configured
+        const io = req.app.get("io");
+        if (io) {
+          io.emit("new-contribution", { amount: txn.amount, purpose: txn.purpose });
+        }
+      }
+    } else {
+      // Failed / Cancelled
+      await Transaction.findOneAndUpdate(
+        { checkoutRequestID: CheckoutRequestID },
+        {
+          status: "FAILED",
+          resultDesc: ResultDesc,
+          updatedAt: new Date(),
+        }
+      );
+    }
+
+    // Always return 200 to Safaricom to acknowledge receipt
+    res.status(200).json({ ResultCode: 0, ResultDesc: "Accepted" });
+  } catch (err) {
+    console.error("MPesa callback error:", err);
+    res.status(500).send("Server Error");
+  }
+}
+
+// --------------------
+// Get Donation Status (Frontend Polling)
+// --------------------
+async function getDonationStatus(req, res) {
+  const { checkoutRequestID } = req.params;
+  try {
+    const txn = await Transaction.findOne({ checkoutRequestID });
+    if (!txn) {
+      return res.status(404).json({ message: "Transaction not found" });
+    }
+
+    res.status(200).json({
+      status: txn.status,
+      resultDesc: txn.resultDesc,
+      mpesaReceiptNumber: txn.mpesaReceiptNumber,
+    });
+  } catch (err) {
+    console.error("Error fetching donation status:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+}
+
+// --------------------
 // Donate via Bank / Partnership / Other
 // --------------------
 async function donateOther(req, res) {
@@ -183,6 +273,8 @@ async function deleteTransaction(req, res) {
 
 module.exports = {
   donateViaMpesa,
+  mpesaCallback,
+  getDonationStatus,
   donateOther,
   getAllTransactions,
   getTransaction,

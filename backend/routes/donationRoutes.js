@@ -1,6 +1,8 @@
 const express = require("express");
 const {
   donateViaMpesa,
+  mpesaCallback,
+  getDonationStatus,
   donateOther,
   getAllTransactions,
   getTransaction,
@@ -16,6 +18,12 @@ router.post("/", (req, res) => {
   if (paymentMethod === "mpesa") return donateViaMpesa(req, res);
   return donateOther(req, res);
 });
+
+// Callback for Safaricom MPesa payment confirmation
+router.post("/callback", mpesaCallback);
+
+// Frontend polling endpoint
+router.get("/status/:checkoutRequestID", getDonationStatus);
 
 // Admin: Get all donations
 router.get("/transactions", getAllTransactions);

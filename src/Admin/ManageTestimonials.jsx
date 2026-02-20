@@ -172,13 +172,13 @@ function ManageTestimonials() {
                 setPage(1);
               }}
               placeholder="Search stories..."
-              className="pl-10 p-2 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
+              className="pl-10 p-2 w-full border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none bg-slate-50 transition-all"
             />
           </div>
 
           <button
             onClick={() => setShowForm(true)}
-            className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition shadow-sm font-medium whitespace-nowrap"
+            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 transition shadow-md font-medium whitespace-nowrap"
           >
             <Plus size={18} /> Add New
           </button>
@@ -200,8 +200,8 @@ function ManageTestimonials() {
             }}
             className={`px-4 py-2 text-sm font-medium rounded-t-lg transition-colors border-b-2 ${
               filterStatus === f.key
-                ? "border-green-600 text-green-700 bg-green-50"
-                : "border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-100"
+                ? "border-blue-600 text-blue-700 bg-slate-50 bg-gradient-to-t from-blue-50/50 to-transparent"
+                : "border-transparent text-slate-500 hover:text-slate-700 hover:bg-slate-100"
             }`}
           >
             {f.label}
@@ -227,7 +227,7 @@ function ManageTestimonials() {
                   required
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  className="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-green-500 outline-none"
+                  className="w-full mt-1 p-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none bg-slate-50"
                 />
               </div>
               <div>
@@ -237,7 +237,7 @@ function ManageTestimonials() {
                 <select
                   value={form.role}
                   onChange={(e) => setForm({ ...form, role: e.target.value })}
-                  className="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-green-500 outline-none bg-white"
+                  className="w-full mt-1 p-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none bg-slate-50"
                 >
                   <option>Pathfinder</option>
                   <option>Parent</option>
@@ -253,7 +253,7 @@ function ManageTestimonials() {
                   value={form.story}
                   onChange={(e) => setForm({ ...form, story: e.target.value })}
                   rows={4}
-                  className="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-green-500 outline-none resize-none"
+                  className="w-full mt-1 p-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none resize-none bg-slate-50"
                 />
               </div>
               <div className="flex justify-end gap-3 pt-2">
@@ -266,7 +266,7 @@ function ManageTestimonials() {
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+                  className="px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 shadow-md transition-all"
                 >
                   Submit
                 </button>
@@ -292,7 +292,7 @@ function ManageTestimonials() {
               <div className="p-5 flex-1">
                 <div className="flex justify-between items-start mb-3">
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-green-100 text-green-700 flex items-center justify-center font-bold text-sm">
+                    <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-sm">
                       {it.name.charAt(0)}
                     </div>
                     <div>
@@ -306,8 +306,8 @@ function ManageTestimonials() {
                   <span
                     className={`px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wide ${
                       it.approved
-                        ? "bg-green-100 text-green-700"
-                        : "bg-amber-100 text-amber-700"
+                        ? "bg-blue-100 text-blue-700"
+                        : "bg-pink-100 text-pink-700"
                     }`}
                   >
                     {it.approved ? "Approved" : "Pending"}
@@ -336,7 +336,7 @@ function ManageTestimonials() {
                   {!it.approved && (
                     <button
                       onClick={() => handleApprove(it._id)}
-                      className="flex items-center gap-1 px-3 py-1.5 bg-white border border-green-200 text-green-700 text-xs font-medium rounded hover:bg-green-50 transition-colors shadow-sm"
+                      className="flex items-center gap-1 px-3 py-1.5 bg-white border border-blue-200 text-blue-700 text-xs font-medium rounded hover:bg-blue-50 transition-colors shadow-sm"
                     >
                       <CheckCircle size={14} /> Approve
                     </button>

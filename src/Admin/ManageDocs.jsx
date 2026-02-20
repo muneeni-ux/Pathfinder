@@ -162,8 +162,8 @@ function ManageDocs() {
               onClick={() => setActiveTab(tab.id)}
               className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-t-lg transition-colors ${
                 activeTab === tab.id
-                  ? "bg-green-50 text-green-700 border-b-2 border-green-600"
-                  : "text-gray-500 hover:text-gray-700 hover:bg-gray-50"
+                  ? "bg-slate-50 text-blue-700 border-b-2 border-blue-600 bg-gradient-to-t from-blue-50/50 to-transparent"
+                  : "text-slate-500 hover:text-slate-700 hover:bg-slate-50"
               }`}
             >
               {tab.icon} {tab.label}
@@ -184,7 +184,7 @@ function ManageDocs() {
                   required
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="w-full mt-1 p-2.5 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
+                  className="w-full mt-1 p-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none bg-slate-50"
                   placeholder={`e.g., ${activeTab === "video" ? "Knot Tying Tutorial" : "2025 Membership Form"}`}
                 />
               </div>
@@ -196,7 +196,7 @@ function ManageDocs() {
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   rows={3}
-                  className="w-full mt-1 p-2.5 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none resize-none"
+                  className="w-full mt-1 p-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none resize-none bg-slate-50"
                   placeholder="Brief description..."
                 />
               </div>
@@ -215,7 +215,7 @@ function ManageDocs() {
                     ref={fileInputRef}
                     type="file"
                     accept=".pdf,.doc,.docx"
-                    className="mt-2 text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100"
+                    className="mt-2 text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-colors"
                   />
                 </div>
               )}
@@ -254,7 +254,7 @@ function ManageDocs() {
             <button
               type="submit"
               disabled={uploading}
-              className={`flex items-center gap-2 px-6 py-2.5 bg-green-600 text-white rounded-lg font-medium shadow hover:bg-green-700 transition-all ${
+              className={`flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-medium shadow-md hover:from-blue-700 hover:to-indigo-700 transition-all ${
                 uploading ? "opacity-70 cursor-not-allowed" : ""
               }`}
             >
@@ -294,7 +294,7 @@ function ManageDocs() {
                       d.category === "video"
                         ? "bg-purple-100 text-purple-600"
                         : d.category === "form"
-                          ? "bg-amber-100 text-amber-600"
+                          ? "bg-pink-100 text-pink-600"
                           : "bg-blue-100 text-blue-600"
                     }`}
                   >

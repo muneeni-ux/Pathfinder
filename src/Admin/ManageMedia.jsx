@@ -1,9 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import toast from "react-hot-toast";
 import {
-  Image as ImageIcon,
   Video,
-  Film,
   Trash2,
   UploadCloud,
   Copy,
@@ -190,8 +188,8 @@ function ManageMedia() {
               onClick={() => setActiveTab(tab.id)}
               className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-t-lg transition-colors whitespace-nowrap ${
                 activeTab === tab.id
-                  ? "bg-green-50 text-green-700 border-b-2 border-green-600"
-                  : "text-gray-500 hover:text-gray-700 hover:bg-gray-50"
+                  ? "bg-slate-50 text-blue-700 border-b-2 border-blue-600 bg-gradient-to-t from-blue-50/50 to-transparent"
+                  : "text-slate-500 hover:text-slate-700 hover:bg-slate-50"
               }`}
             >
               {tab.icon} {tab.label}
@@ -221,7 +219,7 @@ function ManageMedia() {
             <input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
+              className="w-full p-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none bg-slate-50"
               placeholder="e.g., Annual Camp 2025"
             />
           </div>
@@ -238,14 +236,14 @@ function ManageMedia() {
                   ? "video/*"
                   : "image/*"
               }
-              className="w-full p-2 border rounded-lg bg-gray-50 text-sm file:mr-4 file:py-1 file:px-4 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-green-600 file:text-white hover:file:bg-green-700"
+              className="w-full p-2 border border-slate-200 rounded-xl bg-slate-50 text-sm file:mr-4 file:py-1.5 file:px-4 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 transition-colors"
             />
           </div>
 
           <button
             type="submit"
             disabled={uploading}
-            className={`px-6 py-2.5 bg-green-600 text-white rounded-lg font-medium shadow hover:bg-green-700 transition-all flex items-center gap-2 ${
+            className={`px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-medium shadow-md hover:from-blue-700 hover:to-indigo-700 transition-all flex items-center gap-2 mb-0.5 ${
               uploading ? "opacity-70 cursor-not-allowed" : ""
             }`}
           >
@@ -308,7 +306,7 @@ function ManageMedia() {
                 <div className="flex justify-between items-center pt-3 border-t border-gray-100">
                   <button
                     onClick={() => copyToClipboard(m.url)}
-                    className="text-gray-500 hover:text-green-600 text-xs font-medium flex items-center gap-1 transition-colors"
+                    className="text-slate-500 hover:text-blue-600 text-xs font-medium flex items-center gap-1 transition-colors"
                   >
                     <Copy size={14} /> Copy URL
                   </button>

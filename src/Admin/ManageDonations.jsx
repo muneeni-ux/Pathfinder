@@ -137,28 +137,28 @@ function ManageDonations() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between">
             <div>
-              <p className="text-gray-500 text-sm font-medium uppercase">
+              <p className="text-slate-500 text-sm font-medium uppercase">
                 Total Raised
               </p>
-              <h3 className="text-2xl font-bold text-green-600">
+              <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-pink-600">
                 KES {totalRaised.toLocaleString()}
               </h3>
             </div>
-            <div className="bg-green-50 p-3 rounded-full text-green-600">
+            <div className="bg-pink-50 p-3 rounded-full text-pink-600 shadow-sm border border-pink-100">
               <CreditCard size={24} />
             </div>
           </div>
 
           <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between">
             <div>
-              <p className="text-gray-500 text-sm font-medium uppercase">
+              <p className="text-slate-500 text-sm font-medium uppercase">
                 Total Transactions
               </p>
-              <h3 className="text-2xl font-bold text-gray-800">
+              <h3 className="text-2xl font-bold text-slate-800">
                 {donations.length}
               </h3>
             </div>
-            <div className="bg-blue-50 p-3 rounded-full text-blue-600">
+            <div className="bg-blue-50 p-3 rounded-full text-blue-600 shadow-sm border border-blue-100">
               <Smartphone size={24} />
             </div>
           </div>
@@ -181,7 +181,7 @@ function ManageDonations() {
                 setPage(1);
               }}
               placeholder="Search donor name, phone, or ID..."
-              className="pl-10 p-2 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
+              className="pl-10 p-2 w-full border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none bg-slate-50 transition-all"
             />
           </div>
         </div>
@@ -234,15 +234,15 @@ function ManageDonations() {
                     <td className="p-4">
                       {/* Status Logic */}
                       {d.status === "Success" || d.status === "Completed" ? (
-                        <span className="inline-flex items-center gap-1 px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">
+                        <span className="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 text-blue-700 border border-blue-200 rounded-full text-xs font-medium">
                           <CheckCircle size={12} /> Success
                         </span>
                       ) : d.status === "Failed" ? (
-                        <span className="inline-flex items-center gap-1 px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs font-medium">
+                        <span className="inline-flex items-center gap-1 px-2 py-1 bg-red-100 text-red-700 border border-red-200 rounded-full text-xs font-medium">
                           <XCircle size={12} /> Failed
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1 px-2 py-1 bg-amber-100 text-amber-700 rounded-full text-xs font-medium">
+                        <span className="inline-flex items-center gap-1 px-2 py-1 bg-pink-100 text-pink-700 border border-pink-200 rounded-full text-xs font-medium">
                           <Clock size={12} /> Pending
                         </span>
                       )}
